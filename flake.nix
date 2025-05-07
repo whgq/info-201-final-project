@@ -14,7 +14,10 @@
         shellHook = ''
           function knit() {
             ${pkgs.R}/bin/R -e "rmarkdown::render('$1')"
-            ${pkgs.firefox}/bin/firefox "$${1%.*}.html"
+            in_path=''${1}
+            html_path="''${in_path%.*}.html"
+            full_path="$(pwd)/$html_path"
+            ${pkgs.firefox}/bin/firefox "file://$full_path"
           }
         '';
       };
