@@ -23,7 +23,7 @@ conv_many_xs <- function(path) {
     outfs <- outfs %>% c(f.1)
   }
 
-  return (outfs)
+  return(outfs)
 }
 
 conv_many_xs("./data/removals/") %>% print

@@ -10,7 +10,13 @@
     let pkgs = nixpkgs.legacyPackages.${system}; in
     {
       devShells.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [ R rPackages.dplyr rPackages.ggplot2 rPackages.readxl rPackages.stringr ];
+        nativeBuildInputs = with pkgs; [ R rPackages.dplyr rPackages.ggplot2 rPackages.readxl rPackages.stringr pandoc firefox ];
+        shellHook = ''
+          function knit() {
+            ${pkgs.R}/bin/R -e "rmarkdown::render('$1')"
+            ${pkgs.firefox}/bin/firefox "$${1%.*}.html"
+          }
+        '';
       };
     }
   );

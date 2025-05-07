@@ -1,0 +1,20 @@
+---
+title: "Google Trends Data Exploration"
+author: "Dowland Aiello, Roy Lin, Winston Qi"
+date: "2025-06-07"
+output: html_document
+---
+
+```{r setup ,include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Google Trends Data Exploration
+
+Herein, we do some basic summarization of the Google trends data to identify key variables and conventions in the data.
+
+### 1.1
+
+```{r, echo = TRUE}
+
+```
