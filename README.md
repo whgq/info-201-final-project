@@ -4,11 +4,28 @@ In this repository, we aim to analyze the correlation between public opinion on 
 
 ## Getting Started
 
-This repository is formatted as an Rproject. A Nix file is also included which sets up a development environment including R and dplyr, which we utilize.
+This repository is formatted as an Rproject. A Nix file is also included which sets up a development environment including R and tidyverse libraries, which we utilize.
+
+If you have nix installed, you can run:
+
+```bash
+nix develop
+```
+
+This will automatically install all the dependencies. Otherwise, please install these packages in your editor (likely Rstudio):
+
+```
+dplyr
+ggplot2
+readxl
+readr
+stringr
+purrr
+```
 
 ## Datasets Utilized
 
-In doing so, we utilize a few datasets in `data/`. These include:
+In analyzing our research questions, we utilize a few datasets in `data/`. These include:
 
 - Presidential election data by county from 2000-2020
 - Google trends data regarding immigration topics from 2004 - present.
