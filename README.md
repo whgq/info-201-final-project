@@ -23,6 +23,8 @@ stringr
 purrr
 ```
 
+It would also suffice to just install tidyverse.
+
 ## Datasets Utilized
 
 In analyzing our research questions, we utilize a few datasets in `data/`. These include:
