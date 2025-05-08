@@ -1,0 +1,41 @@
+---
+title: "Analysis: Google Search Interest in Immigration-Related Topics vs Electoral Swing Per County"
+author: "Dowland Aiello, Roy Lin, Winston Qi"
+date: "2025-06-08"
+output: html_document
+---
+
+```{r setup ,include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Overview
+
+Herein, we explore the relationship between google search query frequency for topics related to immigration and the electoral swing in the Presidential election at a given point in time. We are particularly interested in the relationship between the change in search frequency and the magnitude of the electoral swinng.
+
+## 2. Data Cleaning
+
+### 2.1 Region / city name sample
+
+#### 2.1.1 Google trends dat
+
+```{r, echo = TRUE}
+library(dplyr)
+library(purrr)
+
+cities_immigration_search_df <- read.delim("./data_cleaned/geoMap(1).csv")
+```
+
+## 3. Results
+
+### 3.1. 2004 United States presidential election
+
+```{r, echo = TRUE}
+
+```
+
+### 3.2. 2008 United States presidential election
+
+```{r, echo = TRUE}
+
+```
