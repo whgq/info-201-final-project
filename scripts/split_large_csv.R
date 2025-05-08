@@ -6,9 +6,8 @@ library(purrr)
 # N rows per output split file
 # Blocks of 100,000 rows by default
 read_csv_gz <- function(path, chunk_size = 100000) {
-  df <- path %>% read_csv
-
-  df %>%
+  path %>%
+    read_csv %>%
     mutate(chunk = (row_number() - 1) %/% chunk_size) %>%
     group_by(chunk) %>%
     group_split(.keep = FALSE) %>%
@@ -20,4 +19,14 @@ read_csv_gz <- function(path, chunk_size = 100000) {
     })
 }
 
-read_csv_gz("./data/apprehensions_origins/Family Units apprehended along the SWB FY2000 Redacted_raw.xlsx.csv.gz") %>% print
+split_all_large_csvs <- function(path) {
+  # Only consider csv files
+  # Get all new file paths after chunking
+  list.files(path) %>%
+    keep(\(fname) str_ends(fname, ".csv.gz") || str_ends(fname, ".csv")) %>%
+    map(\(fname) str_c(path, fname)) %>%
+    map(read_csv_gz)
+}
+
+split_all_large_csvs("./data/apprehensions_origins/") %>% print
+split_all_large_csvs("./data/removals/") %>% print
