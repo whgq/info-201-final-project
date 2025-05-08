@@ -1,33 +1,23 @@
 library(dplyr)
-library(purrr)
 library(stringr)
 library(readr)
-
-split_df_head_tail <- function(df, n) {
-  head <- df %>% head(n)
-  tail <- df %>% tail(n = (df %>% nrow) - n)
-
-  list(chunk = head, acc = tail)
-}
+library(purrr)
 
 # N rows per output split file
-read_csv_gz <- function(path, chunk_size) {
-  df <- path %>% read_csv(lazy = TRUE)
+# Blocks of 100,000 rows by default
+read_csv_gz <- function(path, chunk_size = 100000) {
+  df <- path %>% read_csv
 
-  # Find number of chunks, for each chunk, call split_df_head_tail
-  # continually make df smaller, taking chunks of it of equal size
-  # each time
-  (1:((df %>% nrow) %/% chunk_size)) %>%
-    accumulate(.f = \(df, i) {
-      res <- df %>%
-        split_df_head_tail(n = chunk_size)
+  df %>%
+    mutate(chunk = (row_number() - 1) %/% chunk_size) %>%
+    group_by(chunk) %>%
+    group_split(.keep = FALSE) %>%
+    imap(\(chunk, i) {
+      fname <- str_c(path, "_", i, ".csv.gz")
+      chunk %>% write_csv(fname)
 
-      res[["chunk"]] %>% write.csv(str_c(path, "_", i, ".csv.gz"))
-
-      res[["acc"]]
-    }, .init = df)
+      fname
+    })
 }
 
-read_csv_gz(
-  "data/apprehensions_origins/Family Units apprehended along the SWB FY2000 Redacted_raw.xlsx.csv.gz",
-  5)
+read_csv_gz("./data/apprehensions_origins/Family Units apprehended along the SWB FY2000 Redacted_raw.xlsx.csv.gz") %>% print

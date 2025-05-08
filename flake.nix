@@ -10,7 +10,7 @@
     let pkgs = nixpkgs.legacyPackages.${system}; in
     {
       devShells.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; with rPackages; [ R dplyr ggplot2 readxl stringr pandoc firefox languageserver purrr ];
+        nativeBuildInputs = with pkgs; with rPackages; [ R dplyr ggplot2 readxl readr stringr pkgs.pandoc rPackages.pandoc firefox languageserver purrr ];
         shellHook = ''
           function knit() {
             ${pkgs.R}/bin/R -e "rmarkdown::render('$1')"
