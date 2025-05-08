@@ -2,6 +2,12 @@
 
 In this repository, we aim to analyze the correlation between public opinion on immigration, policy, and apprehensions / deportations in the United States.
 
+## Research Questions
+
+1. How has public sentiment towards immigration in the US changed over time?
+2. How has public sentiment towards immigration affected election outcomes in the US over time?
+3. How has public sentiment towards immigration in the US affected immigration policy over time (measured via deporations and encounters at the border)?
+
 ## Getting Started
 
 This repository is formatted as an Rproject. A Nix file is also included which sets up a development environment including R and tidyverse libraries, which we utilize.
