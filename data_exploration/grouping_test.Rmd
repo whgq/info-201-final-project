@@ -1,0 +1,45 @@
+---
+title: "Grouping Script Test"
+author: "Dowland Aiello, Roy Lin, Winston Qi"
+date: "2025-06-08"
+output: html_document
+---
+
+```{r setup ,include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Grouping Script Test
+
+This document tests that the "apprehensions_origins" dataset was downloaded correctly.
+
+### 1.1 One test file
+
+```{r, echo = TRUE}
+library(dplyr)
+library(readr)
+
+df <- read_csv("../data/apprehensions_origins/Family Units apprehended along the SWB FY2000 Redacted_raw.xlsx.csv.gz_2.csv.gz")
+df %>% head(5)
+```
+
+Looks good.
+
+### 1.2 Another one
+
+```{r, echo = TRUE}
+df <- read_csv("../data/apprehensions_origins/Family Units apprehended along the SWB FY2000 Redacted_raw.xlsx.csv.gz_3.csv.gz")
+df %>% head(5)
+```
+
+Looks good.
+
+### 1.3 Removals Data Test
+
+```{r, echo = TRUE}
+df <- read_csv("../data/removals/2023-ICFO_42034_Removals_FY13-12_LESA-STU_FINAL- Redacted_raw.xlsx.csv.gz_1.csv.gz")
+
+df %>% head(5)
+```
+
+Looks good.
