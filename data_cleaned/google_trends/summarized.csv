@@ -1,0 +1,1266 @@
+"","Region","query_incidence","daterange","City","DMA"
+"1","District of Columbia",100,"04-08",NA,NA
+"2","New York",79,"04-08",NA,NA
+"3","Maryland",73,"04-08",NA,NA
+"4","California",73,"04-08",NA,NA
+"5","New Jersey",72,"04-08",NA,NA
+"6","Illinois",68,"04-08",NA,NA
+"7","Arizona",68,"04-08",NA,NA
+"8","Florida",67,"04-08",NA,NA
+"9","Nevada",65,"04-08",NA,NA
+"10","Connecticut",65,"04-08",NA,NA
+"11","Massachusetts",62,"04-08",NA,NA
+"12","Washington",61,"04-08",NA,NA
+"13","Texas",61,"04-08",NA,NA
+"14","Colorado",60,"04-08",NA,NA
+"15","Minnesota",60,"04-08",NA,NA
+"16","Rhode Island",59,"04-08",NA,NA
+"17","Utah",58,"04-08",NA,NA
+"18","Virginia",58,"04-08",NA,NA
+"19","Hawaii",56,"04-08",NA,NA
+"20","Georgia",56,"04-08",NA,NA
+"21","Iowa",56,"04-08",NA,NA
+"22","New Mexico",55,"04-08",NA,NA
+"23","Nebraska",54,"04-08",NA,NA
+"24","Michigan",53,"04-08",NA,NA
+"25","Indiana",52,"04-08",NA,NA
+"26","Oregon",52,"04-08",NA,NA
+"27","Delaware",52,"04-08",NA,NA
+"28","Wisconsin",50,"04-08",NA,NA
+"29","North Carolina",50,"04-08",NA,NA
+"30","Maine",49,"04-08",NA,NA
+"31","Kansas",49,"04-08",NA,NA
+"32","Pennsylvania",49,"04-08",NA,NA
+"33","New Hampshire",48,"04-08",NA,NA
+"34","Missouri",47,"04-08",NA,NA
+"35","Ohio",47,"04-08",NA,NA
+"36","Vermont",46,"04-08",NA,NA
+"37","Wyoming",46,"04-08",NA,NA
+"38","Oklahoma",46,"04-08",NA,NA
+"39","South Carolina",45,"04-08",NA,NA
+"40","Idaho",44,"04-08",NA,NA
+"41","Tennessee",43,"04-08",NA,NA
+"42","Arkansas",42,"04-08",NA,NA
+"43","Kentucky",42,"04-08",NA,NA
+"44","North Dakota",41,"04-08",NA,NA
+"45","Alaska",39,"04-08",NA,NA
+"46","South Dakota",38,"04-08",NA,NA
+"47","Montana",38,"04-08",NA,NA
+"48","Alabama",38,"04-08",NA,NA
+"49","Mississippi",36,"04-08",NA,NA
+"50","Louisiana",35,"04-08",NA,NA
+"51","West Virginia",33,"04-08",NA,NA
+"52",NA,NA,"04-08","Dover",NA
+"53",NA,NA,"04-08","Hopewell",NA
+"54",NA,NA,"04-08","Waldron",NA
+"55",NA,NA,"04-08","Hampshire",NA
+"56",NA,NA,"04-08","Woodland",NA
+"57",NA,NA,"04-08","Yorkville",NA
+"58",NA,NA,"04-08","Derwood",NA
+"59",NA,NA,"04-08","Winlock",NA
+"60",NA,NA,"04-08","Osseo",NA
+"61",NA,NA,"04-08","Edmonds",NA
+"62",NA,NA,"04-08","Othello",NA
+"63",NA,NA,"04-08","Potomac",NA
+"64",NA,NA,"04-08","San Marcos",NA
+"65",NA,NA,"04-08","Marysville",NA
+"66",NA,NA,"04-08","Wheaton",NA
+"67",NA,NA,"04-08","Larkspur",NA
+"68",NA,NA,"04-08","Elmsford",NA
+"69",NA,NA,"04-08","Elwood",NA
+"70",NA,NA,"04-08","La Mesa",NA
+"71",NA,NA,"04-08","Plymouth",NA
+"72",NA,NA,"04-08","Towanda",NA
+"73",NA,NA,"04-08","Issaquah",NA
+"74",NA,NA,"04-08","West Hempstead",NA
+"75",NA,NA,"04-08","Hadley",NA
+"76",NA,NA,"04-08","Snohomish",NA
+"77",NA,NA,"04-08","Pleasant Hill",NA
+"78",NA,NA,"04-08","Elon",NA
+"79",NA,NA,"04-08","Paterson",NA
+"80",NA,NA,"04-08","Merced",NA
+"81",NA,NA,"04-08","South Orange",NA
+"82",NA,NA,"04-08","Charter Township of Clinton",NA
+"83",NA,NA,"04-08","Westfield",NA
+"84",NA,NA,"04-08","Palos Hills",NA
+"85",NA,NA,"04-08","Mesquite",NA
+"86",NA,NA,"04-08","Marion",NA
+"87",NA,NA,"04-08","Edmond",NA
+"88",NA,NA,"04-08","Northfield",NA
+"89",NA,NA,"04-08","Chula Vista",NA
+"90",NA,NA,"04-08","Salinas",NA
+"91",NA,NA,"04-08","Commack",NA
+"92",NA,NA,"04-08","Coronado",NA
+"93",NA,NA,"04-08","Rensselaer",NA
+"94",NA,NA,"04-08","New Paltz",NA
+"95",NA,NA,"04-08","Claremont",NA
+"96",NA,NA,"04-08","Westport",NA
+"97",NA,NA,"04-08","Fullerton",NA
+"98",NA,NA,"04-08","Montclair",NA
+"99",NA,NA,"04-08","Arlington Heights",NA
+"100",NA,NA,"04-08","Franklin",NA
+"101",NA,NA,"04-08","Daly City",NA
+"102",NA,NA,"04-08","Porterville",NA
+"103",NA,NA,"04-08","Pomona",NA
+"104",NA,NA,"04-08","Hempstead",NA
+"105",NA,NA,"04-08","Normal",NA
+"106",NA,NA,"04-08","Mission Viejo",NA
+"107",NA,NA,"04-08","Brownsville",NA
+"108",NA,NA,"04-08","Castle Rock",NA
+"109",NA,NA,"04-08","New Rochelle",NA
+"110",NA,NA,"04-08","McAllen",NA
+"111",NA,NA,"04-08","Cerritos",NA
+"112",NA,NA,"04-08","Yuma",NA
+"113",NA,NA,"04-08","Garden City",NA
+"114",NA,NA,"04-08","Manassas",NA
+"115",NA,NA,"04-08","Chelmsford",NA
+"116",NA,NA,"04-08","Smithsburg",NA
+"117",NA,NA,"04-08","Grinnell",NA
+"118",NA,NA,"04-08","San Bernardino",NA
+"119",NA,NA,"04-08","Whittier",NA
+"120",NA,NA,"04-08","Leesburg",NA
+"121",NA,NA,"04-08","Allen",NA
+"122",NA,NA,"04-08","Downey",NA
+"123",NA,NA,"04-08","Ukiah",NA
+"124",NA,NA,"04-08","Harrison",NA
+"125",NA,NA,"04-08","Seaside",NA
+"126",NA,NA,"04-08","North Kingstown",NA
+"127",NA,NA,"04-08","Upper Marlboro",NA
+"128",NA,NA,"04-08","Aurora",NA
+"129",NA,NA,"04-08","Notre Dame",NA
+"130",NA,NA,"04-08","Glendale",NA
+"131",NA,NA,"04-08","Napa",NA
+"132",NA,NA,"04-08","Lewisville",NA
+"133",NA,NA,"04-08","Ridgefield",NA
+"134",NA,NA,"04-08","New London",NA
+"135",NA,NA,"04-08","Evanston",NA
+"136",NA,100,"04-08","Fort Lauderdale",NA
+"137",NA,NA,"04-08","Greeley",NA
+"138",NA,NA,"04-08","Cuyahoga Falls",NA
+"139",NA,NA,"04-08","Key West",NA
+"140",NA,NA,"04-08","Joliet",NA
+"141",NA,NA,"04-08","East Orange",NA
+"142",NA,NA,"04-08","Chelsea",NA
+"143",NA,NA,"04-08","Grass Valley",NA
+"144",NA,NA,"04-08","San Juan Capistrano",NA
+"145",NA,NA,"04-08","Hamilton",NA
+"146",NA,NA,"04-08","Longmont",NA
+"147",NA,NA,"04-08","Elizabeth",NA
+"148",NA,NA,"04-08","Chester",NA
+"149",NA,NA,"04-08","Decatur",NA
+"150",NA,NA,"04-08","Stony Brook",NA
+"151",NA,NA,"04-08","Hayward",NA
+"152",NA,NA,"04-08","Edinboro",NA
+"153",NA,NA,"04-08","Burlingame",NA
+"154",NA,NA,"04-08","Canfield",NA
+"155",NA,94,"04-08","Everett",NA
+"156",NA,NA,"04-08","Frankfort",NA
+"157",NA,93,"04-08","Miami",NA
+"158",NA,NA,"04-08","Powell",NA
+"159",NA,NA,"04-08","Fairfax",NA
+"160",NA,NA,"04-08","Lake Forest",NA
+"161",NA,NA,"04-08","Hanford",NA
+"162",NA,NA,"04-08","Bangor",NA
+"163",NA,NA,"04-08","Yonkers",NA
+"164",NA,NA,"04-08","Geneseo",NA
+"165",NA,NA,"04-08","Pueblo",NA
+"166",NA,NA,"04-08","Madison",NA
+"167",NA,NA,"04-08","Westminster",NA
+"168",NA,NA,"04-08","West Palm Beach",NA
+"169",NA,NA,"04-08","Harlingen",NA
+"170",NA,NA,"04-08","Somerville",NA
+"171",NA,NA,"04-08","Morristown",NA
+"172",NA,NA,"04-08","Madison",NA
+"173",NA,NA,"04-08","Las Cruces",NA
+"174",NA,NA,"04-08","Chantilly",NA
+"175",NA,88,"04-08","Washington",NA
+"176",NA,NA,"04-08","Bellingham",NA
+"177",NA,NA,"04-08","Marion",NA
+"178",NA,NA,"04-08","Elgin",NA
+"179",NA,NA,"04-08","Berkeley",NA
+"180",NA,NA,"04-08","La Grange",NA
+"181",NA,NA,"04-08","Arcata",NA
+"182",NA,NA,"04-08","Sugar Land",NA
+"183",NA,NA,"04-08","Painesville",NA
+"184",NA,NA,"04-08","Chapel Hill",NA
+"185",NA,NA,"04-08","Chino",NA
+"186",NA,NA,"04-08","North Arlington",NA
+"187",NA,NA,"04-08","West Babylon",NA
+"188",NA,NA,"04-08","Redlands",NA
+"189",NA,NA,"04-08","Cypress",NA
+"190",NA,NA,"04-08","Newburgh",NA
+"191",NA,NA,"04-08","Visalia",NA
+"192",NA,NA,"04-08","Williamsburg",NA
+"193",NA,NA,"04-08","Bishopville",NA
+"194",NA,NA,"04-08","Danvers",NA
+"195",NA,NA,"04-08","Kapolei",NA
+"196",NA,NA,"04-08","DeKalb",NA
+"197",NA,NA,"04-08","Alpine",NA
+"198",NA,NA,"04-08","Garden Grove",NA
+"199",NA,NA,"04-08","College Park",NA
+"200",NA,NA,"04-08","Clifton",NA
+"201",NA,NA,"04-08","Gaithersburg",NA
+"202",NA,NA,"04-08","Waldwick",NA
+"203",NA,82,"04-08","McLean",NA
+"204",NA,NA,"04-08","Gambier",NA
+"205",NA,NA,"04-08","Secaucus",NA
+"206",NA,NA,"04-08","Edison",NA
+"207",NA,NA,"04-08","Holland",NA
+"208",NA,NA,"04-08","Sioux Center",NA
+"209",NA,NA,"04-08","Modesto",NA
+"210",NA,NA,"04-08","Norman",NA
+"211",NA,NA,"04-08","Gettysburg",NA
+"212",NA,80,"04-08","New York",NA
+"213",NA,NA,"04-08","Naples",NA
+"214",NA,NA,"04-08","Westminster",NA
+"215",NA,NA,"04-08","Gardena",NA
+"216",NA,NA,"04-08","Lee's Summit",NA
+"217",NA,NA,"04-08","Burlington",NA
+"218",NA,NA,"04-08","Brookings",NA
+"219",NA,NA,"04-08","Dade City",NA
+"220",NA,NA,"04-08","Hawthorne",NA
+"221",NA,NA,"04-08","Fairfield",NA
+"222",NA,NA,"04-08","Hillsboro",NA
+"223",NA,NA,"04-08","Costa Mesa",NA
+"224",NA,NA,"04-08","East Hartford",NA
+"225",NA,NA,"04-08","Uniondale",NA
+"226",NA,79,"04-08","El Paso",NA
+"227",NA,NA,"04-08","Yellow Springs",NA
+"228",NA,NA,"04-08","Shrewsbury",NA
+"229",NA,NA,"04-08","Ellensburg",NA
+"230",NA,NA,"04-08","Long Beach",NA
+"231",NA,NA,"04-08","Libertyville",NA
+"232",NA,NA,"04-08","Salem",NA
+"233",NA,78,"04-08","Tempe",NA
+"234",NA,NA,"04-08","Chandler",NA
+"235",NA,NA,"04-08","Salina",NA
+"236",NA,NA,"04-08","Camarillo",NA
+"237",NA,NA,"04-08","Pompano Beach",NA
+"238",NA,NA,"04-08","Hackensack",NA
+"239",NA,NA,"04-08","Mesa",NA
+"240",NA,NA,"04-08","Medford",NA
+"241",NA,NA,"04-08","Charleston",NA
+"242",NA,NA,"04-08","Hyattsville",NA
+"243",NA,NA,"04-08","Lincolnshire",NA
+"244",NA,NA,"04-08","New Haven",NA
+"245",NA,NA,"04-08","Pharr",NA
+"246",NA,76,"04-08","Irvine",NA
+"247",NA,NA,"04-08","West Point",NA
+"248",NA,NA,"04-08","Wooster",NA
+"249",NA,NA,"04-08","Oxford",NA
+"250",NA,NA,"04-08","Iowa City",NA
+"251",NA,NA,"04-08","Pinole",NA
+"252","District of Columbia",100,"08-12",NA,NA
+"253","New Jersey",80,"08-12",NA,NA
+"254","New York",77,"08-12",NA,NA
+"255","Nevada",75,"08-12",NA,NA
+"256","Florida",72,"08-12",NA,NA
+"257","Arizona",70,"08-12",NA,NA
+"258","Maryland",69,"08-12",NA,NA
+"259","Connecticut",68,"08-12",NA,NA
+"260","Texas",67,"08-12",NA,NA
+"261","California",66,"08-12",NA,NA
+"262","Utah",65,"08-12",NA,NA
+"263","Massachusetts",65,"08-12",NA,NA
+"264","Rhode Island",64,"08-12",NA,NA
+"265","Delaware",63,"08-12",NA,NA
+"266","Hawaii",61,"08-12",NA,NA
+"267","New Mexico",61,"08-12",NA,NA
+"268","Colorado",60,"08-12",NA,NA
+"269","Illinois",59,"08-12",NA,NA
+"270","Idaho",59,"08-12",NA,NA
+"271","Washington",58,"08-12",NA,NA
+"272","Georgia",58,"08-12",NA,NA
+"273","Alabama",58,"08-12",NA,NA
+"274","Nebraska",56,"08-12",NA,NA
+"275","Virginia",55,"08-12",NA,NA
+"276","Iowa",54,"08-12",NA,NA
+"277","Oregon",53,"08-12",NA,NA
+"278","Minnesota",52,"08-12",NA,NA
+"279","Wisconsin",52,"08-12",NA,NA
+"280","Indiana",52,"08-12",NA,NA
+"281","Kansas",52,"08-12",NA,NA
+"282","Pennsylvania",50,"08-12",NA,NA
+"283","Arkansas",49,"08-12",NA,NA
+"284","Michigan",48,"08-12",NA,NA
+"285","New Hampshire",48,"08-12",NA,NA
+"286","North Carolina",48,"08-12",NA,NA
+"287","Wyoming",47,"08-12",NA,NA
+"288","South Carolina",47,"08-12",NA,NA
+"289","Oklahoma",47,"08-12",NA,NA
+"290","Missouri",46,"08-12",NA,NA
+"291","Tennessee",45,"08-12",NA,NA
+"292","Vermont",45,"08-12",NA,NA
+"293","Ohio",45,"08-12",NA,NA
+"294","Maine",44,"08-12",NA,NA
+"295","Kentucky",42,"08-12",NA,NA
+"296","Mississippi",42,"08-12",NA,NA
+"297","South Dakota",38,"08-12",NA,NA
+"298","Alaska",38,"08-12",NA,NA
+"299","North Dakota",37,"08-12",NA,NA
+"300","West Virginia",36,"08-12",NA,NA
+"301","Louisiana",36,"08-12",NA,NA
+"302","Montana",32,"08-12",NA,NA
+"303",NA,100,"08-12",NA,"Harlingen-Weslaco-Brownsville-McAllen TX"
+"304",NA,92,"08-12",NA,"El Paso TX"
+"305",NA,85,"08-12",NA,"Laredo TX"
+"306",NA,84,"08-12",NA,"Miami-Ft. Lauderdale FL"
+"307",NA,73,"08-12",NA,"New York NY"
+"308",NA,72,"08-12",NA,"West Palm Beach-Ft. Pierce FL"
+"309",NA,68,"08-12",NA,"San Diego CA"
+"310",NA,68,"08-12",NA,"Yuma AZ-El Centro CA"
+"311",NA,68,"08-12",NA,"Monterey-Salinas CA"
+"312",NA,68,"08-12",NA,"Phoenix AZ"
+"313",NA,67,"08-12",NA,"Los Angeles CA"
+"314",NA,66,"08-12",NA,"Tucson (Sierra Vista) AZ"
+"315",NA,63,"08-12",NA,"Las Vegas NV"
+"316",NA,63,"08-12",NA,"Bakersfield CA"
+"317",NA,63,"08-12",NA,"Washington DC (Hagerstown MD)"
+"318",NA,62,"08-12",NA,"Houston TX"
+"319",NA,61,"08-12",NA,"Ft. Myers-Naples FL"
+"320",NA,61,"08-12",NA,"Yakima-Pasco-Richland-Kennewick WA"
+"321",NA,60,"08-12",NA,"Hartford & New Haven CT"
+"322",NA,59,"08-12",NA,"Reno NV"
+"323",NA,59,"08-12",NA,"Salt Lake City UT"
+"324",NA,59,"08-12",NA,"Palm Springs CA"
+"325",NA,59,"08-12",NA,"Sacramento-Stockton-Modesto CA"
+"326",NA,59,"08-12",NA,"Boston MA-Manchester NH"
+"327",NA,56,"08-12",NA,"Baltimore MD"
+"328",NA,55,"08-12",NA,"Fresno-Visalia CA"
+"329",NA,55,"08-12",NA,"Tallahassee FL-Thomasville GA"
+"330",NA,55,"08-12",NA,"Orlando-Daytona Beach-Melbourne FL"
+"331",NA,54,"08-12",NA,"Idaho Falls-Pocatello ID"
+"332",NA,54,"08-12",NA,"Santa Barbara-Santa Maria-San Luis Obispo CA"
+"333",NA,54,"08-12",NA,"San Antonio TX"
+"334",NA,54,"08-12",NA,"Honolulu HI"
+"335",NA,53,"08-12",NA,"Chicago IL"
+"336",NA,53,"08-12",NA,"Providence RI-New Bedford MA"
+"337",NA,53,"08-12",NA,"Springfield-Holyoke MA"
+"338",NA,53,"08-12",NA,"Waco-Temple-Bryan TX"
+"339",NA,53,"08-12",NA,"Twin Falls ID"
+"340",NA,53,"08-12",NA,"Philadelphia PA"
+"341",NA,53,"08-12",NA,"Seattle-Tacoma WA"
+"342",NA,53,"08-12",NA,"Champaign & Springfield-Decatur IL"
+"343",NA,53,"08-12",NA,"Albuquerque-Santa Fe NM"
+"344",NA,52,"08-12",NA,"Denver CO"
+"345",NA,52,"08-12",NA,"Sioux City IA"
+"346",NA,52,"08-12",NA,"Austin TX"
+"347",NA,52,"08-12",NA,"Dallas-Ft. Worth TX"
+"348",NA,51,"08-12",NA,"Portland OR"
+"349",NA,51,"08-12",NA,"Huntsville-Decatur (Florence) AL"
+"350",NA,51,"08-12",NA,"San Francisco-Oakland-San Jose CA"
+"351",NA,51,"08-12",NA,"Lincoln & Hastings-Kearney NE"
+"352",NA,51,"08-12",NA,"Indianapolis IN"
+"353",NA,50,"08-12",NA,"Atlanta GA"
+"354",NA,50,"08-12",NA,"Odessa-Midland TX"
+"355",NA,50,"08-12",NA,"North Platte NE"
+"356",NA,50,"08-12",NA,"Corpus Christi TX"
+"357",NA,50,"08-12",NA,"Birmingham AL"
+"358",NA,50,"08-12",NA,"Tampa-St. Petersburg (Sarasota) FL"
+"359",NA,49,"08-12",NA,"Lima OH"
+"360",NA,49,"08-12",NA,"Victoria TX"
+"361",NA,49,"08-12",NA,"Ft. Smith-Fayetteville-Springdale-Rogers AR"
+"362",NA,49,"08-12",NA,"Grand Junction-Montrose CO"
+"363",NA,49,"08-12",NA,"Cheyenne WY-Scottsbluff NE"
+"364",NA,49,"08-12",NA,"Amarillo TX"
+"365",NA,49,"08-12",NA,"Cedar Rapids-Waterloo-Iowa City & Dubuque IA"
+"366",NA,48,"08-12",NA,"Albany GA"
+"367",NA,48,"08-12",NA,"Salisbury MD"
+"368",NA,48,"08-12",NA,"Madison WI"
+"369",NA,48,"08-12",NA,"Spokane WA"
+"370",NA,48,"08-12",NA,"Minneapolis-St. Paul MN"
+"371",NA,48,"08-12",NA,"Syracuse NY"
+"372",NA,47,"08-12",NA,"Buffalo NY"
+"373",NA,47,"08-12",NA,"Boise ID"
+"374",NA,47,"08-12",NA,"Harrisonburg VA"
+"375",NA,47,"08-12",NA,"South Bend-Elkhart IN"
+"376",NA,47,"08-12",NA,"Richmond-Petersburg VA"
+"377",NA,46,"08-12",NA,"Milwaukee WI"
+"378",NA,46,"08-12",NA,"Albany-Schenectady-Troy NY"
+"379",NA,46,"08-12",NA,"Raleigh-Durham (Fayetteville) NC"
+"380",NA,46,"08-12",NA,"Omaha NE"
+"381",NA,46,"08-12",NA,"Wichita-Hutchinson KS"
+"382",NA,46,"08-12",NA,"Juneau AK"
+"383",NA,46,"08-12",NA,"Eureka CA"
+"384",NA,46,"08-12",NA,"Mankato MN"
+"385",NA,46,"08-12",NA,"Colorado Springs-Pueblo CO"
+"386",NA,46,"08-12",NA,"Greensboro-High Point-Winston Salem NC"
+"387",NA,45,"08-12",NA,"Nashville TN"
+"388",NA,45,"08-12",NA,"Montgomery (Selma) AL"
+"389",NA,44,"08-12",NA,"Kansas City MO"
+"390",NA,44,"08-12",NA,"San Angelo TX"
+"391",NA,44,"08-12",NA,"Savannah GA"
+"392",NA,44,"08-12",NA,"Des Moines-Ames IA"
+"393",NA,44,"08-12",NA,"Oklahoma City OK"
+"394",NA,44,"08-12",NA,"Jacksonville FL"
+"395",NA,44,"08-12",NA,"Grand Rapids-Kalamazoo-Battle Creek MI"
+"396",NA,43,"08-12",NA,"Eugene OR"
+"397",NA,43,"08-12",NA,"Topeka KS"
+"398",NA,43,"08-12",NA,"Lubbock TX"
+"399",NA,43,"08-12",NA,"Beaumont-Port Arthur TX"
+"400",NA,43,"08-12",NA,"Burlington VT-Plattsburgh NY"
+"401",NA,43,"08-12",NA,"Quincy IL-Hannibal MO-Keokuk IA"
+"402",NA,43,"08-12",NA,"Joplin MO-Pittsburg KS"
+"403",NA,43,"08-12",NA,"Casper-Riverton WY"
+"404",NA,42,"08-12",NA,"Lafayette IN"
+"405",NA,42,"08-12",NA,"Columbus GA"
+"406",NA,42,"08-12",NA,"Sherman TX-Ada OK"
+"407",NA,42,"08-12",NA,"Chico-Redding CA"
+"408",NA,42,"08-12",NA,"Charlottesville VA"
+"409",NA,42,"08-12",NA,"Lansing MI"
+"410",NA,42,"08-12",NA,"Jackson MS"
+"411",NA,42,"08-12",NA,"Columbus OH"
+"412",NA,42,"08-12",NA,"Greenwood-Greenville MS"
+"413",NA,42,"08-12",NA,"Detroit MI"
+"414",NA,41,"08-12",NA,"Utica NY"
+"415",NA,41,"08-12",NA,"Watertown NY"
+"416",NA,41,"08-12",NA,"Gainesville FL"
+"417",NA,41,"08-12",NA,"Rochester MN-Mason City IA-Austin MN"
+"418",NA,41,"08-12",NA,"La Crosse-Eau Claire WI"
+"419",NA,41,"08-12",NA,"Binghamton NY"
+"420",NA,41,"08-12",NA,"Lexington KY"
+"421",NA,41,"08-12",NA,"Medford-Klamath Falls OR"
+"422",NA,41,"08-12",NA,"Ottumwa IA-Kirksville MO"
+"423",NA,40,"08-12",NA,"Peoria-Bloomington IL"
+"424",NA,40,"08-12",NA,"Columbia-Jefferson City MO"
+"425",NA,40,"08-12",NA,"Mobile AL-Pensacola (Ft. Walton Beach) FL"
+"426",NA,40,"08-12",NA,"Harrisburg-Lancaster-Lebanon-York PA"
+"427",NA,40,"08-12",NA,"Greenville-Spartanburg SC-Asheville NC-Anderson SC"
+"428",NA,40,"08-12",NA,"St. Joseph MO"
+"429",NA,40,"08-12",NA,"Wilkes Barre-Scranton PA"
+"430",NA,40,"08-12",NA,"Davenport IA-Rock Island-Moline IL"
+"431",NA,40,"08-12",NA,"St. Louis MO"
+"432",NA,40,"08-12",NA,"Bangor ME"
+"433",NA,39,"08-12",NA,"Florence-Myrtle Beach SC"
+"434",NA,39,"08-12",NA,"Tyler-Longview(Lufkin & Nacogdoches) TX"
+"435",NA,39,"08-12",NA,"Rockford IL"
+"436",NA,39,"08-12",NA,"Rochester NY"
+"437",NA,39,"08-12",NA,"Cincinnati OH"
+"438",NA,39,"08-12",NA,"Macon GA"
+"439",NA,39,"08-12",NA,"Memphis TN"
+"440",NA,39,"08-12",NA,"Charlotte NC"
+"441",NA,39,"08-12",NA,"Norfolk-Portsmouth-Newport News VA"
+"442",NA,39,"08-12",NA,"Green Bay-Appleton WI"
+"443",NA,38,"08-12",NA,"Columbia SC"
+"444",NA,38,"08-12",NA,"Clarksburg-Weston WV"
+"445",NA,38,"08-12",NA,"Portland-Auburn ME"
+"446",NA,38,"08-12",NA,"Wichita Falls TX & Lawton OK"
+"447",NA,37,"08-12",NA,"Cleveland-Akron (Canton) OH"
+"448",NA,37,"08-12",NA,"Duluth MN-Superior WI"
+"449",NA,37,"08-12",NA,"Dayton OH"
+"450",NA,37,"08-12",NA,"Ft. Wayne IN"
+"451",NA,37,"08-12",NA,"Monroe LA-El Dorado AR"
+"452",NA,37,"08-12",NA,"Minot-Bismarck-Dickinson(Williston) ND"
+"453",NA,37,"08-12",NA,"Little Rock-Pine Bluff AR"
+"454",NA,37,"08-12",NA,"Fairbanks AK"
+"455",NA,36,"08-12",NA,"Louisville KY"
+"456",NA,36,"08-12",NA,"Charleston SC"
+"457",NA,36,"08-12",NA,"Wausau-Rhinelander WI"
+"458",NA,36,"08-12",NA,"Helena MT"
+"459",NA,36,"08-12",NA,"Tulsa OK"
+"460",NA,36,"08-12",NA,"Great Falls MT"
+"461",NA,36,"08-12",NA,"Dothan AL"
+"462",NA,36,"08-12",NA,"Pittsburgh PA"
+"463",NA,35,"08-12",NA,"Wilmington NC"
+"464",NA,35,"08-12",NA,"Rapid City SD"
+"465",NA,35,"08-12",NA,"Erie PA"
+"466",NA,35,"08-12",NA,"Anchorage AK"
+"467",NA,35,"08-12",NA,"Abilene-Sweetwater TX"
+"468",NA,35,"08-12",NA,"Jackson TN"
+"469",NA,35,"08-12",NA,"Zanesville OH"
+"470",NA,34,"08-12",NA,"Sioux Falls(Mitchell) SD"
+"471",NA,34,"08-12",NA,"New Orleans LA"
+"472",NA,34,"08-12",NA,"Fargo-Valley City ND"
+"473",NA,34,"08-12",NA,"Roanoke-Lynchburg VA"
+"474",NA,34,"08-12",NA,"Alpena MI"
+"475",NA,33,"08-12",NA,"Chattanooga TN"
+"476",NA,33,"08-12",NA,"Missoula MT"
+"477",NA,33,"08-12",NA,"Presque Isle ME"
+"478",NA,33,"08-12",NA,"Columbus-Tupelo-West Point MS"
+"479",NA,33,"08-12",NA,"Jonesboro AR"
+"480",NA,33,"08-12",NA,"Flint-Saginaw-Bay City MI"
+"481",NA,32,"08-12",NA,"Johnstown-Altoona PA"
+"482",NA,32,"08-12",NA,"Greenville-New Bern-Washington NC"
+"483",NA,32,"08-12",NA,"Alexandria LA"
+"484",NA,32,"08-12",NA,"Youngstown OH"
+"485",NA,32,"08-12",NA,"Terre Haute IN"
+"486",NA,32,"08-12",NA,"Elmira NY"
+"487",NA,32,"08-12",NA,"Panama City FL"
+"488",NA,32,"08-12",NA,"Bend OR"
+"489",NA,32,"08-12",NA,"Toledo OH"
+"490",NA,32,"08-12",NA,"Shreveport LA"
+"491",NA,31,"08-12",NA,"Marquette MI"
+"492",NA,31,"08-12",NA,"Augusta GA"
+"493",NA,31,"08-12",NA,"Traverse City-Cadillac MI"
+"494",NA,31,"08-12",NA,"Billings, MT"
+"495",NA,31,"08-12",NA,"Bowling Green KY"
+"496",NA,30,"08-12",NA,"Evansville IN"
+"497",NA,30,"08-12",NA,"Butte-Bozeman MT"
+"498",NA,30,"08-12",NA,"Wheeling WV-Steubenville OH"
+"499",NA,30,"08-12",NA,"Biloxi-Gulfport MS"
+"500",NA,30,"08-12",NA,"Baton Rouge LA"
+"501",NA,30,"08-12",NA,"Knoxville TN"
+"502",NA,29,"08-12",NA,"Charleston-Huntington WV"
+"503",NA,29,"08-12",NA,"Lake Charles LA"
+"504",NA,29,"08-12",NA,"Springfield MO"
+"505",NA,29,"08-12",NA,"Paducah KY-Cape Girardeau MO-Harrisburg-Mount Vernon IL"
+"506",NA,28,"08-12",NA,"Parkersburg WV"
+"507",NA,26,"08-12",NA,"Meridian MS"
+"508",NA,25,"08-12",NA,"Tri-Cities TN-VA"
+"509",NA,24,"08-12",NA,"Lafayette LA"
+"510",NA,24,"08-12",NA,"Bluefield-Beckley-Oak Hill WV"
+"511",NA,24,"08-12",NA,"Hattiesburg-Laurel MS"
+"512",NA,NA,"08-12",NA,"Glendive MT"
+"513","District of Columbia",100,"12-16",NA,NA
+"514","New York",82,"12-16",NA,NA
+"515","New Jersey",82,"12-16",NA,NA
+"516","Maryland",73,"12-16",NA,NA
+"517","California",73,"12-16",NA,NA
+"518","Massachusetts",71,"12-16",NA,NA
+"519","Connecticut",68,"12-16",NA,NA
+"520","Florida",61,"12-16",NA,NA
+"521","Texas",60,"12-16",NA,NA
+"522","Nevada",60,"12-16",NA,NA
+"523","Illinois",60,"12-16",NA,NA
+"524","Arizona",56,"12-16",NA,NA
+"525","Washington",55,"12-16",NA,NA
+"526","Colorado",54,"12-16",NA,NA
+"527","Delaware",52,"12-16",NA,NA
+"528","Virginia",52,"12-16",NA,NA
+"529","Rhode Island",52,"12-16",NA,NA
+"530","New Mexico",51,"12-16",NA,NA
+"531","New Hampshire",50,"12-16",NA,NA
+"532","Hawaii",49,"12-16",NA,NA
+"533","Utah",48,"12-16",NA,NA
+"534","Vermont",47,"12-16",NA,NA
+"535","Wisconsin",46,"12-16",NA,NA
+"536","Nebraska",46,"12-16",NA,NA
+"537","Pennsylvania",46,"12-16",NA,NA
+"538","Minnesota",45,"12-16",NA,NA
+"539","Indiana",45,"12-16",NA,NA
+"540","Idaho",45,"12-16",NA,NA
+"541","North Carolina",45,"12-16",NA,NA
+"542","Iowa",44,"12-16",NA,NA
+"543","Wyoming",44,"12-16",NA,NA
+"544","Georgia",43,"12-16",NA,NA
+"545","Maine",43,"12-16",NA,NA
+"546","Michigan",43,"12-16",NA,NA
+"547","Arkansas",42,"12-16",NA,NA
+"548","South Carolina",41,"12-16",NA,NA
+"549","Kansas",40,"12-16",NA,NA
+"550","Oklahoma",40,"12-16",NA,NA
+"551","Alaska",40,"12-16",NA,NA
+"552","North Dakota",38,"12-16",NA,NA
+"553","Ohio",38,"12-16",NA,NA
+"554","Oregon",38,"12-16",NA,NA
+"555","Missouri",37,"12-16",NA,NA
+"556","Tennessee",36,"12-16",NA,NA
+"557","South Dakota",36,"12-16",NA,NA
+"558","Kentucky",36,"12-16",NA,NA
+"559","Alabama",36,"12-16",NA,NA
+"560","Louisiana",34,"12-16",NA,NA
+"561","Mississippi",33,"12-16",NA,NA
+"562","West Virginia",29,"12-16",NA,NA
+"563","Montana",28,"12-16",NA,NA
+"564",NA,100,"12-16","Elizabeth",NA
+"565",NA,NA,"12-16","Carteret",NA
+"566",NA,85,"12-16","Jersey City",NA
+"567",NA,84,"12-16","Edison",NA
+"568",NA,NA,"12-16","Union City",NA
+"569",NA,NA,"12-16","East Orange",NA
+"570",NA,NA,"12-16","Lauderhill",NA
+"571",NA,NA,"12-16","West New York",NA
+"572",NA,NA,"12-16","Kearny",NA
+"573",NA,NA,"12-16","Perth Amboy",NA
+"574",NA,NA,"12-16","San Bruno",NA
+"575",NA,NA,"12-16","North Bergen",NA
+"576",NA,76,"12-16","Newark",NA
+"577",NA,NA,"12-16","Malden",NA
+"578",NA,NA,"12-16","Huntington Park",NA
+"579",NA,74,"12-16","Silver Spring",NA
+"580",NA,NA,"12-16","Woodlawn",NA
+"581",NA,NA,"12-16","North Miami Beach",NA
+"582",NA,NA,"12-16","Union City",NA
+"583",NA,NA,"12-16","Hallandale Beach",NA
+"584",NA,NA,"12-16","Greenbelt",NA
+"585",NA,NA,"12-16","West Falls Church",NA
+"586",NA,70,"12-16","Allen Park",NA
+"587",NA,NA,"12-16","Secaucus",NA
+"588",NA,NA,"12-16","Woodbridge Township",NA
+"589",NA,NA,"12-16","Rockville",NA
+"590",NA,NA,"12-16","College Park",NA
+"591",NA,NA,"12-16","Brentwood",NA
+"592",NA,NA,"12-16","Mount Vernon",NA
+"593",NA,NA,"12-16","Fremont",NA
+"594",NA,NA,"12-16","Wheaton-Glenmont",NA
+"595",NA,NA,"12-16","Colmar Manor",NA
+"596",NA,NA,"12-16","Key West",NA
+"597",NA,NA,"12-16","Norridge",NA
+"598",NA,NA,"12-16","Lake Worth",NA
+"599",NA,66,"12-16","Arlington",NA
+"600",NA,NA,"12-16","Hempstead",NA
+"601",NA,NA,"12-16","Skokie",NA
+"602",NA,NA,"12-16","North Decatur",NA
+"603",NA,NA,"12-16","Passaic",NA
+"604",NA,64,"12-16","Newark",NA
+"605",NA,NA,"12-16","Fairfax",NA
+"606",NA,NA,"12-16","Palos Hills",NA
+"607",NA,NA,"12-16","Paterson",NA
+"608",NA,63,"12-16","Washington",NA
+"609",NA,NA,"12-16","Union",NA
+"610",NA,NA,"12-16","Lynbrook",NA
+"611",NA,NA,"12-16","Margate",NA
+"612",NA,62,"12-16","Irving",NA
+"613",NA,NA,"12-16","Salem",NA
+"614",NA,NA,"12-16","Little Falls",NA
+"615",NA,NA,"12-16","Addison",NA
+"616",NA,NA,"12-16","Nanuet",NA
+"617",NA,NA,"12-16","Edinburg",NA
+"618",NA,NA,"12-16","Merrifield",NA
+"619",NA,NA,"12-16","Teaneck",NA
+"620",NA,NA,"12-16","University Park",NA
+"621",NA,NA,"12-16","Harlingen",NA
+"622",NA,NA,"12-16","Valley Stream",NA
+"623",NA,NA,"12-16","West Orange",NA
+"624",NA,61,"12-16","New York",NA
+"625",NA,NA,"12-16","Bridgeport",NA
+"626",NA,NA,"12-16","Ridgefield",NA
+"627",NA,NA,"12-16","Stamford",NA
+"628",NA,NA,"12-16","North Miami",NA
+"629",NA,NA,"12-16","Gaithersburg",NA
+"630",NA,NA,"12-16","South Plainfield",NA
+"631",NA,NA,"12-16","Beltsville",NA
+"632",NA,NA,"12-16","Combes",NA
+"633",NA,NA,"12-16","Doral",NA
+"634",NA,NA,"12-16","Old Bridge Township",NA
+"635",NA,NA,"12-16","Annandale",NA
+"636",NA,NA,"12-16","Clifton",NA
+"637",NA,NA,"12-16","Palm Springs",NA
+"638",NA,NA,"12-16","Montgomery Village",NA
+"639",NA,NA,"12-16","South Gate",NA
+"640",NA,NA,"12-16","Berwyn",NA
+"641",NA,NA,"12-16","Hoboken",NA
+"642",NA,NA,"12-16","Framingham",NA
+"643",NA,NA,"12-16","The Hammocks",NA
+"644",NA,NA,"12-16","Linden",NA
+"645",NA,NA,"12-16","Deerfield Beach",NA
+"646",NA,NA,"12-16","El Cerrito",NA
+"647",NA,NA,"12-16","Brownsville",NA
+"648",NA,NA,"12-16","Des Plaines",NA
+"649",NA,NA,"12-16","Danbury",NA
+"650",NA,NA,"12-16","Hawthorne",NA
+"651",NA,NA,"12-16","Aventura",NA
+"652",NA,NA,"12-16","Daly City",NA
+"653",NA,NA,"12-16","Medford",NA
+"654",NA,NA,"12-16","Miami Gardens",NA
+"655",NA,NA,"12-16","Pompano Beach",NA
+"656",NA,NA,"12-16","Hicksville",NA
+"657",NA,NA,"12-16","Pasco",NA
+"658",NA,NA,"12-16","Clarksburg",NA
+"659",NA,NA,"12-16","Fair Lawn",NA
+"660",NA,NA,"12-16","Woodbridge",NA
+"661",NA,NA,"12-16","Mission Bend",NA
+"662",NA,NA,"12-16","East Los Angeles",NA
+"663",NA,NA,"12-16","Hunters Creek",NA
+"664",NA,NA,"12-16","Sunrise",NA
+"665",NA,NA,"12-16","Richmond",NA
+"666",NA,NA,"12-16","Piscataway Township",NA
+"667",NA,NA,"12-16","North Lauderdale",NA
+"668",NA,NA,"12-16","Rose Hill",NA
+"669",NA,NA,"12-16","Owings Mills",NA
+"670",NA,NA,"12-16","Sugar Land",NA
+"671",NA,NA,"12-16","Coral Gables",NA
+"672",NA,NA,"12-16","New City",NA
+"673",NA,NA,"12-16","Marlborough",NA
+"674",NA,NA,"12-16","Baldwin Park",NA
+"675",NA,NA,"12-16","Springfield",NA
+"676",NA,NA,"12-16","Hackensack",NA
+"677",NA,55,"12-16","Miami Beach",NA
+"678",NA,NA,"12-16","Hampton Bays",NA
+"679",NA,NA,"12-16","Lilburn",NA
+"680",NA,NA,"12-16","Waukegan",NA
+"681",NA,NA,"12-16","West Windsor Township",NA
+"682",NA,NA,"12-16","East Brunswick",NA
+"683",NA,NA,"12-16","Oakland Park",NA
+"684",NA,NA,"12-16","Homestead",NA
+"685",NA,NA,"12-16","Elk Grove Village",NA
+"686",NA,54,"12-16","Berkeley",NA
+"687",NA,NA,"12-16","Fontainebleau",NA
+"688",NA,NA,"12-16","Mount Vernon",NA
+"689",NA,NA,"12-16","El Monte",NA
+"690",NA,NA,"12-16","Fort Lee",NA
+"691",NA,NA,"12-16","Bayonne",NA
+"692",NA,NA,"12-16","Claremont",NA
+"693",NA,NA,"12-16","Hayward",NA
+"694",NA,NA,"12-16","Country Club",NA
+"695",NA,NA,"12-16","South Brunswick Township",NA
+"696",NA,53,"12-16","Yonkers",NA
+"697",NA,NA,"12-16","Maplewood",NA
+"698",NA,53,"12-16","Pasadena",NA
+"699",NA,NA,"12-16","Rowland Heights",NA
+"700",NA,NA,"12-16","Pine Hills",NA
+"701",NA,NA,"12-16","Trenton",NA
+"702",NA,NA,"12-16","Herndon",NA
+"703",NA,NA,"12-16","Carson",NA
+"704",NA,NA,"12-16","Somerville",NA
+"705",NA,NA,"12-16","Lynn",NA
+"706",NA,NA,"12-16","North Bethesda",NA
+"707",NA,NA,"12-16","Rahway",NA
+"708",NA,NA,"12-16","Bellflower",NA
+"709",NA,NA,"12-16","Mission",NA
+"710",NA,NA,"12-16","Arlington Heights",NA
+"711",NA,NA,"12-16","Pawtucket",NA
+"712",NA,NA,"12-16","Rolling Meadows",NA
+"713",NA,52,"12-16","Sunnyvale",NA
+"714",NA,52,"12-16","Santa Ana",NA
+"715",NA,52,"12-16","Cambridge",NA
+"716",NA,NA,"12-16","Tucker",NA
+"717",NA,NA,"12-16","Hollywood",NA
+"718",NA,NA,"12-16","New Carrollton",NA
+"719",NA,NA,"12-16","Miami Lakes",NA
+"720",NA,52,"12-16","Miami",NA
+"721",NA,NA,"12-16","Glendale",NA
+"722",NA,NA,"12-16","Cerritos",NA
+"723",NA,NA,"12-16","Hauppauge",NA
+"724",NA,NA,"12-16","San Gabriel",NA
+"725",NA,NA,"12-16","Melrose",NA
+"726",NA,NA,"12-16","Manassas",NA
+"727",NA,NA,"12-16","Hyattsville",NA
+"728",NA,NA,"12-16","Stanton",NA
+"729",NA,NA,"12-16","Groveton",NA
+"730",NA,NA,"12-16","Warren",NA
+"731",NA,NA,"12-16","White Plains",NA
+"732",NA,50,"12-16","Boca Raton",NA
+"733",NA,NA,"12-16","Stanford",NA
+"734",NA,50,"12-16","Santa Clara",NA
+"735",NA,NA,"12-16","Franklin Township",NA
+"736",NA,NA,"12-16","Short Pump",NA
+"737",NA,50,"12-16","Fort Lauderdale",NA
+"738",NA,NA,"12-16","Princeton",NA
+"739",NA,NA,"12-16","Randolph",NA
+"740",NA,NA,"12-16","Wheeling",NA
+"741",NA,NA,"12-16","Harrison",NA
+"742",NA,NA,"12-16","Compton",NA
+"743",NA,NA,"12-16","Worcester",NA
+"744",NA,NA,"12-16","Norwalk",NA
+"745",NA,NA,"12-16","Cinco Ranch",NA
+"746",NA,NA,"12-16","Brambleton",NA
+"747",NA,NA,"12-16","San Leandro",NA
+"748",NA,NA,"12-16","Hoffman Estates",NA
+"749",NA,49,"12-16","Oakland",NA
+"750",NA,NA,"12-16","Watertown",NA
+"751",NA,NA,"12-16","Miramar",NA
+"752",NA,NA,"12-16","Perris",NA
+"753",NA,NA,"12-16","McLean",NA
+"754",NA,49,"12-16","Riverside",NA
+"755",NA,NA,"12-16","East Hartford",NA
+"756",NA,NA,"12-16","Cupertino",NA
+"757",NA,NA,"12-16","New Rochelle",NA
+"758",NA,NA,"12-16","Madera",NA
+"759",NA,NA,"12-16","Potomac Falls",NA
+"760",NA,NA,"12-16","Greenwich",NA
+"761",NA,NA,"12-16","Alhambra",NA
+"762",NA,NA,"12-16","Weston",NA
+"763",NA,48,"12-16","West Palm Beach",NA
+"764","District of Columbia",100,"16-20",NA,NA
+"765","New York",61,"16-20",NA,NA
+"766","California",61,"16-20",NA,NA
+"767","New Jersey",60,"16-20",NA,NA
+"768","Massachusetts",59,"16-20",NA,NA
+"769","Texas",55,"16-20",NA,NA
+"770","Maryland",54,"16-20",NA,NA
+"771","Florida",52,"16-20",NA,NA
+"772","Connecticut",52,"16-20",NA,NA
+"773","Virginia",52,"16-20",NA,NA
+"774","Illinois",50,"16-20",NA,NA
+"775","Washington",49,"16-20",NA,NA
+"776","Nevada",47,"16-20",NA,NA
+"777","Rhode Island",46,"16-20",NA,NA
+"778","Arizona",46,"16-20",NA,NA
+"779","Oregon",45,"16-20",NA,NA
+"780","Colorado",44,"16-20",NA,NA
+"781","Minnesota",43,"16-20",NA,NA
+"782","Kansas",42,"16-20",NA,NA
+"783","New Mexico",41,"16-20",NA,NA
+"784","Maine",40,"16-20",NA,NA
+"785","Delaware",40,"16-20",NA,NA
+"786","Nebraska",40,"16-20",NA,NA
+"787","North Carolina",40,"16-20",NA,NA
+"788","Georgia",40,"16-20",NA,NA
+"789","Utah",40,"16-20",NA,NA
+"790","Hawaii",39,"16-20",NA,NA
+"791","Vermont",39,"16-20",NA,NA
+"792","Iowa",38,"16-20",NA,NA
+"793","Wisconsin",38,"16-20",NA,NA
+"794","Pennsylvania",37,"16-20",NA,NA
+"795","New Hampshire",37,"16-20",NA,NA
+"796","Idaho",36,"16-20",NA,NA
+"797","Michigan",36,"16-20",NA,NA
+"798","Oklahoma",35,"16-20",NA,NA
+"799","Indiana",35,"16-20",NA,NA
+"800","Alaska",33,"16-20",NA,NA
+"801","Wyoming",33,"16-20",NA,NA
+"802","Arkansas",33,"16-20",NA,NA
+"803","South Carolina",33,"16-20",NA,NA
+"804","South Dakota",32,"16-20",NA,NA
+"805","North Dakota",32,"16-20",NA,NA
+"806","Tennessee",31,"16-20",NA,NA
+"807","Louisiana",31,"16-20",NA,NA
+"808","Ohio",31,"16-20",NA,NA
+"809","Missouri",31,"16-20",NA,NA
+"810","Kentucky",29,"16-20",NA,NA
+"811","Alabama",28,"16-20",NA,NA
+"812","Mississippi",27,"16-20",NA,NA
+"813","Montana",27,"16-20",NA,NA
+"814","West Virginia",25,"16-20",NA,NA
+"815",NA,NA,"16-20","Bailey's Crossroads",NA
+"816",NA,NA,"16-20","Golden Glades",NA
+"817",NA,NA,"16-20","Newington",NA
+"818",NA,NA,"16-20","Elizabeth",NA
+"819",NA,NA,"16-20","Union City",NA
+"820",NA,100,"16-20","Washington",NA
+"821",NA,NA,"16-20","Chelsea",NA
+"822",NA,NA,"16-20","Springfield",NA
+"823",NA,NA,"16-20","Everett",NA
+"824",NA,NA,"16-20","Perth Amboy",NA
+"825",NA,NA,"16-20","Silver Spring",NA
+"826",NA,NA,"16-20","Princeton Meadows",NA
+"827",NA,NA,"16-20","White Oak",NA
+"828",NA,NA,"16-20","Santa Cruz",NA
+"829",NA,NA,"16-20","Irvington",NA
+"830",NA,NA,"16-20","Doral",NA
+"831",NA,NA,"16-20","Fairland",NA
+"832",NA,NA,"16-20","Chillum",NA
+"833",NA,NA,"16-20","Plainfield",NA
+"834",NA,87,"16-20","Miami",NA
+"835",NA,NA,"16-20","Wheaton-Glenmont",NA
+"836",NA,NA,"16-20","Brentwood",NA
+"837",NA,NA,"16-20","North Miami Beach",NA
+"838",NA,NA,"16-20","Edison",NA
+"839",NA,NA,"16-20","South Brunswick Township",NA
+"840",NA,84,"16-20","Jersey City",NA
+"841",NA,NA,"16-20","West New York",NA
+"842",NA,NA,"16-20","Malden",NA
+"843",NA,NA,"16-20","Moss Landing",NA
+"844",NA,NA,"16-20","Huntington Park",NA
+"845",NA,NA,"16-20","Berkeley",NA
+"846",NA,NA,"16-20","North Miami",NA
+"847",NA,NA,"16-20","Richmond",NA
+"848",NA,81,"16-20","Newark",NA
+"849",NA,NA,"16-20","Paterson",NA
+"850",NA,NA,"16-20","Hempstead",NA
+"851",NA,81,"16-20","Arlington",NA
+"852",NA,NA,"16-20","South Miami Heights",NA
+"853",NA,NA,"16-20","Greenacres",NA
+"854",NA,81,"16-20","New York",NA
+"855",NA,NA,"16-20","Bell Gardens",NA
+"856",NA,NA,"16-20","East Orange",NA
+"857",NA,NA,"16-20","Coral Gables",NA
+"858",NA,NA,"16-20","Union City",NA
+"859",NA,NA,"16-20","Alexandria",NA
+"860",NA,NA,"16-20","Country Club",NA
+"861",NA,NA,"16-20","Palm Springs",NA
+"862",NA,NA,"16-20","Lynn",NA
+"863",NA,NA,"16-20","La Homa",NA
+"864",NA,NA,"16-20","Golden Gate",NA
+"865",NA,NA,"16-20","Fontainebleau",NA
+"866",NA,NA,"16-20","Passaic",NA
+"867",NA,NA,"16-20","Woodbridge Township",NA
+"868",NA,NA,"16-20","Albany",NA
+"869",NA,NA,"16-20","Deerfield Beach",NA
+"870",NA,NA,"16-20","Mission Bend",NA
+"871",NA,NA,"16-20","Cicero",NA
+"872",NA,NA,"16-20","Fairfax",NA
+"873",NA,75,"16-20","Sunnyvale",NA
+"874",NA,NA,"16-20","Salinas",NA
+"875",NA,NA,"16-20","Framingham",NA
+"876",NA,NA,"16-20","Danbury",NA
+"877",NA,NA,"16-20","Paramount",NA
+"878",NA,NA,"16-20","Mount Vernon",NA
+"879",NA,74,"16-20","Oakland",NA
+"880",NA,NA,"16-20","Princeton",NA
+"881",NA,NA,"16-20","Miami Beach",NA
+"882",NA,NA,"16-20","Bridgeport",NA
+"883",NA,NA,"16-20","University Park",NA
+"884",NA,NA,"16-20","Hayward",NA
+"885",NA,73,"16-20","Boardman",NA
+"886",NA,NA,"16-20","Somerville",NA
+"887",NA,NA,"16-20","Oakland Park",NA
+"888",NA,NA,"16-20","Key West",NA
+"889",NA,NA,"16-20","Merrifield",NA
+"890",NA,NA,"16-20","Norridge",NA
+"891",NA,73,"16-20","Cambridge",NA
+"892",NA,NA,"16-20","East Foothills",NA
+"893",NA,72,"16-20","Newark",NA
+"894",NA,NA,"16-20","Greenbelt",NA
+"895",NA,NA,"16-20","Davis",NA
+"896",NA,NA,"16-20","East Los Angeles",NA
+"897",NA,NA,"16-20","College Park",NA
+"898",NA,NA,"16-20","Union",NA
+"899",NA,NA,"16-20","The Hammocks",NA
+"900",NA,NA,"16-20","Annandale",NA
+"901",NA,NA,"16-20","Gaithersburg",NA
+"902",NA,NA,"16-20","Montgomery Village",NA
+"903",NA,NA,"16-20","North Lauderdale",NA
+"904",NA,71,"16-20","Irving",NA
+"905",NA,NA,"16-20","Hollywood",NA
+"906",NA,NA,"16-20","Hicksville",NA
+"907",NA,NA,"16-20","Miami Lakes",NA
+"908",NA,70,"16-20","Santa Ana",NA
+"909",NA,NA,"16-20","San Gabriel",NA
+"910",NA,70,"16-20","Fremont",NA
+"911",NA,NA,"16-20","Herndon",NA
+"912",NA,NA,"16-20","Margate",NA
+"913",NA,NA,"16-20","Ceres",NA
+"914",NA,NA,"16-20","Moraga",NA
+"915",NA,NA,"16-20","South Plainfield",NA
+"916",NA,NA,"16-20","Mount Vernon",NA
+"917",NA,NA,"16-20","Pine Hills",NA
+"918",NA,NA,"16-20","Sunrise",NA
+"919",NA,NA,"16-20","El Monte",NA
+"920",NA,NA,"16-20","Norcross",NA
+"921",NA,NA,"16-20","Linden",NA
+"922",NA,NA,"16-20","Marlborough",NA
+"923",NA,NA,"16-20","South Gate",NA
+"924",NA,NA,"16-20","Kendall West",NA
+"925",NA,NA,"16-20","Seaside",NA
+"926",NA,NA,"16-20","Manassas",NA
+"927",NA,NA,"16-20","San Mateo",NA
+"928",NA,NA,"16-20","South Laurel",NA
+"929",NA,NA,"16-20","Lawrence",NA
+"930",NA,NA,"16-20","Monterey Park",NA
+"931",NA,NA,"16-20","Aventura",NA
+"932",NA,NA,"16-20","Vernon Hills",NA
+"933",NA,NA,"16-20","Peekskill",NA
+"934",NA,NA,"16-20","Clarksburg",NA
+"935",NA,NA,"16-20","Brownsville",NA
+"936",NA,NA,"16-20","Potomac Falls",NA
+"937",NA,NA,"16-20","Walnut",NA
+"938",NA,NA,"16-20","Skokie",NA
+"939",NA,NA,"16-20","Tamiami",NA
+"940",NA,NA,"16-20","Sammamish",NA
+"941",NA,NA,"16-20","Egypt Lake-Leto",NA
+"942",NA,NA,"16-20","Stamford",NA
+"943",NA,NA,"16-20","Lely Resort",NA
+"944",NA,NA,"16-20","Homestead",NA
+"945",NA,NA,"16-20","Mansfield",NA
+"946",NA,NA,"16-20","Pomona",NA
+"947",NA,NA,"16-20","Kent",NA
+"948",NA,66,"16-20","Boston",NA
+"949",NA,NA,"16-20","Woodbridge",NA
+"950",NA,NA,"16-20","Plantation",NA
+"951",NA,NA,"16-20","East Palo Alto",NA
+"952",NA,NA,"16-20","Redmond",NA
+"953",NA,NA,"16-20","Stanton",NA
+"954",NA,NA,"16-20","Hackensack",NA
+"955",NA,NA,"16-20","Chamblee",NA
+"956",NA,66,"16-20","Hialeah",NA
+"957",NA,NA,"16-20","West Windsor Township",NA
+"958",NA,NA,"16-20","Montebello",NA
+"959",NA,NA,"16-20","Bethesda",NA
+"960",NA,NA,"16-20","Princeton",NA
+"961",NA,65,"16-20","Fort Lauderdale",NA
+"962",NA,NA,"16-20","Lilburn",NA
+"963",NA,NA,"16-20","Wellesley",NA
+"964",NA,NA,"16-20","Worcester",NA
+"965",NA,NA,"16-20","Lawrence Township",NA
+"966",NA,NA,"16-20","Concord",NA
+"967",NA,NA,"16-20","Trenton",NA
+"968",NA,NA,"16-20","Sterling",NA
+"969",NA,NA,"16-20","Fullerton",NA
+"970",NA,NA,"16-20","Evanston",NA
+"971",NA,NA,"16-20","Mineola",NA
+"972",NA,NA,"16-20","Northampton",NA
+"973",NA,NA,"16-20","Mountain House",NA
+"974",NA,NA,"16-20","Daly City",NA
+"975",NA,NA,"16-20","Nanuet",NA
+"976",NA,NA,"16-20","Merced",NA
+"977",NA,NA,"16-20","Montclair",NA
+"978",NA,NA,"16-20","Coconut Creek",NA
+"979",NA,NA,"16-20","Pasadena",NA
+"980",NA,NA,"16-20","New Rochelle",NA
+"981",NA,NA,"16-20","West Palm Beach",NA
+"982",NA,NA,"16-20","North Decatur",NA
+"983",NA,NA,"16-20","Redwood City",NA
+"984",NA,NA,"16-20","Wheeling",NA
+"985",NA,NA,"16-20","Newton",NA
+"986",NA,NA,"16-20","Los Altos",NA
+"987",NA,63,"16-20","Leesburg",NA
+"988",NA,NA,"16-20","Dulles",NA
+"989",NA,NA,"16-20","Coral Springs",NA
+"990",NA,NA,"16-20","New Haven",NA
+"991",NA,NA,"16-20","Pittsburg",NA
+"992",NA,NA,"16-20","Rosemead",NA
+"993",NA,NA,"16-20","Glendale",NA
+"994",NA,NA,"16-20","Palo Alto",NA
+"995",NA,NA,"16-20","Compton",NA
+"996",NA,NA,"16-20","Brookline",NA
+"997",NA,NA,"16-20","Des Plaines",NA
+"998",NA,NA,"16-20","Hartford",NA
+"999",NA,NA,"16-20","Miramar",NA
+"1000",NA,NA,"16-20","Bellevue",NA
+"1001",NA,NA,"16-20","Berwyn",NA
+"1002",NA,NA,"16-20","Amherst",NA
+"1003",NA,NA,"16-20","Tarrytown",NA
+"1004",NA,NA,"16-20","Piscataway Township",NA
+"1005",NA,NA,"16-20","Tucker",NA
+"1006",NA,62,"16-20","Chula Vista",NA
+"1007",NA,NA,"16-20","Medley",NA
+"1008",NA,NA,"16-20","Franklin Township",NA
+"1009",NA,NA,"16-20","White Plains",NA
+"1010",NA,NA,"16-20","North Bethesda",NA
+"1011",NA,NA,"16-20","Oxnard",NA
+"1012",NA,NA,"16-20","Pompano Beach",NA
+"1013",NA,NA,"16-20","Duluth",NA
+"1014",NA,NA,"16-20","San Bruno",NA
+"1015","District of Columbia",100,"20-24",NA,NA
+"1016","Florida",71,"20-24",NA,NA
+"1017","New Jersey",65,"20-24",NA,NA
+"1018","New York",65,"20-24",NA,NA
+"1019","Massachusetts",64,"20-24",NA,NA
+"1020","Texas",64,"20-24",NA,NA
+"1021","California",61,"20-24",NA,NA
+"1022","Connecticut",61,"20-24",NA,NA
+"1023","Maryland",57,"20-24",NA,NA
+"1024","Washington",56,"20-24",NA,NA
+"1025","Nevada",55,"20-24",NA,NA
+"1026","Illinois",55,"20-24",NA,NA
+"1027","Rhode Island",54,"20-24",NA,NA
+"1028","Virginia",53,"20-24",NA,NA
+"1029","Arizona",50,"20-24",NA,NA
+"1030","New Mexico",46,"20-24",NA,NA
+"1031","Utah",46,"20-24",NA,NA
+"1032","Minnesota",45,"20-24",NA,NA
+"1033","North Carolina",45,"20-24",NA,NA
+"1034","Georgia",45,"20-24",NA,NA
+"1035","Delaware",45,"20-24",NA,NA
+"1036","Colorado",44,"20-24",NA,NA
+"1037","Oregon",43,"20-24",NA,NA
+"1038","Hawaii",42,"20-24",NA,NA
+"1039","Kansas",42,"20-24",NA,NA
+"1040","Iowa",41,"20-24",NA,NA
+"1041","Nebraska",40,"20-24",NA,NA
+"1042","Pennsylvania",40,"20-24",NA,NA
+"1043","Vermont",40,"20-24",NA,NA
+"1044","Oklahoma",39,"20-24",NA,NA
+"1045","Indiana",39,"20-24",NA,NA
+"1046","Maine",38,"20-24",NA,NA
+"1047","Louisiana",38,"20-24",NA,NA
+"1048","South Carolina",38,"20-24",NA,NA
+"1049","Wisconsin",37,"20-24",NA,NA
+"1050","Michigan",36,"20-24",NA,NA
+"1051","Idaho",36,"20-24",NA,NA
+"1052","New Hampshire",36,"20-24",NA,NA
+"1053","Tennessee",36,"20-24",NA,NA
+"1054","Ohio",34,"20-24",NA,NA
+"1055","Kentucky",34,"20-24",NA,NA
+"1056","North Dakota",34,"20-24",NA,NA
+"1057","Wyoming",34,"20-24",NA,NA
+"1058","Missouri",33,"20-24",NA,NA
+"1059","Arkansas",33,"20-24",NA,NA
+"1060","Alaska",32,"20-24",NA,NA
+"1061","South Dakota",32,"20-24",NA,NA
+"1062","Alabama",32,"20-24",NA,NA
+"1063","Mississippi",31,"20-24",NA,NA
+"1064","West Virginia",29,"20-24",NA,NA
+"1065","Montana",27,"20-24",NA,NA
+"1066",NA,NA,"20-24","Golden Glades",NA
+"1067",NA,NA,"20-24","Coral Terrace",NA
+"1068",NA,NA,"20-24","Elizabeth",NA
+"1069",NA,NA,"20-24","Oak Ridge",NA
+"1070",NA,NA,"20-24","Pinewood",NA
+"1071",NA,NA,"20-24","Harrison",NA
+"1072",NA,NA,"20-24","Fontainebleau",NA
+"1073",NA,NA,"20-24","Union City",NA
+"1074",NA,NA,"20-24","South Miami Heights",NA
+"1075",NA,NA,"20-24","Golden Gate",NA
+"1076",NA,NA,"20-24","Everett",NA
+"1077",NA,NA,"20-24","Chillum",NA
+"1078",NA,NA,"20-24","Irvington",NA
+"1079",NA,100,"20-24","Miami",NA
+"1080",NA,99,"20-24","Newark",NA
+"1081",NA,NA,"20-24","Doral",NA
+"1082",NA,NA,"20-24","Miami Springs",NA
+"1083",NA,NA,"20-24","Miami Shores",NA
+"1084",NA,NA,"20-24","Paterson",NA
+"1085",NA,NA,"20-24","Brentwood",NA
+"1086",NA,NA,"20-24","Hempstead",NA
+"1087",NA,NA,"20-24","North Miami Beach",NA
+"1088",NA,NA,"20-24","Lynn",NA
+"1089",NA,NA,"20-24","Kendall West",NA
+"1090",NA,94,"20-24","Hialeah",NA
+"1091",NA,NA,"20-24","Aubrey",NA
+"1092",NA,NA,"20-24","Egypt Lake-Leto",NA
+"1093",NA,NA,"20-24","Palm Springs",NA
+"1094",NA,NA,"20-24","Elmont",NA
+"1095",NA,NA,"20-24","Perth Amboy",NA
+"1096",NA,NA,"20-24","Hallandale Beach",NA
+"1097",NA,NA,"20-24","White Oak",NA
+"1098",NA,NA,"20-24","Vienna",NA
+"1099",NA,NA,"20-24","Malden",NA
+"1100",NA,NA,"20-24","Kearny",NA
+"1101",NA,NA,"20-24","Lauderhill",NA
+"1102",NA,NA,"20-24","Homestead",NA
+"1103",NA,NA,"20-24","Country Club",NA
+"1104",NA,NA,"20-24","The Hammocks",NA
+"1105",NA,NA,"20-24","North Miami",NA
+"1106",NA,NA,"20-24","Miami Gardens",NA
+"1107",NA,NA,"20-24","Tamiami",NA
+"1108",NA,NA,"20-24","Lawrence",NA
+"1109",NA,87,"20-24","Washington",NA
+"1110",NA,NA,"20-24","Silver Spring",NA
+"1111",NA,NA,"20-24","Three Lakes",NA
+"1112",NA,NA,"20-24","Greenacres",NA
+"1113",NA,NA,"20-24","University Park",NA
+"1114",NA,NA,"20-24","Kendale Lakes",NA
+"1115",NA,NA,"20-24","Wheaton-Glenmont",NA
+"1116",NA,NA,"20-24","Danbury",NA
+"1117",NA,NA,"20-24","Princeton",NA
+"1118",NA,NA,"20-24","Huntington Park",NA
+"1119",NA,NA,"20-24","Medley",NA
+"1120",NA,NA,"20-24","Sunrise",NA
+"1121",NA,NA,"20-24","Kissimmee",NA
+"1122",NA,NA,"20-24","Passaic",NA
+"1123",NA,NA,"20-24","Eagle Pass",NA
+"1124",NA,NA,"20-24","North Lauderdale",NA
+"1125",NA,NA,"20-24","Coral Gables",NA
+"1126",NA,NA,"20-24","Del Rio",NA
+"1127",NA,80,"20-24","Jersey City",NA
+"1128",NA,NA,"20-24","Framingham",NA
+"1129",NA,NA,"20-24","San Gabriel",NA
+"1130",NA,NA,"20-24","Union City",NA
+"1131",NA,NA,"20-24","Mission Bend",NA
+"1132",NA,NA,"20-24","Fairfax",NA
+"1133",NA,NA,"20-24","Rowland Heights",NA
+"1134",NA,NA,"20-24","Hollywood",NA
+"1135",NA,NA,"20-24","South Brunswick Township",NA
+"1136",NA,NA,"20-24","Marlborough",NA
+"1137",NA,NA,"20-24","Randolph",NA
+"1138",NA,NA,"20-24","East Hill-Meridian",NA
+"1139",NA,NA,"20-24","Plainfield",NA
+"1140",NA,NA,"20-24","Miami Beach",NA
+"1141",NA,NA,"20-24","Deerfield Beach",NA
+"1142",NA,NA,"20-24","Pasco",NA
+"1143",NA,NA,"20-24","Key West",NA
+"1144",NA,NA,"20-24","Herndon",NA
+"1145",NA,NA,"20-24","Beltsville",NA
+"1146",NA,NA,"20-24","Hartford",NA
+"1147",NA,NA,"20-24","Alexandria",NA
+"1148",NA,NA,"20-24","Cicero",NA
+"1149",NA,NA,"20-24","Margate",NA
+"1150",NA,NA,"20-24","Hicksville",NA
+"1151",NA,74,"20-24","Fort Lauderdale",NA
+"1152",NA,NA,"20-24","Pine Hills",NA
+"1153",NA,NA,"20-24","East Orange",NA
+"1154",NA,NA,"20-24","Roselle Park",NA
+"1155",NA,NA,"20-24","Lehigh Acres",NA
+"1156",NA,NA,"20-24","East Foothills",NA
+"1157",NA,NA,"20-24","Edison",NA
+"1158",NA,NA,"20-24","Northlake",NA
+"1159",NA,NA,"20-24","Norcross",NA
+"1160",NA,NA,"20-24","Aventura",NA
+"1161",NA,NA,"20-24","Uniondale",NA
+"1162",NA,NA,"20-24","Coconut Creek",NA
+"1163",NA,72,"20-24","Irving",NA
+"1164",NA,NA,"20-24","Lilburn",NA
+"1165",NA,NA,"20-24","Town 'n' Country",NA
+"1166",NA,72,"20-24","Sunnyvale",NA
+"1167",NA,NA,"20-24","Greenbelt",NA
+"1168",NA,NA,"20-24","Pinecrest",NA
+"1169",NA,NA,"20-24","Groveton",NA
+"1170",NA,NA,"20-24","Davis",NA
+"1171",NA,NA,"20-24","Richmond",NA
+"1172",NA,NA,"20-24","Hayward",NA
+"1173",NA,71,"20-24","Pembroke Pines",NA
+"1174",NA,NA,"20-24","Combes",NA
+"1175",NA,NA,"20-24","Nanuet",NA
+"1176",NA,NA,"20-24","Ceres",NA
+"1177",NA,NA,"20-24","Rosemead",NA
+"1178",NA,NA,"20-24","Monterey Park",NA
+"1179",NA,NA,"20-24","Union",NA
+"1180",NA,NA,"20-24","Mansfield",NA
+"1181",NA,NA,"20-24","Miramar",NA
+"1182",NA,NA,"20-24","Laurel",NA
+"1183",NA,NA,"20-24","Goulds",NA
+"1184",NA,70,"20-24","Fremont",NA
+"1185",NA,NA,"20-24","Mount Vernon",NA
+"1186",NA,NA,"20-24","Manassas",NA
+"1187",NA,NA,"20-24","Stamford",NA
+"1188",NA,NA,"20-24","Bridgeport",NA
+"1189",NA,NA,"20-24","Pompano Beach",NA
+"1190",NA,NA,"20-24","Concord",NA
+"1191",NA,NA,"20-24","Berkeley",NA
+"1192",NA,NA,"20-24","Merrifield",NA
+"1193",NA,NA,"20-24","Garland",NA
+"1194",NA,69,"20-24","El Paso",NA
+"1195",NA,69,"20-24","Cambridge",NA
+"1196",NA,NA,"20-24","Doraville",NA
+"1197",NA,NA,"20-24","Daly City",NA
+"1198",NA,NA,"20-24","El Monte",NA
+"1199",NA,NA,"20-24","University",NA
+"1200",NA,NA,"20-24","Woodbridge",NA
+"1201",NA,68,"20-24","Santa Ana",NA
+"1202",NA,NA,"20-24","Princeton",NA
+"1203",NA,NA,"20-24","Madera",NA
+"1204",NA,NA,"20-24","Brownsville",NA
+"1205",NA,NA,"20-24","Meadow Woods",NA
+"1206",NA,NA,"20-24","Orangetree",NA
+"1207",NA,NA,"20-24","Mountain House",NA
+"1208",NA,NA,"20-24","Piscataway Township",NA
+"1209",NA,NA,"20-24","Worcester",NA
+"1210",NA,NA,"20-24","Manassas Park",NA
+"1211",NA,NA,"20-24","Clarksburg",NA
+"1212",NA,NA,"20-24","Coral Springs",NA
+"1213",NA,67,"20-24","Irvine",NA
+"1214",NA,NA,"20-24","Compton",NA
+"1215",NA,67,"20-24","Arlington",NA
+"1216",NA,NA,"20-24","SeaTac",NA
+"1217",NA,NA,"20-24","Lowell",NA
+"1218",NA,NA,"20-24","Glenn Dale",NA
+"1219",NA,NA,"20-24","Davie",NA
+"1220",NA,NA,"20-24","Valley Stream",NA
+"1221",NA,NA,"20-24","Sterling",NA
+"1222",NA,NA,"20-24","New Haven",NA
+"1223",NA,NA,"20-24","Linden",NA
+"1224",NA,NA,"20-24","Glendale",NA
+"1225",NA,NA,"20-24","Manor",NA
+"1226",NA,NA,"20-24","Annandale",NA
+"1227",NA,NA,"20-24","San Bruno",NA
+"1228",NA,NA,"20-24","Kendall",NA
+"1229",NA,NA,"20-24","Brockton",NA
+"1230",NA,NA,"20-24","Bellevue",NA
+"1231",NA,NA,"20-24","Riviera Beach",NA
+"1232",NA,NA,"20-24","East Los Angeles",NA
+"1233",NA,NA,"20-24","White Plains",NA
+"1234",NA,NA,"20-24","Freeport",NA
+"1235",NA,65,"20-24","Boston",NA
+"1236",NA,NA,"20-24","Stanton",NA
+"1237",NA,NA,"20-24","Tysons",NA
+"1238",NA,65,"20-24","Houston",NA
+"1239",NA,NA,"20-24","Fort Pierce",NA
+"1240",NA,NA,"20-24","Allen",NA
+"1241",NA,NA,"20-24","Hudson",NA
+"1242",NA,NA,"20-24","Edinburg",NA
+"1243",NA,65,"20-24","Cypress",NA
+"1244",NA,NA,"20-24","West Windsor Township",NA
+"1245",NA,NA,"20-24","Oxnard",NA
+"1246",NA,NA,"20-24","Pittsburg",NA
+"1247",NA,64,"20-24","West Palm Beach",NA
+"1248",NA,NA,"20-24","Chamblee",NA
+"1249",NA,NA,"20-24","Heber",NA
+"1250",NA,NA,"20-24","Chantilly",NA
+"1251",NA,NA,"20-24","Fort Lee",NA
+"1252",NA,NA,"20-24","Barnstable",NA
+"1253",NA,64,"20-24","Oakland",NA
+"1254",NA,NA,"20-24","Wellington",NA
+"1255",NA,NA,"20-24","Lake Ridge",NA
+"1256",NA,NA,"20-24","McLean",NA
+"1257",NA,NA,"20-24","West Orange",NA
+"1258",NA,NA,"20-24","Amherst",NA
+"1259",NA,NA,"20-24","Skokie",NA
+"1260",NA,NA,"20-24","Franklin Township",NA
+"1261",NA,NA,"20-24","North Bergen",NA
+"1262",NA,NA,"20-24","Yakima",NA
+"1263",NA,NA,"20-24","Diamond Bar",NA
+"1264",NA,NA,"20-24","Federal Way",NA
+"1265",NA,NA,"20-24","East Haven",NA
