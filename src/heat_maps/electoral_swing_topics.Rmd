@@ -84,7 +84,7 @@ Now, we calculate the change in average query incidence from one timeframe to th
 
 ```{r}
 trendsdf %>%
-  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
+  pivot_wider(id_cols = c(Region, City, DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
   (\(df) df %>% mutate("change_04-12" = df[["08-12"]] - df[["04-08"]])) %>%
   head(10)
 ```
@@ -96,7 +96,7 @@ Now, we make a reusable function which calculates the change over a given time p
 ```{r}
 change_time_period <- function(date1, date2) {
   trendsdf %>%
-  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
+  pivot_wider(id_cols = c(Region, City, DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
   (\(df) df %>% mutate("change_query_incidence" = df[[date1]] - df[[date2]]))
 }
 
@@ -107,32 +107,41 @@ change_time_period("08-12", "04-08") %>% head(10)
 
 ### 5.1 Data Overview
 
-We first match cities from Google trends to electoral data. We do so by normalizing the city names in the Google tends dataset.
+We first match cities from Google trends to electoral data. We do so by checking for cities in the election data which are substrings of the Google trends DMA column.
+Note that the line of code for doing a fuzzy merge uses the fuzzyjoin package.
 
 ```{r}
-interest_swing_08_12 <- change_time_period("08-12", "04-08") %>% mutate(city = toupper(City)) %>% select(city, change_query_incidence)
+library(fuzzyjoin)
+
+interest_swing_08_12 <- change_time_period("08-12", "04-08") %>% mutate(county = toupper(DMA)) %>% select(county, change_query_incidence)
 swing_county <- votestimeframe %>%
     group_by(state, county_name, office) %>%
     summarise(swing = .data[["2012"]] - .data[["2008"]]) %>%
-    mutate(city = county_name) %>%
-    select(city, swing)
+    mutate(county = county_name) %>%
+    select(county, swing)
 
-merge(interest_swing_08_12, swing_county, by = "city") %>% head(10)
+regex_inner_join(interest_swing_08_12, swing_county, by = "county") %>% head(10)
 ```
 
 Looks good.
 
 ### 5.2 The Heatmap
 
-To generate a heatmap, we get latitutde and longitudes for each city, then plot the values.
+To generate a heatmap, we get latitutde and longitudes for each city, then plot the values. We save this dataframe for convenience. To speed up knitting, we use our cached .csv file.
 
 ```{r}
 library(ggmap)
 
-register_google(Sys.getenv("GOOGLE_API_KEY"))
+register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE)
 
-with_lat_long <- merge(interest_swing_08_12, swing_county, by = "city") %>%
-    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = df$city, method = "census")))
+#with_lat_long <- merge(interest_swing_08_12, swing_county, by = "city") %>%
+#    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$city, ", ", df$state), method = "census")))
 
-with_lat_long %>% head(10)
+#with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv")
+#with_lat_long %>% head(10)
+
+with_lat_long <- read.csv("../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv")
+with_lat_long %>% filter(!is.na(change_query_incidence)) %>% head(10)
 ```
+
+Looks good.

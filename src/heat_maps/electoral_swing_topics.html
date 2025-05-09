@@ -387,12 +387,18 @@ library(stringr)
 
 trendsdf &lt;- read.csv(&quot;../../data_cleaned/google_trends/summarized.csv&quot;)
 trendsdf %&gt;% head(5)</code></pre>
-<pre><code>##   X               Region query_incidence daterange City  DMA
-## 1 1 District of Columbia             100     04-08 &lt;NA&gt; &lt;NA&gt;
-## 2 2             New York              79     04-08 &lt;NA&gt; &lt;NA&gt;
-## 3 3             Maryland              73     04-08 &lt;NA&gt; &lt;NA&gt;
-## 4 4           California              73     04-08 &lt;NA&gt; &lt;NA&gt;
-## 5 5           New Jersey              72     04-08 &lt;NA&gt; &lt;NA&gt;</code></pre>
+<pre><code>##   X                                      DMA query_incidence daterange Region
+## 1 1                     Yuma AZ-El Centro CA             100     04-08   &lt;NA&gt;
+## 2 2                  Miami-Ft. Lauderdale FL              84     04-08   &lt;NA&gt;
+## 3 3 Harlingen-Weslaco-Brownsville-McAllen TX              74     04-08   &lt;NA&gt;
+## 4 4                                Alpena MI              73     04-08   &lt;NA&gt;
+## 5 5            Washington DC (Hagerstown MD)              72     04-08   &lt;NA&gt;
+##   City
+## 1 &lt;NA&gt;
+## 2 &lt;NA&gt;
+## 3 &lt;NA&gt;
+## 4 &lt;NA&gt;
+## 5 &lt;NA&gt;</code></pre>
 </div>
 <div id="electoral-swing-from-2004---2008-presidential-elections" class="section level2">
 <h2>3. Electoral Swing from 2004 - 2008 Presidential Elections</h2>
@@ -401,28 +407,39 @@ trendsdf %&gt;% head(5)</code></pre>
 <p>Here is an overview of the electiondf dataset:</p>
 <pre class="r"><code>electiondf &lt;- read.csv(&quot;../../data_cleaned/harvard_election/countypres_2000-2020.csv&quot;)
 electiondf %&gt;% sample_n(10)</code></pre>
-<pre><code>##    year        state state_po county_name county_fips       office
-## 1  2020     ARKANSAS       AR      GREENE        5055 US PRESIDENT
-## 2  2008         IOWA       IA        TAMA       19171 US PRESIDENT
-## 3  2020      GEORGIA       GA    HARALSON       13143 US PRESIDENT
-## 4  2016       KANSAS       KS      BARBER       20007 US PRESIDENT
-## 5  2020        TEXAS       TX     COLEMAN       48083 US PRESIDENT
-## 6  2000     KENTUCKY       KY        BATH       21011 US PRESIDENT
-## 7  2012     MISSOURI       MO    CALLAWAY       29027 US PRESIDENT
-## 8  2000    TENNESSEE       TN      MORGAN       47129 US PRESIDENT
-## 9  2016 SOUTH DAKOTA       SD      HUGHES       46065 US PRESIDENT
-## 10 2020     MISSOURI       MO    MONITEAU       29135 US PRESIDENT
-##          candidate       party candidatevotes totalvotes  version         mode
-## 1            OTHER       GREEN             20      16100 20220315   EARLY VOTE
-## 2            OTHER       OTHER            131       8850 20220315        TOTAL
-## 3     JO JORGENSEN LIBERTARIAN             55      14248 20220315 ELECTION DAY
-## 4  HILLARY CLINTON    DEMOCRAT            286       2252 20220315        TOTAL
-## 5     JO JORGENSEN LIBERTARIAN             23       4124 20220315        TOTAL
-## 6      RALPH NADER       GREEN             49       4473 20220315        TOTAL
-## 7      MITT ROMNEY  REPUBLICAN          11745      18232 20220315        TOTAL
-## 8          AL GORE    DEMOCRAT           2921       6162 20220315        TOTAL
-## 9            OTHER       OTHER            551       8175 20220315        TOTAL
-## 10           OTHER       GREEN              8       7157 20220315        TOTAL</code></pre>
+<pre><code>##    year         state state_po county_name county_fips       office
+## 1  2012          OHIO       OH    CRAWFORD       39033 US PRESIDENT
+## 2  2020          UTAH       UT     DAGGETT       49009 US PRESIDENT
+## 3  2016         TEXAS       TX     RANDALL       48381 US PRESIDENT
+## 4  2020       ARIZONA       AZ  SANTA CRUZ        4023 US PRESIDENT
+## 5  2020       INDIANA       IN     HANCOCK       18059 US PRESIDENT
+## 6  2020      VIRGINIA       VA MECKLENBURG       51117 US PRESIDENT
+## 7  2020  SOUTH DAKOTA       SD       BUTTE       46019 US PRESIDENT
+## 8  2020       GEORGIA       GA      WILKES       13317 US PRESIDENT
+## 9  2008     TENNESSEE       TN  CUMBERLAND       47035 US PRESIDENT
+## 10 2012 WEST VIRGINIA       WV   DODDRIDGE       54017 US PRESIDENT
+##            candidate       party candidatevotes totalvotes  version
+## 1        MITT ROMNEY  REPUBLICAN          11852      19803 20220315
+## 2              OTHER       GREEN              0        619 20220315
+## 3              OTHER       OTHER           2476      54305 20220315
+## 4       JO JORGENSEN LIBERTARIAN            180      19556 20220315
+## 5  JOSEPH R BIDEN JR    DEMOCRAT          12895      42911 20220315
+## 6              OTHER       OTHER             13      16207 20220315
+## 7       JO JORGENSEN LIBERTARIAN            132       4802 20220315
+## 8     DONALD J TRUMP  REPUBLICAN              3       5029 20220315
+## 9              OTHER       OTHER            387      25712 20220315
+## 10      BARACK OBAMA    DEMOCRAT            575       2769 20220315
+##            mode
+## 1         TOTAL
+## 2         TOTAL
+## 3         TOTAL
+## 4    EARLY VOTE
+## 5         TOTAL
+## 6  ELECTION DAY
+## 7         TOTAL
+## 8          PROV
+## 9         TOTAL
+## 10        TOTAL</code></pre>
 </div>
 <div id="data-cleaning-1" class="section level3">
 <h3>3.2 Data Cleaning</h3>
@@ -431,18 +448,18 @@ electiondf %&gt;% sample_n(10)</code></pre>
 <pre class="r"><code>electiondf %&gt;%
     filter(year == 2004 | year == 2008) %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##   year    state state_po county_name county_fips       office      candidate
-## 1 2004   OREGON       OR   TILLAMOOK       41057 US PRESIDENT GEORGE W. BUSH
-## 2 2008 ILLINOIS       IL        FORD       17053 US PRESIDENT    JOHN MCCAIN
-## 3 2004  MONTANA       MT   JEFFERSON       30043 US PRESIDENT     JOHN KERRY
-## 4 2008 MICHIGAN       MI    KEWEENAW       26083 US PRESIDENT   BARACK OBAMA
-## 5 2008 OKLAHOMA       OK       PAYNE       40119 US PRESIDENT   BARACK OBAMA
+<pre><code>##   year         state state_po county_name county_fips       office   candidate
+## 1 2008      VIRGINIA       VA   FREDERICK       51069 US PRESIDENT       OTHER
+## 2 2008      OKLAHOMA       OK       OSAGE       40113 US PRESIDENT JOHN MCCAIN
+## 3 2004     LOUISIANA       LA PLAQUEMINES       22075 US PRESIDENT  JOHN KERRY
+## 4 2004 MASSACHUSETTS       MA   HAMPSHIRE       25015 US PRESIDENT       OTHER
+## 5 2008         MAINE       ME     HANCOCK       23009 US PRESIDENT JOHN MCCAIN
 ##        party candidatevotes totalvotes  version  mode
-## 1 REPUBLICAN           7003      13951 20220315 TOTAL
-## 2 REPUBLICAN           4079       6386 20220315 TOTAL
-## 3   DEMOCRAT           1881       5868 20220315 TOTAL
-## 4   DEMOCRAT            610       1410 20220315 TOTAL
-## 5   DEMOCRAT          10601      29036 20220315 TOTAL</code></pre>
+## 1      OTHER            502      33612 20220315 TOTAL
+## 2 REPUBLICAN          12160      19658 20220315 TOTAL
+## 3   DEMOCRAT           4181      12153 20220315 TOTAL
+## 4      OTHER           1427      74422 20220315 TOTAL
+## 5 REPUBLICAN          12686      32165 20220315 TOTAL</code></pre>
 <p>We can gather all votes in 2004 and 2008 per county via the pivot
 function:</p>
 <pre class="r"><code>votestimeframe &lt;- electiondf %&gt;%
@@ -509,22 +526,22 @@ votestimeframe %&gt;% head(10)</code></pre>
 timeframe to the next. We use a similar pivoting method to get (date
 ranges, queyr_incidence) as columns.</p>
 <pre class="r"><code>trendsdf %&gt;%
-  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %&gt;%
+  pivot_wider(id_cols = c(Region, City, DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %&gt;%
   (\(df) df %&gt;% mutate(&quot;change_04-12&quot; = df[[&quot;08-12&quot;]] - df[[&quot;04-08&quot;]])) %&gt;%
   head(10)</code></pre>
-<pre><code>## # A tibble: 10 × 8
-##    Region           City  `04-08` `08-12` `12-16` `16-20` `20-24` `change_04-12`
-##    &lt;chr&gt;            &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;          &lt;int&gt;
-##  1 District of Col… &lt;NA&gt;      100     100     100     100     100              0
-##  2 New York         &lt;NA&gt;       79      77      82      61      65             -2
-##  3 Maryland         &lt;NA&gt;       73      69      73      54      57             -4
-##  4 California       &lt;NA&gt;       73      66      73      61      61             -7
-##  5 New Jersey       &lt;NA&gt;       72      80      82      60      65              8
-##  6 Illinois         &lt;NA&gt;       68      59      60      50      55             -9
-##  7 Arizona          &lt;NA&gt;       68      70      56      46      50              2
-##  8 Florida          &lt;NA&gt;       67      72      61      52      71              5
-##  9 Nevada           &lt;NA&gt;       65      75      60      47      55             10
-## 10 Connecticut      &lt;NA&gt;       65      68      68      52      61              3</code></pre>
+<pre><code>## # A tibble: 10 × 9
+##    Region City  DMA       `04-08` `08-12` `12-16` `16-20` `20-24` `change_04-12`
+##    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;          &lt;int&gt;
+##  1 &lt;NA&gt;   &lt;NA&gt;  Yuma AZ-…     100      68      64      68      55            -32
+##  2 &lt;NA&gt;   &lt;NA&gt;  Miami-Ft…      84      84      92      98     100              0
+##  3 &lt;NA&gt;   &lt;NA&gt;  Harlinge…      74     100      65      80      66             26
+##  4 &lt;NA&gt;   &lt;NA&gt;  Alpena MI      73      34      22      25      15            -39
+##  5 &lt;NA&gt;   &lt;NA&gt;  Washingt…      72      63      91     100      80             -9
+##  6 &lt;NA&gt;   &lt;NA&gt;  New York…      71      73     100      87      76              2
+##  7 &lt;NA&gt;   &lt;NA&gt;  El Paso …      71      92      68      75      78             21
+##  8 &lt;NA&gt;   &lt;NA&gt;  West Pal…      69      72      81      81      76              3
+##  9 &lt;NA&gt;   &lt;NA&gt;  Bangor ME      67      40      31      32      24            -27
+## 10 &lt;NA&gt;   &lt;NA&gt;  Los Ange…      67      67      74      71      66              0</code></pre>
 </div>
 <div id="generic-function" class="section level3">
 <h3>4. Generic Function</h3>
@@ -532,55 +549,79 @@ ranges, queyr_incidence) as columns.</p>
 given time period for all regions.</p>
 <pre class="r"><code>change_time_period &lt;- function(date1, date2) {
   trendsdf %&gt;%
-  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %&gt;%
+  pivot_wider(id_cols = c(Region, City, DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %&gt;%
   (\(df) df %&gt;% mutate(&quot;change_query_incidence&quot; = df[[date1]] - df[[date2]]))
 }
 
 change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% head(10)</code></pre>
-<pre><code>## # A tibble: 10 × 8
-##    Region   City  `04-08` `08-12` `12-16` `16-20` `20-24` change_query_incidence
-##    &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;                  &lt;int&gt;
-##  1 Distric… &lt;NA&gt;      100     100     100     100     100                      0
-##  2 New York &lt;NA&gt;       79      77      82      61      65                     -2
-##  3 Maryland &lt;NA&gt;       73      69      73      54      57                     -4
-##  4 Califor… &lt;NA&gt;       73      66      73      61      61                     -7
-##  5 New Jer… &lt;NA&gt;       72      80      82      60      65                      8
-##  6 Illinois &lt;NA&gt;       68      59      60      50      55                     -9
-##  7 Arizona  &lt;NA&gt;       68      70      56      46      50                      2
-##  8 Florida  &lt;NA&gt;       67      72      61      52      71                      5
-##  9 Nevada   &lt;NA&gt;       65      75      60      47      55                     10
-## 10 Connect… &lt;NA&gt;       65      68      68      52      61                      3</code></pre>
+<pre><code>## # A tibble: 10 × 9
+##    Region City  DMA                      `04-08` `08-12` `12-16` `16-20` `20-24`
+##    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                      &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
+##  1 &lt;NA&gt;   &lt;NA&gt;  Yuma AZ-El Centro CA         100      68      64      68      55
+##  2 &lt;NA&gt;   &lt;NA&gt;  Miami-Ft. Lauderdale FL       84      84      92      98     100
+##  3 &lt;NA&gt;   &lt;NA&gt;  Harlingen-Weslaco-Brown…      74     100      65      80      66
+##  4 &lt;NA&gt;   &lt;NA&gt;  Alpena MI                     73      34      22      25      15
+##  5 &lt;NA&gt;   &lt;NA&gt;  Washington DC (Hagersto…      72      63      91     100      80
+##  6 &lt;NA&gt;   &lt;NA&gt;  New York NY                   71      73     100      87      76
+##  7 &lt;NA&gt;   &lt;NA&gt;  El Paso TX                    71      92      68      75      78
+##  8 &lt;NA&gt;   &lt;NA&gt;  West Palm Beach-Ft. Pie…      69      72      81      81      76
+##  9 &lt;NA&gt;   &lt;NA&gt;  Bangor ME                     67      40      31      32      24
+## 10 &lt;NA&gt;   &lt;NA&gt;  Los Angeles CA                67      67      74      71      66
+## # ℹ 1 more variable: change_query_incidence &lt;int&gt;</code></pre>
 </div>
 </div>
 <div id="heatmap-query-incidence-swing-vs-electoral-swing-2008-election-to-2012-election" class="section level2">
 <h2>5. Heatmap: Query Incidence Swing vs Electoral Swing (2008 election
 to 2012 election)</h2>
+<div id="data-overview-1" class="section level3">
+<h3>5.1 Data Overview</h3>
 <p>We first match cities from Google trends to electoral data. We do so
 by normalizing the city names in the Google tends dataset.</p>
-<pre class="r"><code>interest_swing_08_12 &lt;- change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% mutate(city = toupper(City)) %&gt;% select(city, change_query_incidence)
+<pre class="r"><code>interest_swing_08_12 &lt;- change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% mutate(county = toupper(DMA)) %&gt;% select(county, change_query_incidence)
 swing_county &lt;- votestimeframe %&gt;%
     group_by(state, county_name, office) %&gt;%
     summarise(swing = .data[[&quot;2012&quot;]] - .data[[&quot;2008&quot;]]) %&gt;%
-    mutate(city = county_name) %&gt;%
-    select(city, swing)</code></pre>
+    mutate(county = county_name) %&gt;%
+    select(county, swing)</code></pre>
 <pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in dplyr 1.1.0.
 ## ℹ Please use `reframe()` instead.
 ## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()` always returns an ungrouped data frame and adjust accordingly.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;state&#39;, &#39;county_name&#39;, &#39;office&#39;. You can override using the `.groups` argument.
 ## Adding missing grouping variables: `state`, `county_name`, `office`</code></pre>
-<pre class="r"><code>merge(interest_swing_08_12, swing_county, by = &quot;city&quot;) %&gt;% head(10)</code></pre>
-<pre><code>##          city change_query_incidence     state county_name       office swing
-## 1     ADDISON                     NA   VERMONT     ADDISON US PRESIDENT  -945
-## 2      ALBANY                     NA   WYOMING      ALBANY US PRESIDENT    NA
-## 3      ALBANY                     NA   WYOMING      ALBANY US PRESIDENT    NA
-## 4      ALBANY                     NA  NEW YORK      ALBANY US PRESIDENT -9959
-## 5  ALEXANDRIA                     NA  VIRGINIA  ALEXANDRIA US PRESIDENT  1726
-## 6       ALLEN                     NA    KANSAS       ALLEN US PRESIDENT  -236
-## 7       ALLEN                     NA   INDIANA       ALLEN US PRESIDENT  6820
-## 8       ALLEN                     NA LOUISIANA       ALLEN US PRESIDENT   162
-## 9       ALLEN                     NA  KENTUCKY       ALLEN US PRESIDENT   -74
-## 10      ALLEN                     NA      OHIO       ALLEN US PRESIDENT  -439</code></pre>
+<pre class="r"><code>merge(interest_swing_08_12, swing_county, by = &quot;county&quot;) %&gt;% head(10)</code></pre>
+<pre><code>## [1] county                 change_query_incidence state                 
+## [4] county_name            office                 swing                 
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>Looks good.</p>
+</div>
+<div id="the-heatmap" class="section level3">
+<h3>5.2 The Heatmap</h3>
+<p>To generate a heatmap, we get latitutde and longitudes for each city,
+then plot the values. We save this dataframe for convenience. To speed
+up knitting, we use our cached .csv file.</p>
+<pre class="r"><code>library(ggmap)</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## ℹ Google&#39;s Terms of Service: &lt;https://mapsplatform.google.com&gt;
+##   Stadia Maps&#39; Terms of Service: &lt;https://stadiamaps.com/terms-of-service/&gt;
+##   OpenStreetMap&#39;s Tile Usage Policy: &lt;https://operations.osmfoundation.org/policies/tiles/&gt;
+## ℹ Please cite ggmap if you use it! Use `citation(&quot;ggmap&quot;)` for details.</code></pre>
+<pre class="r"><code>register_google(key = Sys.getenv(&quot;GOOGLE_API_KEY&quot;), write = FALSE)
+
+#with_lat_long &lt;- merge(interest_swing_08_12, swing_county, by = &quot;city&quot;) %&gt;%
+#    (\(df) df %&gt;% mutate(lat_long = geocode(output = &quot;latlon&quot;, location = paste(df$city, &quot;, &quot;, df$state), method = &quot;census&quot;)))
+
+#with_lat_long %&gt;% write.csv(&quot;../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv&quot;)
+#with_lat_long %&gt;% head(10)
+
+with_lat_long &lt;- read.csv(&quot;../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv&quot;)
+with_lat_long %&gt;% filter(!is.na(change_query_incidence)) %&gt;% head(10)</code></pre>
+<pre><code>## [1] X                      city                   change_query_incidence
+## [4] state                  county_name            office                
+## [7] swing                  lat_long.lon           lat_long.lat          
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>Looks good.</p>
+</div>
 </div>
 
 

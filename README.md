@@ -14,8 +14,8 @@ This repository is formatted as an Rproject. Setup can be performed manually by 
 
 ```
 tidyverse
-ggplot2
 ggmap
+fuzzyjoin
 ```
 
 A Google API key is required to generate heatmaps manually. Specify this key in the `GOOGLE_API_KEY` environment variable.

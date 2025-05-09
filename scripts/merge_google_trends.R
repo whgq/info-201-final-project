@@ -2,7 +2,7 @@ library(dplyr)
 library(purrr)
 library(stringr)
 
-locales <- c("region", "city")
+locales <- c("metro", "region", "city")
 timeframes <- c("04-08", "08-12", "12-16", "16-20", "20-24")
 
 read_imm_reg_timeframe <- function(region, daterange) {
