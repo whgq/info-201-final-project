@@ -10,26 +10,21 @@ In this repository, we aim to analyze the correlation between public opinion on 
 
 ## Getting Started
 
-This repository is formatted as an Rproject. A Nix file is also included which sets up a development environment including R and tidyverse libraries, which we utilize.
+This repository is formatted as an Rproject. Setup can be performed manually by installing these packages:
+
+```
+tidyverse
+ggplot2
+gtrendsR
+```
+
+A Nix file is also included which optionally sets up a development environment automatically including dependencies for the project.
 
 If you have nix installed, you can run:
 
 ```bash
 nix develop
 ```
-
-This will automatically install all the dependencies. Otherwise, please install these packages in your editor (likely Rstudio):
-
-```
-dplyr
-ggplot2
-readxl
-readr
-stringr
-purrr
-```
-
-It would also suffice to just install tidyverse.
 
 ## Datasets Utilized
 
@@ -39,12 +34,18 @@ In analyzing our research questions, we utilize a few datasets in `data/`. These
 - Google trends data regarding immigration topics from 2004 - present.
   - The topics analyzed are:
     - "cbp one"
-    - "Mexico-United States Border"
-    - "U.S. Customs and Border Protection"
-    - "Border"
-    - "Immigration"
+    - "immigration"
+    - "asylum"
+    - "border crisis"
+    - "illegal immigration"
   - Data is broken down by state, county, and city
-- Deporation data from deproationdata.org
+- Deporation data from deportationdata.org
   - We utilize the "Annual apprehensions with place of origin," and, "Removals (deportations)," datasets.
   - The removals dataset ranges from 2011 - 2019
   - The apprehensions dataset ranges from 1999 - 2021
+
+We have written several scripts to process this data in `scripts/`.
+
+- `conv_xlsx_csv.R`: converts excel-formatted data from deportationdata.org to compressed CSV format
+- `split_large_csv.R`: splits datasets from deportationdata.org into small chunks of less than 100K rows so that they can be uploaded to GitHub
+- `remove_large_files.R`: removes large datasets from deportationdata.org
