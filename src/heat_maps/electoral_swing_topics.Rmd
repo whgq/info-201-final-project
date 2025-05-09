@@ -21,6 +21,7 @@ See the `scripts/` folder for utilities we wrote to clean our data. Notably, Goo
 library(dplyr)
 library(purrr)
 library(tidyr)
+library(stringr)
 
 trendsdf <- read.csv("../../data_cleaned/google_trends/summarized.csv")
 trendsdf %>% head(5)
@@ -28,12 +29,16 @@ trendsdf %>% head(5)
 
 ## 3. Electoral Swing from 2004 - 2008 Presidential Elections
 
+### 3.1 Data Overview
+
 Here is an overview of the electiondf dataset:
 
 ```{r}
 electiondf <- read.csv("../../data_cleaned/harvard_election/countypres_2000-2020.csv")
 electiondf %>% sample_n(10)
 ```
+
+### 3.2 Data Cleaning
 
 For this particular analysis, we are interested in the swing from 2004 to 2008. We can get all data from these date ranges like such:
 
@@ -61,6 +66,8 @@ votestimeframe <- electiondf %>%
 votestimeframe %>% head(10)
 ```
 
+### 3.3 Swing Calculation
+
 We can then calculate the swing like such:
 
 ```{r}
@@ -68,4 +75,25 @@ votestimeframe %>%
     group_by(state, county_name, office) %>%
     summarise(swing = .data[["2008"]] - .data[["2004"]]) %>%
     head(10)
+```
+
+### 3.4 Generalization to a Function
+
+We define a function `swing_timeframe` which performs the above steps. We also normalize the swing as a change in percentage basis points:
+
+```{r}
+swing_timeframe <- function(year1, year2) {
+  read.csv(c("../../data_cleaned/harvard_election/countypres_", year1, "-", year2, ".csv")) %>%
+    filter(year == year1 | year == year2) %>%
+    select(year, state, county_name, party, office, candidatevotes, totalvotes) %>%
+    # Only get rows where the candidates won
+    group_by(year, state, county_name, office) %>%
+    filter(candidatevotes == max(candidatevotes)) %>%
+    ungroup %>%
+    # Collapse votes in 2004 and 2008 into columns 2004 and 2008
+    group_by(state, county_name, office) %>%
+    pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = c(candidatevotes, totalvotes)) %>%
+    group_by(state, county_name, office) %>%
+    summarise(swing = .data[["2008_candidatevotes"]] / .data[["2008_totalvotes"]] - (.data[["2004_candidatevotes"]] / .data[["2008_totalvotes"]]))
+}
 ```
