@@ -407,39 +407,28 @@ trendsdf %&gt;% head(5)</code></pre>
 <p>Here is an overview of the electiondf dataset:</p>
 <pre class="r"><code>electiondf &lt;- read.csv(&quot;../../data_cleaned/harvard_election/countypres_2000-2020.csv&quot;)
 electiondf %&gt;% sample_n(10)</code></pre>
-<pre><code>##    year         state state_po county_name county_fips       office
-## 1  2012          OHIO       OH    CRAWFORD       39033 US PRESIDENT
-## 2  2020          UTAH       UT     DAGGETT       49009 US PRESIDENT
-## 3  2016         TEXAS       TX     RANDALL       48381 US PRESIDENT
-## 4  2020       ARIZONA       AZ  SANTA CRUZ        4023 US PRESIDENT
-## 5  2020       INDIANA       IN     HANCOCK       18059 US PRESIDENT
-## 6  2020      VIRGINIA       VA MECKLENBURG       51117 US PRESIDENT
-## 7  2020  SOUTH DAKOTA       SD       BUTTE       46019 US PRESIDENT
-## 8  2020       GEORGIA       GA      WILKES       13317 US PRESIDENT
-## 9  2008     TENNESSEE       TN  CUMBERLAND       47035 US PRESIDENT
-## 10 2012 WEST VIRGINIA       WV   DODDRIDGE       54017 US PRESIDENT
-##            candidate       party candidatevotes totalvotes  version
-## 1        MITT ROMNEY  REPUBLICAN          11852      19803 20220315
-## 2              OTHER       GREEN              0        619 20220315
-## 3              OTHER       OTHER           2476      54305 20220315
-## 4       JO JORGENSEN LIBERTARIAN            180      19556 20220315
-## 5  JOSEPH R BIDEN JR    DEMOCRAT          12895      42911 20220315
-## 6              OTHER       OTHER             13      16207 20220315
-## 7       JO JORGENSEN LIBERTARIAN            132       4802 20220315
-## 8     DONALD J TRUMP  REPUBLICAN              3       5029 20220315
-## 9              OTHER       OTHER            387      25712 20220315
-## 10      BARACK OBAMA    DEMOCRAT            575       2769 20220315
-##            mode
-## 1         TOTAL
-## 2         TOTAL
-## 3         TOTAL
-## 4    EARLY VOTE
-## 5         TOTAL
-## 6  ELECTION DAY
-## 7         TOTAL
-## 8          PROV
-## 9         TOTAL
-## 10        TOTAL</code></pre>
+<pre><code>##    year        state state_po county_name county_fips       office
+## 1  2000      GEORGIA       GA        HART       13147 US PRESIDENT
+## 2  2008 PENNSYLVANIA       PA    BRADFORD       42015 US PRESIDENT
+## 3  2020     ILLINOIS       IL     DOUGLAS       17041 US PRESIDENT
+## 4  2008   NEW MEXICO       NM  BERNALILLO       35001 US PRESIDENT
+## 5  2020 SOUTH DAKOTA       SD    WALWORTH       46129 US PRESIDENT
+## 6  2016      FLORIDA       FL     COLLIER       12021 US PRESIDENT
+## 7  2020     NEW YORK       NY  MONTGOMERY       36057 US PRESIDENT
+## 8  2016        TEXAS       TX         LEE       48287 US PRESIDENT
+## 9  2000         OHIO       OH       MIAMI       39109 US PRESIDENT
+## 10 2012 SOUTH DAKOTA       SD    WALWORTH       46129 US PRESIDENT
+##            candidate       party candidatevotes totalvotes  version  mode
+## 1              OTHER       OTHER             81       7536 20220315 TOTAL
+## 2       BARACK OBAMA    DEMOCRAT          10306      25782 20220315 TOTAL
+## 3       JO JORGENSEN LIBERTARIAN            119       8738 20220315 TOTAL
+## 4       BARACK OBAMA    DEMOCRAT         171556     285778 20220315 TOTAL
+## 5  JOSEPH R BIDEN JR    DEMOCRAT            565       2580 20220315 TOTAL
+## 6    HILLARY CLINTON    DEMOCRAT          61085     170789 20220315 TOTAL
+## 7       JO JORGENSEN LIBERTARIAN            242      21246 20220315 TOTAL
+## 8    HILLARY CLINTON    DEMOCRAT           1372       6535 20220315 TOTAL
+## 9            AL GORE    DEMOCRAT          15584      42841 20220315 TOTAL
+## 10      BARACK OBAMA    DEMOCRAT            671       2462 20220315 TOTAL</code></pre>
 </div>
 <div id="data-cleaning-1" class="section level3">
 <h3>3.2 Data Cleaning</h3>
@@ -448,18 +437,18 @@ electiondf %&gt;% sample_n(10)</code></pre>
 <pre class="r"><code>electiondf %&gt;%
     filter(year == 2004 | year == 2008) %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##   year         state state_po county_name county_fips       office   candidate
-## 1 2008      VIRGINIA       VA   FREDERICK       51069 US PRESIDENT       OTHER
-## 2 2008      OKLAHOMA       OK       OSAGE       40113 US PRESIDENT JOHN MCCAIN
-## 3 2004     LOUISIANA       LA PLAQUEMINES       22075 US PRESIDENT  JOHN KERRY
-## 4 2004 MASSACHUSETTS       MA   HAMPSHIRE       25015 US PRESIDENT       OTHER
-## 5 2008         MAINE       ME     HANCOCK       23009 US PRESIDENT JOHN MCCAIN
-##        party candidatevotes totalvotes  version  mode
-## 1      OTHER            502      33612 20220315 TOTAL
-## 2 REPUBLICAN          12160      19658 20220315 TOTAL
-## 3   DEMOCRAT           4181      12153 20220315 TOTAL
-## 4      OTHER           1427      74422 20220315 TOTAL
-## 5 REPUBLICAN          12686      32165 20220315 TOTAL</code></pre>
+<pre><code>##   year     state state_po county_name county_fips       office    candidate
+## 1 2008  KENTUCKY       KY   CHRISTIAN       21047 US PRESIDENT BARACK OBAMA
+## 2 2008 LOUISIANA       LA       ALLEN       22003 US PRESIDENT BARACK OBAMA
+## 3 2008  ILLINOIS       IL   CHAMPAIGN       17019 US PRESIDENT        OTHER
+## 4 2008  ILLINOIS       IL    MARSHALL       17123 US PRESIDENT BARACK OBAMA
+## 5 2008      IOWA       IA   VAN BUREN       19177 US PRESIDENT BARACK OBAMA
+##      party candidatevotes totalvotes  version  mode
+## 1 DEMOCRAT           8880      22778 20220315 TOTAL
+## 2 DEMOCRAT           2891       9467 20220315 TOTAL
+## 3    OTHER           1675      84143 20220315 TOTAL
+## 4 DEMOCRAT           3081       6333 20220315 TOTAL
+## 5 DEMOCRAT           1546       3608 20220315 TOTAL</code></pre>
 <p>We can gather all votes in 2004 and 2008 per county via the pivot
 function:</p>
 <pre class="r"><code>votestimeframe &lt;- electiondf %&gt;%
@@ -576,8 +565,12 @@ to 2012 election)</h2>
 <div id="data-overview-1" class="section level3">
 <h3>5.1 Data Overview</h3>
 <p>We first match cities from Google trends to electoral data. We do so
-by normalizing the city names in the Google tends dataset.</p>
-<pre class="r"><code>interest_swing_08_12 &lt;- change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% mutate(county = toupper(DMA)) %&gt;% select(county, change_query_incidence)
+by checking for cities in the election data which are substrings of the
+Google trends DMA column. Note that the line of code for doing a fuzzy
+merge uses the fuzzyjoin package.</p>
+<pre class="r"><code>library(fuzzyjoin)
+
+interest_swing_08_12 &lt;- change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% mutate(county = toupper(DMA)) %&gt;% select(county, change_query_incidence)
 swing_county &lt;- votestimeframe %&gt;%
     group_by(state, county_name, office) %&gt;%
     summarise(swing = .data[[&quot;2012&quot;]] - .data[[&quot;2008&quot;]]) %&gt;%
@@ -589,17 +582,27 @@ swing_county &lt;- votestimeframe %&gt;%
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;state&#39;, &#39;county_name&#39;, &#39;office&#39;. You can override using the `.groups` argument.
 ## Adding missing grouping variables: `state`, `county_name`, `office`</code></pre>
-<pre class="r"><code>merge(interest_swing_08_12, swing_county, by = &quot;county&quot;) %&gt;% head(10)</code></pre>
-<pre><code>## [1] county                 change_query_incidence state                 
-## [4] county_name            office                 swing                 
-## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<pre class="r"><code>regex_inner_join(interest_swing_08_12, swing_county, by = &quot;county&quot;) %&gt;% head(10)</code></pre>
+<pre><code>## # A tibble: 10 × 7
+##    county.x       change_query_incidence state county_name office county.y swing
+##    &lt;chr&gt;                           &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+##  1 YUMA AZ-EL CE…                    -32 ARIZ… YUMA        US PR… YUMA     -1225
+##  2 YUMA AZ-EL CE…                    -32 COLO… YUMA        US PR… YUMA       204
+##  3 MIAMI-FT. LAU…                      0 ALAB… DALE        US PR… DALE      -778
+##  4 MIAMI-FT. LAU…                      0 ALAB… LAUDERDALE  US PR… LAUDERD…  -157
+##  5 MIAMI-FT. LAU…                      0 INDI… MIAMI       US PR… MIAMI     -138
+##  6 MIAMI-FT. LAU…                      0 KANS… MIAMI       US PR… MIAMI      476
+##  7 MIAMI-FT. LAU…                      0 MISS… LAUDERDALE  US PR… LAUDERD…  -882
+##  8 MIAMI-FT. LAU…                      0 OHIO  MIAMI       US PR… MIAMI     1189
+##  9 MIAMI-FT. LAU…                      0 TENN… LAUDERDALE  US PR… LAUDERD…    NA
+## 10 MIAMI-FT. LAU…                      0 TENN… LAUDERDALE  US PR… LAUDERD…  -317</code></pre>
 <p>Looks good.</p>
 </div>
 <div id="the-heatmap" class="section level3">
 <h3>5.2 The Heatmap</h3>
-<p>To generate a heatmap, we get latitutde and longitudes for each city,
-then plot the values. We save this dataframe for convenience. To speed
-up knitting, we use our cached .csv file.</p>
+<p>To generate a heatmap, we get latitutde and longitudes for each
+county, then plot the values. We save this dataframe for convenience. To
+speed up knitting, we use our cached .csv file.</p>
 <pre class="r"><code>library(ggmap)</code></pre>
 <pre><code>## Loading required package: ggplot2</code></pre>
 <pre><code>## ℹ Google&#39;s Terms of Service: &lt;https://mapsplatform.google.com&gt;
@@ -608,18 +611,1072 @@ up knitting, we use our cached .csv file.</p>
 ## ℹ Please cite ggmap if you use it! Use `citation(&quot;ggmap&quot;)` for details.</code></pre>
 <pre class="r"><code>register_google(key = Sys.getenv(&quot;GOOGLE_API_KEY&quot;), write = FALSE)
 
-#with_lat_long &lt;- merge(interest_swing_08_12, swing_county, by = &quot;city&quot;) %&gt;%
-#    (\(df) df %&gt;% mutate(lat_long = geocode(output = &quot;latlon&quot;, location = paste(df$city, &quot;, &quot;, df$state), method = &quot;census&quot;)))
-
-#with_lat_long %&gt;% write.csv(&quot;../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv&quot;)
-#with_lat_long %&gt;% head(10)
-
-with_lat_long &lt;- read.csv(&quot;../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv&quot;)
+with_lat_long &lt;- regex_inner_join(interest_swing_08_12, swing_county, by = &quot;county&quot;) %&gt;%
+    select(county = county.y, swing, change_query_incidence, state) %&gt;%
+    (\(df) df %&gt;% mutate(lat_long = geocode(output = &quot;latlon&quot;, location = paste(df$county, &quot;, &quot;, df$state), method = &quot;census&quot;)))</code></pre>
+<pre><code>## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YUMA+,+ARIZONA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YUMA+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAUDERDALE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MIAMI+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MIAMI+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAUDERDALE+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MIAMI+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAUDERDALE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAUDERDALE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALLEN+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALLEN+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALLEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALLEN+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALLEN+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BROWN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALPENA+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALPENA+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+RHODE+ISLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+VERMONT&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NEW+YORK+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=EL+PASO+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=EL+PASO+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PALM+BEACH+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PIERCE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PIERCE+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PIERCE+,+NORTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PIERCE+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PIERCE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PIERCE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LOS+ANGELES+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GRAND+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTROSE+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GRAND+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GRAND+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTEREY+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FRESNO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FRESNO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HOUSTON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIERRA+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIERRA+,+NEW+MEXICO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=EUREKA+,+NEVADA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAN+FRANCISCO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=OAKLAND+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SACRAMENTO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAC+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARTFORD+,+CONNECTICUT&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NEW+HAVEN+,+CONNECTICUT&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HART+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HART+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PASCO+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PASCO+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+NORTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICH+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YAKIMA+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHLAND+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=TWIN+FALLS+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FALLS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BEDFORD+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PROVIDENCE+,+RHODE+ISLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BEDFORD+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BEDFORD+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BEDFORD+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAKER+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAKER+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAKER+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAKER+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BALTIMORE+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HONOLULU+,+HAWAII&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WORTH+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WORTH+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WORTH+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WORTH+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALLAS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MIDLAND+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MIDLAND+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICH+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PETERSBURG+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RICHMOND+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=AUSTIN+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PEORIA+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KEARNEY+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+NEVADA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+NEW+MEXICO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LINCOLN+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DENVER+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DAY+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DAY+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISONBURG+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISONBURG+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRISON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUTTE+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUTTE+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUTTE+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUTTE+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RENO+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=THOMAS+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=THOMAS+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=THOMAS+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VICTORIA+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAN+LUIS+OBISPO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAN+LUIS+OBISPO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SANTA+BARBARA+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SALT+LAKE+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SALT+LAKE+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PHILADELPHIA+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SANTA+FE+,+NEW+MEXICO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MILWAUKEE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUFFALO+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUFFALO+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUFFALO+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BUFFALO+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JEFFERSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LEXINGTON+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LEXINGTON+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KEOKUK+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBUS+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBUS+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DALE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SMITH+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SMITH+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROGERS+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SMITH+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SMITH+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SMITH+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WICHITA+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HUTCHINSON+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HUTCHINSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WICHITA+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIOUX+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIOUX+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIOUX+,+NORTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HART+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ELKHART+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ELK+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HART+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ELK+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ELK+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHAMPAIGN+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHAMPAIGN+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DURHAM+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JUNEAU+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JUNEAU+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CEDAR+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CEDAR+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DUBUQUE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DUBUQUE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=IOWA+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=IOWA+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CEDAR+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CEDAR+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=IOWA+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=INDIANA+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PLATTE+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PLATTE+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PLATTE+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SARASOTA+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PETERSBURG+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREENWOOD+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WOOD+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WOOD+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREENVILLE+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREENWOOD+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WOOD+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WOOD+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WOOD+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WOOD+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACK+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LUBBOCK+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+ISLAND+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ISLAND+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ISLAND+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MADISON+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BRYAN+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BRYAN+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BINGHAM+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=INGHAM+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALBANY+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCHENECTADY+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALBANY+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALBANY+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PITT+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PITT+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PITTSBURG+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GAINES+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KLAMATH+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FALLS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTE+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ADA+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SHERMAN+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SHERMAN+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SHERMAN+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SHERMAN+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ANDERSON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ANDERSON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ASHE+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ANDERSON+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREENVILLE+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SPARTANBURG+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ANDERSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ANDERSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANE+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SPOKANE+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GRAND+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KALAMAZOO+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CREEK+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GRAND+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GRAND+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHEYENNE+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHEYENNE+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHEYENNE+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SCOTT+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BURLINGTON+,+NEW+JERSEY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NASH+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NASH+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FLORENCE+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FLORENCE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=OKLAHOMA+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PRESQUE+ISLE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PRESQUE+ISLE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANSAS+CITY+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANSAS+CITY+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANSAS+CITY+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KANSAS+CITY+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PUEBLO+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PUEBLO+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLORADO+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=TULSA+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANCASTER+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANCASTER+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANCASTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LEBANON+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANCASTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANCASTER+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANCASTER+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YORK+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LANDER+,+NEVADA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WINSTON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WINSTON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SALEM+,+NEW+JERSEY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SALEM+,+NEW+JERSEY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SALEM+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DES+MOINES+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DES+MOINES+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBUS+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBUS+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FORD+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WILL+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WILL+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DICKINSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DICKINSON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DICKINSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BANKS+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VERNON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CAPE+GIRARDEAU+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VERNON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HARRIS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VERNON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VERNON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=IDAHO+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=IDA+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FALLS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAUREL+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=EL+DORADO+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONROE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BILLINGS+,+NORTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=TRAVERSE+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=TRAVERSE+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=AUSTIN+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MASON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VALLEY+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VALLEY+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=VALLEY+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WICHITA+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FALLS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WICHITA+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLES+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLESTON+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLESTON+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTE+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTESVILLE+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WAYNE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=YOUNG+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LONG+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NACOGDOCHES+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=TYLER+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=TYLER+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALBANY+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALBANY+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALBANY+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHESTER+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NORFOLK+,+MASSACHUSETTS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NEWPORT+,+RHODE+ISLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NEWPORT+NEWS+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=NORFOLK+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PORTSMOUTH+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ST.+JOSEPH+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ST.+JOSEPH+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ST.+JOSEPH+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BOISE+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JONES+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ARTHUR+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ERIE+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ERIE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ERIE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ERIE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ERIE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PITT+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PITT+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PITTSBURG+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SWEETWATER+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FALLS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=STEUBEN+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=STEUBEN+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MONTGOMERY+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=AUGUSTA+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WILKES+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WILKES+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LYNCHBURG+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROANOKE+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBIA+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CROSS+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CROSS+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROSS+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=EAU+CLAIRE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LA+CROSSE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIOUX+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIOUX+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SIOUX+,+NORTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FALLS+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MITCHELL+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLEVELAND+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLEVELAND+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLEVELAND+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=KNOX+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAY+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAY+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAY+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PINE+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PINE+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ROCK+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MISSOULA+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MISSOULA+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACK+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MACON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GULF+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MARQUETTE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MARQUETTE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MARQUETTE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAY+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAY+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=BAY+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAGINAW+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAGINAW+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DAY+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DAY+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FLORENCE+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=DECATUR+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HUNT+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FLORENCE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MAINE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NEBRASKA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+RHODE+ISLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREENVILLE+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+UTAH&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+VERMONT&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=INGHAM+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBUS+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=COLUMBUS+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=GREEN+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ORLEANS+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LEA+,+NEW+MEXICO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ORLEANS+,+NEW+YORK&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ORLEANS+,+VERMONT&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ORLEANS+,+VERMONT&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=EVANS+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=MOBILE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WALTON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WALTON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=SAC+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+IDAHO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+NEVADA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+WASHINGTON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CLARK+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=WESTON+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+KANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+NORTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OKLAHOMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACK+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=JACKSON+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=ALEXANDRIA+,+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+CALIFORNIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLES+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MICHIGAN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MINNESOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+OREGON&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+SOUTH+DAKOTA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAKE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HILL+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HILL+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HILL+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HUNTINGTON+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLES+,+MARYLAND&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLESTON+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=CHARLESTON+,+SOUTH+CAROLINA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=HUNT+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PARK+,+COLORADO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PARKE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PARK+,+MONTANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PARKER+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=PARK+,+WYOMING&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ALABAMA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+ARKANSAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+FLORIDA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+GEORGIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+ILLINOIS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+INDIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+IOWA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+KENTUCKY&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+LOUISIANA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+MISSISSIPPI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+MISSOURI&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+OHIO&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+PENNSYLVANIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TENNESSEE&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+TEXAS&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=FAYETTE+,+WEST+VIRGINIA&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+WISCONSIN&amp;key=xxx&gt;
+## ℹ &lt;https://maps.googleapis.com/maps/api/geocode/json?address=LAFAYETTE+,+WISCONSIN&amp;key=xxx&gt;</code></pre>
+<pre><code>## Warning: There were 160 warnings in `mutate()`.
+## The first warning was:
+## ℹ In argument: `lat_long = geocode(...)`.
+## Caused by warning:
+## ! &quot;MIAMI , INDIANA&quot; not uniquely geocoded, using &quot;miami, in, usa&quot;
+## ℹ Run `dplyr::last_dplyr_warnings()` to see the 159 remaining warnings.</code></pre>
+<pre class="r"><code>with_lat_long %&gt;% write.csv(&quot;../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv&quot;)
+with_lat_long %&gt;% head(10)</code></pre>
+<pre><code>## # A tibble: 10 × 5
+##    county     swing change_query_incidence state       lat_long$lon  $lat
+##    &lt;chr&gt;      &lt;int&gt;                  &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;
+##  1 YUMA       -1225                    -32 ARIZONA           -115.   32.7
+##  2 YUMA         204                    -32 COLORADO          -103.   40.1
+##  3 DALE        -778                      0 ALABAMA            -85.7  31.5
+##  4 LAUDERDALE  -157                      0 ALABAMA            -87.7  34.9
+##  5 MIAMI       -138                      0 INDIANA            -86.1  40.6
+##  6 MIAMI        476                      0 KANSAS             -94.8  38.6
+##  7 LAUDERDALE  -882                      0 MISSISSIPPI        -88.5  32.5
+##  8 MIAMI       1189                      0 OHIO               -84.7  39.5
+##  9 LAUDERDALE    NA                      0 TENNESSEE          -89.7  35.8
+## 10 LAUDERDALE  -317                      0 TENNESSEE          -89.7  35.8</code></pre>
+<pre class="r"><code>with_lat_long &lt;- read.csv(&quot;../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv&quot;)
 with_lat_long %&gt;% filter(!is.na(change_query_incidence)) %&gt;% head(10)</code></pre>
-<pre><code>## [1] X                      city                   change_query_incidence
-## [4] state                  county_name            office                
-## [7] swing                  lat_long.lon           lat_long.lat          
-## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<pre><code>##     X     county swing change_query_incidence       state lat_long.lon
+## 1   1       YUMA -1225                    -32     ARIZONA   -114.62769
+## 2   2       YUMA   204                    -32    COLORADO   -102.72521
+## 3   3       DALE  -778                      0     ALABAMA    -85.68458
+## 4   4 LAUDERDALE  -157                      0     ALABAMA    -87.65811
+## 5   5      MIAMI  -138                      0     INDIANA    -86.10649
+## 6   6      MIAMI   476                      0      KANSAS    -94.81060
+## 7   7 LAUDERDALE  -882                      0 MISSISSIPPI    -88.51171
+## 8   8      MIAMI  1189                      0        OHIO    -84.73449
+## 9   9 LAUDERDALE    NA                      0   TENNESSEE    -89.66281
+## 10 10 LAUDERDALE  -317                      0   TENNESSEE    -89.66281
+##    lat_long.lat
+## 1      32.69265
+## 2      40.12221
+## 3      31.46453
+## 4      34.88409
+## 5      40.61405
+## 6      38.63817
+## 7      32.52085
+## 8      39.50875
+## 9      35.78388
+## 10     35.78388</code></pre>
 <p>Looks good.</p>
 </div>
 </div>

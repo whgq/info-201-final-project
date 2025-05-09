@@ -127,15 +127,16 @@ Looks good.
 
 ### 5.2 The Heatmap
 
-To generate a heatmap, we get latitutde and longitudes for each city, then plot the values. We save this dataframe for convenience. To speed up knitting, we use our cached .csv file.
+To generate a heatmap, we get latitutde and longitudes for each county, then plot the values. We save this dataframe for convenience. To speed up knitting, we use our cached .csv file.
 
 ```{r}
 library(ggmap)
 
-register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE)
+#register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE)
 
-#with_lat_long <- merge(interest_swing_08_12, swing_county, by = "city") %>%
-#    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$city, ", ", df$state), method = "census")))
+#with_lat_long <- regex_inner_join(interest_swing_08_12, swing_county, by = "county") %>%
+#    select(county = county.y, swing, change_query_incidence, state) %>%
+#    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
 
 #with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_08_12_lat_long.csv")
 #with_lat_long %>% head(10)
