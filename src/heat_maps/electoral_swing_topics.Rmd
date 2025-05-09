@@ -53,7 +53,6 @@ We can gather all votes in 2004 and 2008 per county via the pivot function:
 ```{r}
 votestimeframe <- electiondf %>%
   # Only interested in vote counts for 2004 or 2008
-  filter(year == 2004 | year == 2008) %>%
   select(year, state, county_name, party, office, candidatevotes) %>%
   # Only get rows where the candidates won
   group_by(year, state, county_name, office) %>%
@@ -79,6 +78,8 @@ votestimeframe %>%
 
 ## 4. Change in Google Trends Over a Timeframe
 
+### 4.1 Change Overview
+
 Now, we calculate the change in average query incidence from one timeframe to the next. We use a similar pivoting method to get (date ranges, queyr_incidence) as columns.
 
 ```{r}
@@ -86,4 +87,52 @@ trendsdf %>%
   pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
   (\(df) df %>% mutate("change_04-12" = df[["08-12"]] - df[["04-08"]])) %>%
   head(10)
+```
+
+### 4. Generic Function
+
+Now, we make a reusable function which calculates the change over a given time period for all regions.
+
+```{r}
+change_time_period <- function(date1, date2) {
+  trendsdf %>%
+  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
+  (\(df) df %>% mutate("change_query_incidence" = df[[date1]] - df[[date2]]))
+}
+
+change_time_period("08-12", "04-08") %>% head(10)
+```
+
+## 5. Heatmap: Query Incidence Swing vs Electoral Swing (2008 election to 2012 election)
+
+### 5.1 Data Overview
+
+We first match cities from Google trends to electoral data. We do so by normalizing the city names in the Google tends dataset.
+
+```{r}
+interest_swing_08_12 <- change_time_period("08-12", "04-08") %>% mutate(city = toupper(City)) %>% select(city, change_query_incidence)
+swing_county <- votestimeframe %>%
+    group_by(state, county_name, office) %>%
+    summarise(swing = .data[["2012"]] - .data[["2008"]]) %>%
+    mutate(city = county_name) %>%
+    select(city, swing)
+
+merge(interest_swing_08_12, swing_county, by = "city") %>% head(10)
+```
+
+Looks good.
+
+### 5.2 The Heatmap
+
+To generate a heatmap, we get latitutde and longitudes for each city, then plot the values.
+
+```{r}
+library(ggmap)
+
+register_google(Sys.getenv("GOOGLE_API_KEY"))
+
+with_lat_long <- merge(interest_swing_08_12, swing_county, by = "city") %>%
+    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = df$city, method = "census")))
+
+with_lat_long %>% head(10)
 ```

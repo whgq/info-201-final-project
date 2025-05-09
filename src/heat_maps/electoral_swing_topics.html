@@ -402,27 +402,27 @@ trendsdf %&gt;% head(5)</code></pre>
 <pre class="r"><code>electiondf &lt;- read.csv(&quot;../../data_cleaned/harvard_election/countypres_2000-2020.csv&quot;)
 electiondf %&gt;% sample_n(10)</code></pre>
 <pre><code>##    year        state state_po county_name county_fips       office
-## 1  2020     NEW YORK       NY      BROOME       36007 US PRESIDENT
-## 2  2000       KANSAS       KS    MARSHALL       20117 US PRESIDENT
-## 3  2004   CALIFORNIA       CA LOS ANGELES        6037 US PRESIDENT
-## 4  2016     ILLINOIS       IL       BROWN       17009 US PRESIDENT
-## 5  2000 PENNSYLVANIA       PA     CLARION       42031 US PRESIDENT
-## 6  2020     NEW YORK       NY       KINGS       36047 US PRESIDENT
-## 7  2012      VERMONT       VT     WINDSOR       50027 US PRESIDENT
-## 8  2012      MONTANA       MT    TREASURE       30103 US PRESIDENT
-## 9  2008    LOUISIANA       LA     BOSSIER       22015 US PRESIDENT
-## 10 2020    LOUISIANA       LA       ALLEN       22003 US PRESIDENT
-##          candidate      party candidatevotes totalvotes  version  mode
-## 1            OTHER      OTHER           1148      93494 20220315 TOTAL
-## 2   GEORGE W. BUSH REPUBLICAN           3066       5115 20220315 TOTAL
-## 3       JOHN KERRY   DEMOCRAT        1907736    3021647 20220315 TOTAL
-## 4  HILLARY CLINTON   DEMOCRAT            476       2379 20220315 TOTAL
-## 5          AL GORE   DEMOCRAT           5605      15843 20220315 TOTAL
-## 6            OTHER      OTHER           7816     920380 20220315 TOTAL
-## 7     BARACK OBAMA   DEMOCRAT          19494      28699 20220315 TOTAL
-## 8     BARACK OBAMA   DEMOCRAT            114        455 20220315 TOTAL
-## 9     BARACK OBAMA   DEMOCRAT          12701      45826 20220315 TOTAL
-## 10           OTHER      OTHER             55       9810 20220315 TOTAL</code></pre>
+## 1  2020     ARKANSAS       AR      GREENE        5055 US PRESIDENT
+## 2  2008         IOWA       IA        TAMA       19171 US PRESIDENT
+## 3  2020      GEORGIA       GA    HARALSON       13143 US PRESIDENT
+## 4  2016       KANSAS       KS      BARBER       20007 US PRESIDENT
+## 5  2020        TEXAS       TX     COLEMAN       48083 US PRESIDENT
+## 6  2000     KENTUCKY       KY        BATH       21011 US PRESIDENT
+## 7  2012     MISSOURI       MO    CALLAWAY       29027 US PRESIDENT
+## 8  2000    TENNESSEE       TN      MORGAN       47129 US PRESIDENT
+## 9  2016 SOUTH DAKOTA       SD      HUGHES       46065 US PRESIDENT
+## 10 2020     MISSOURI       MO    MONITEAU       29135 US PRESIDENT
+##          candidate       party candidatevotes totalvotes  version         mode
+## 1            OTHER       GREEN             20      16100 20220315   EARLY VOTE
+## 2            OTHER       OTHER            131       8850 20220315        TOTAL
+## 3     JO JORGENSEN LIBERTARIAN             55      14248 20220315 ELECTION DAY
+## 4  HILLARY CLINTON    DEMOCRAT            286       2252 20220315        TOTAL
+## 5     JO JORGENSEN LIBERTARIAN             23       4124 20220315        TOTAL
+## 6      RALPH NADER       GREEN             49       4473 20220315        TOTAL
+## 7      MITT ROMNEY  REPUBLICAN          11745      18232 20220315        TOTAL
+## 8          AL GORE    DEMOCRAT           2921       6162 20220315        TOTAL
+## 9            OTHER       OTHER            551       8175 20220315        TOTAL
+## 10           OTHER       GREEN              8       7157 20220315        TOTAL</code></pre>
 </div>
 <div id="data-cleaning-1" class="section level3">
 <h3>3.2 Data Cleaning</h3>
@@ -431,23 +431,22 @@ electiondf %&gt;% sample_n(10)</code></pre>
 <pre class="r"><code>electiondf %&gt;%
     filter(year == 2004 | year == 2008) %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##   year      state state_po  county_name county_fips       office      candidate
-## 1 2004     OREGON       OR         LAKE       41037 US PRESIDENT GEORGE W. BUSH
-## 2 2008 WASHINGTON       WA       BENTON       53005 US PRESIDENT   BARACK OBAMA
-## 3 2008       UTAH       UT        WAYNE       49055 US PRESIDENT   BARACK OBAMA
-## 4 2004   VIRGINIA       VA          LEE       51105 US PRESIDENT          OTHER
-## 5 2004   MICHIGAN       MI PRESQUE ISLE       26141 US PRESIDENT     JOHN KERRY
+<pre><code>##   year    state state_po county_name county_fips       office      candidate
+## 1 2004   OREGON       OR   TILLAMOOK       41057 US PRESIDENT GEORGE W. BUSH
+## 2 2008 ILLINOIS       IL        FORD       17053 US PRESIDENT    JOHN MCCAIN
+## 3 2004  MONTANA       MT   JEFFERSON       30043 US PRESIDENT     JOHN KERRY
+## 4 2008 MICHIGAN       MI    KEWEENAW       26083 US PRESIDENT   BARACK OBAMA
+## 5 2008 OKLAHOMA       OK       PAYNE       40119 US PRESIDENT   BARACK OBAMA
 ##        party candidatevotes totalvotes  version  mode
-## 1 REPUBLICAN           3039       3905 20220315 TOTAL
-## 2   DEMOCRAT          26288      72911 20220315 TOTAL
-## 3   DEMOCRAT            335       1314 20220315 TOTAL
-## 4      OTHER            101       9770 20220315 TOTAL
-## 5   DEMOCRAT           3432       7516 20220315 TOTAL</code></pre>
+## 1 REPUBLICAN           7003      13951 20220315 TOTAL
+## 2 REPUBLICAN           4079       6386 20220315 TOTAL
+## 3   DEMOCRAT           1881       5868 20220315 TOTAL
+## 4   DEMOCRAT            610       1410 20220315 TOTAL
+## 5   DEMOCRAT          10601      29036 20220315 TOTAL</code></pre>
 <p>We can gather all votes in 2004 and 2008 per county via the pivot
 function:</p>
 <pre class="r"><code>votestimeframe &lt;- electiondf %&gt;%
   # Only interested in vote counts for 2004 or 2008
-  filter(year == 2004 | year == 2008) %&gt;%
   select(year, state, county_name, party, office, candidatevotes) %&gt;%
   # Only get rows where the candidates won
   group_by(year, state, county_name, office) %&gt;%
@@ -458,20 +457,20 @@ function:</p>
   pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = candidatevotes)
 
 votestimeframe %&gt;% head(10)</code></pre>
-<pre><code>## # A tibble: 10 × 6
+<pre><code>## # A tibble: 10 × 10
 ## # Groups:   state, county_name, office [10]
-##    state   county_name party      office       `2004` `2008`
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;  &lt;int&gt;
-##  1 ALABAMA AUTAUGA     REPUBLICAN US PRESIDENT  15196  17403
-##  2 ALABAMA BALDWIN     REPUBLICAN US PRESIDENT  52971  61271
-##  3 ALABAMA BARBOUR     REPUBLICAN US PRESIDENT   5899   5866
-##  4 ALABAMA BIBB        REPUBLICAN US PRESIDENT   5472   6262
-##  5 ALABAMA BLOUNT      REPUBLICAN US PRESIDENT  17386  20389
-##  6 ALABAMA BULLOCK     DEMOCRAT   US PRESIDENT   3210   4011
-##  7 ALABAMA BUTLER      REPUBLICAN US PRESIDENT   4979   5485
-##  8 ALABAMA CALHOUN     REPUBLICAN US PRESIDENT  29814  32348
-##  9 ALABAMA CHAMBERS    REPUBLICAN US PRESIDENT   7622   8067
-## 10 ALABAMA CHEROKEE    REPUBLICAN US PRESIDENT   5923   7298</code></pre>
+##    state   county_name party    office `2000` `2004` `2008` `2012` `2016` `2020`
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+##  1 ALABAMA AUTAUGA     REPUBLI… US PR…  11993  15196  17403  17379  18172  19838
+##  2 ALABAMA BALDWIN     REPUBLI… US PR…  40872  52971  61271  66016  72883  83544
+##  3 ALABAMA BARBOUR     DEMOCRAT US PR…   5188     NA     NA   5912     NA     NA
+##  4 ALABAMA BIBB        REPUBLI… US PR…   4273   5472   6262   6132   6738   7525
+##  5 ALABAMA BLOUNT      REPUBLI… US PR…  12667  17386  20389  20757  22859  24711
+##  6 ALABAMA BULLOCK     DEMOCRAT US PR…   3395   3210   4011   4061   3530   3446
+##  7 ALABAMA BUTLER      REPUBLI… US PR…   4127   4979   5485   5087   4901   5458
+##  8 ALABAMA CALHOUN     REPUBLI… US PR…  22306  29814  32348  30278  32865  35101
+##  9 ALABAMA CHAMBERS    REPUBLI… US PR…   6037   7622   8067   7626   7843   8753
+## 10 ALABAMA CHEROKEE    REPUBLI… US PR…   4154   5923   7298   7506   8953  10583</code></pre>
 </div>
 <div id="swing-calculation" class="section level3">
 <h3>3.3 Swing Calculation</h3>
@@ -487,23 +486,25 @@ votestimeframe %&gt;% head(10)</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;state&#39;, &#39;county_name&#39;, &#39;office&#39;. You can
 ## override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 10 × 4
-## # Groups:   state, county_name, office [10]
+## # Groups:   state, county_name, office [9]
 ##    state   county_name office       swing
 ##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;int&gt;
 ##  1 ALABAMA AUTAUGA     US PRESIDENT  2207
 ##  2 ALABAMA BALDWIN     US PRESIDENT  8300
-##  3 ALABAMA BARBOUR     US PRESIDENT   -33
-##  4 ALABAMA BIBB        US PRESIDENT   790
-##  5 ALABAMA BLOUNT      US PRESIDENT  3003
-##  6 ALABAMA BULLOCK     US PRESIDENT   801
-##  7 ALABAMA BUTLER      US PRESIDENT   506
-##  8 ALABAMA CALHOUN     US PRESIDENT  2534
-##  9 ALABAMA CHAMBERS    US PRESIDENT   445
-## 10 ALABAMA CHEROKEE    US PRESIDENT  1375</code></pre>
+##  3 ALABAMA BARBOUR     US PRESIDENT    NA
+##  4 ALABAMA BARBOUR     US PRESIDENT   -33
+##  5 ALABAMA BIBB        US PRESIDENT   790
+##  6 ALABAMA BLOUNT      US PRESIDENT  3003
+##  7 ALABAMA BULLOCK     US PRESIDENT   801
+##  8 ALABAMA BUTLER      US PRESIDENT   506
+##  9 ALABAMA CALHOUN     US PRESIDENT  2534
+## 10 ALABAMA CHAMBERS    US PRESIDENT   445</code></pre>
 </div>
 </div>
 <div id="change-in-google-trends-over-a-timeframe" class="section level2">
 <h2>4. Change in Google Trends Over a Timeframe</h2>
+<div id="change-overview" class="section level3">
+<h3>4.1 Change Overview</h3>
 <p>Now, we calculate the change in average query incidence from one
 timeframe to the next. We use a similar pivoting method to get (date
 ranges, queyr_incidence) as columns.</p>
@@ -524,6 +525,62 @@ ranges, queyr_incidence) as columns.</p>
 ##  8 Florida          &lt;NA&gt;       67      72      61      52      71              5
 ##  9 Nevada           &lt;NA&gt;       65      75      60      47      55             10
 ## 10 Connecticut      &lt;NA&gt;       65      68      68      52      61              3</code></pre>
+</div>
+<div id="generic-function" class="section level3">
+<h3>4. Generic Function</h3>
+<p>Now, we make a reusable function which calculates the change over a
+given time period for all regions.</p>
+<pre class="r"><code>change_time_period &lt;- function(date1, date2) {
+  trendsdf %&gt;%
+  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %&gt;%
+  (\(df) df %&gt;% mutate(&quot;change_query_incidence&quot; = df[[date1]] - df[[date2]]))
+}
+
+change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% head(10)</code></pre>
+<pre><code>## # A tibble: 10 × 8
+##    Region   City  `04-08` `08-12` `12-16` `16-20` `20-24` change_query_incidence
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;                  &lt;int&gt;
+##  1 Distric… &lt;NA&gt;      100     100     100     100     100                      0
+##  2 New York &lt;NA&gt;       79      77      82      61      65                     -2
+##  3 Maryland &lt;NA&gt;       73      69      73      54      57                     -4
+##  4 Califor… &lt;NA&gt;       73      66      73      61      61                     -7
+##  5 New Jer… &lt;NA&gt;       72      80      82      60      65                      8
+##  6 Illinois &lt;NA&gt;       68      59      60      50      55                     -9
+##  7 Arizona  &lt;NA&gt;       68      70      56      46      50                      2
+##  8 Florida  &lt;NA&gt;       67      72      61      52      71                      5
+##  9 Nevada   &lt;NA&gt;       65      75      60      47      55                     10
+## 10 Connect… &lt;NA&gt;       65      68      68      52      61                      3</code></pre>
+</div>
+</div>
+<div id="heatmap-query-incidence-swing-vs-electoral-swing-2008-election-to-2012-election" class="section level2">
+<h2>5. Heatmap: Query Incidence Swing vs Electoral Swing (2008 election
+to 2012 election)</h2>
+<p>We first match cities from Google trends to electoral data. We do so
+by normalizing the city names in the Google tends dataset.</p>
+<pre class="r"><code>interest_swing_08_12 &lt;- change_time_period(&quot;08-12&quot;, &quot;04-08&quot;) %&gt;% mutate(city = toupper(City)) %&gt;% select(city, change_query_incidence)
+swing_county &lt;- votestimeframe %&gt;%
+    group_by(state, county_name, office) %&gt;%
+    summarise(swing = .data[[&quot;2012&quot;]] - .data[[&quot;2008&quot;]]) %&gt;%
+    mutate(city = county_name) %&gt;%
+    select(city, swing)</code></pre>
+<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in dplyr 1.1.0.
+## ℹ Please use `reframe()` instead.
+## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()` always returns an ungrouped data frame and adjust accordingly.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;, &#39;county_name&#39;, &#39;office&#39;. You can override using the `.groups` argument.
+## Adding missing grouping variables: `state`, `county_name`, `office`</code></pre>
+<pre class="r"><code>merge(interest_swing_08_12, swing_county, by = &quot;city&quot;) %&gt;% head(10)</code></pre>
+<pre><code>##          city change_query_incidence     state county_name       office swing
+## 1     ADDISON                     NA   VERMONT     ADDISON US PRESIDENT  -945
+## 2      ALBANY                     NA   WYOMING      ALBANY US PRESIDENT    NA
+## 3      ALBANY                     NA   WYOMING      ALBANY US PRESIDENT    NA
+## 4      ALBANY                     NA  NEW YORK      ALBANY US PRESIDENT -9959
+## 5  ALEXANDRIA                     NA  VIRGINIA  ALEXANDRIA US PRESIDENT  1726
+## 6       ALLEN                     NA    KANSAS       ALLEN US PRESIDENT  -236
+## 7       ALLEN                     NA   INDIANA       ALLEN US PRESIDENT  6820
+## 8       ALLEN                     NA LOUISIANA       ALLEN US PRESIDENT   162
+## 9       ALLEN                     NA  KENTUCKY       ALLEN US PRESIDENT   -74
+## 10      ALLEN                     NA      OHIO       ALLEN US PRESIDENT  -439</code></pre>
 </div>
 
 

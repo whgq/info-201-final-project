@@ -15,11 +15,14 @@ This repository is formatted as an Rproject. Setup can be performed manually by 
 ```
 tidyverse
 ggplot2
+ggmap
 ```
+
+A Google API key is required to generate heatmaps manually. Specify this key in the `GOOGLE_API_KEY` environment variable.
 
 A Nix file is also included which optionally sets up a development environment automatically including dependencies for the project.
 
-If you have nix installed, you can run:
+If you have Nix installed, you can run:
 
 ```bash
 nix develop
