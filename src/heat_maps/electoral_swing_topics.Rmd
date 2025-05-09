@@ -47,18 +47,23 @@ We can gather all votes in 2004 and 2008 per county via the pivot function:
 
 ```{r}
 votestimeframe <- electiondf %>%
+  # Only interested in vote counts for 2004 or 2008
   filter(year == 2004 | year == 2008) %>%
-  pivot_wider(names_from = year, values_from = candidatevotes)
-
-votestimeframe %>% head(10)
+  select(year, state, county_name, party, office, candidatevotes) %>%
+  # Only get rows where the candidates won
+  group_by(year, state, county_name, office) %>%
+  filter(candidatevotes == max(candidatevotes)) %>%
+  ungroup %>%
+  # Collapse votes in 2004 and 2008 into columns 2004 and 2008
+  group_by(state, county_name, office) %>%
+  pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = candidatevotes) %>%
+  head(10) %>% print
 ```
 
 We can then calculate the swing like such:
 
 ```{r}
 votestimeframe %>%
-  mutate(swing = .data[["2008"]] - .data[["2004"]]) %>%
-  select(county_name, swing) %>%
-  filter(!is.na(swing)) %>%
-  sample_n(10)
+    filter(!is.na(2004) | !is.na(2008)) %>%
+    head(2)
 ```

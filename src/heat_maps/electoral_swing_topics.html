@@ -398,81 +398,91 @@ trendsdf %&gt;% head(5)</code></pre>
 <p>Here is an overview of the electiondf dataset:</p>
 <pre class="r"><code>electiondf &lt;- read.csv(&quot;../../data_cleaned/harvard_election/countypres_2000-2020.csv&quot;)
 electiondf %&gt;% sample_n(10)</code></pre>
-<pre><code>##    year         state state_po county_name county_fips       office
-## 1  2012        KANSAS       KS   DICKINSON       20041 US PRESIDENT
-## 2  2004         TEXAS       TX     RANDALL       48381 US PRESIDENT
-## 3  2020      COLORADO       CO  BROOMFIELD        8014 US PRESIDENT
-## 4  2004      NEBRASKA       NE     BUFFALO       31019 US PRESIDENT
-## 5  2012       GEORGIA       GA     CHATHAM       13051 US PRESIDENT
-## 6  2016    CALIFORNIA       CA  SANTA CRUZ        6087 US PRESIDENT
-## 7  2000 WEST VIRGINIA       WV     SUMMERS       54089 US PRESIDENT
-## 8  2008      KENTUCKY       KY  CRITTENDEN       21055 US PRESIDENT
-## 9  2008      MISSOURI       MO       BOONE       29019 US PRESIDENT
-## 10 2016      COLORADO       CO    CHEYENNE        8017 US PRESIDENT
-##          candidate      party candidatevotes totalvotes  version  mode
-## 1     BARACK OBAMA   DEMOCRAT           2020       8042 20220315 TOTAL
-## 2       JOHN KERRY   DEMOCRAT           7849      48587 20220315 TOTAL
-## 3            OTHER      GREEN            104      46632 20220315 TOTAL
-## 4   GEORGE W. BUSH REPUBLICAN          14222      18608 20220315 TOTAL
-## 5      MITT ROMNEY REPUBLICAN          47204     108628 20220315 TOTAL
-## 6  HILLARY CLINTON   DEMOCRAT          95249     128821 20220315 TOTAL
-## 7          AL GORE   DEMOCRAT           2299       4713 20220315 TOTAL
-## 8     BARACK OBAMA   DEMOCRAT           1254       3930 20220315 TOTAL
-## 9      JOHN MCCAIN REPUBLICAN          36849      85251 20220315 TOTAL
-## 10 HILLARY CLINTON   DEMOCRAT            132       1102 20220315 TOTAL</code></pre>
+<pre><code>##    year          state state_po  county_name county_fips       office
+## 1  2000  MASSACHUSETTS       MA    HAMPSHIRE       25015 US PRESIDENT
+## 2  2020       VIRGINIA       VA        BLAND       51021 US PRESIDENT
+## 3  2012     CALIFORNIA       CA       LASSEN        6035 US PRESIDENT
+## 4  2020 NORTH CAROLINA       NC        MACON       37113 US PRESIDENT
+## 5  2004        GEORGIA       GA       BROOKS       13027 US PRESIDENT
+## 6  2020      LOUISIANA       LA      BOSSIER       22015 US PRESIDENT
+## 7  2020           IOWA       IA       BREMER       19017 US PRESIDENT
+## 8  2004        ALABAMA       AL         BIBB        1007 US PRESIDENT
+## 9  2000       VIRGINIA       VA WESTMORELAND       51193 US PRESIDENT
+## 10 2012  WEST VIRGINIA       WV       MARION       54049 US PRESIDENT
+##            candidate       party candidatevotes totalvotes  version
+## 1     GEORGE W. BUSH  REPUBLICAN          19202      68626 20220315
+## 2       JO JORGENSEN LIBERTARIAN             18       3479 20220315
+## 3       BARACK OBAMA    DEMOCRAT           3053      10683 20220315
+## 4              OTHER       OTHER             25      20743 20220315
+## 5         JOHN KERRY    DEMOCRAT           2193       5113 20220315
+## 6     DONALD J TRUMP  REPUBLICAN          38074      54655 20220315
+## 7  JOSEPH R BIDEN JR    DEMOCRAT           4497      14546 20220315
+## 8         JOHN KERRY    DEMOCRAT           2089       7600 20220315
+## 9        RALPH NADER       GREEN             88       6026 20220315
+## 10       MITT ROMNEY  REPUBLICAN          12054      21542 20220315
+##            mode
+## 1         TOTAL
+## 2      ABSENTEE
+## 3         TOTAL
+## 4  ELECTION DAY
+## 5         TOTAL
+## 6         TOTAL
+## 7      ABSENTEE
+## 8         TOTAL
+## 9         TOTAL
+## 10        TOTAL</code></pre>
 <p>For this particular analysis, we are interested in the swing from
 2004 to 2008. We can get all data from these date ranges like such:</p>
 <pre class="r"><code>electiondf %&gt;%
     filter(year == 2004 | year == 2008) %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##   year     state state_po county_name county_fips       office    candidate
-## 1 2004   FLORIDA       FL      NASSAU       12089 US PRESIDENT   JOHN KERRY
-## 2 2008     TEXAS       TX      CASTRO       48069 US PRESIDENT BARACK OBAMA
-## 3 2004 TENNESSEE       TN       SCOTT       47151 US PRESIDENT        OTHER
-## 4 2008   GEORGIA       GA      PIERCE       13229 US PRESIDENT        OTHER
-## 5 2008 MINNESOTA       MN      ROSEAU       27135 US PRESIDENT  JOHN MCCAIN
+<pre><code>##   year        state state_po  county_name county_fips       office    candidate
+## 1 2008 PENNSYLVANIA       PA WESTMORELAND       42129 US PRESIDENT  JOHN MCCAIN
+## 2 2008         IOWA       IA    DICKINSON       19059 US PRESIDENT BARACK OBAMA
+## 3 2008        TEXAS       TX     MONTAGUE       48337 US PRESIDENT BARACK OBAMA
+## 4 2004    TENNESSEE       TN      JACKSON       47087 US PRESIDENT   JOHN KERRY
+## 5 2008     OKLAHOMA       OK        OSAGE       40113 US PRESIDENT        OTHER
 ##        party candidatevotes totalvotes  version  mode
-## 1   DEMOCRAT           8573      32743 20220315 TOTAL
-## 2   DEMOCRAT            719       2291 20220315 TOTAL
-## 3      OTHER             33       7626 20220315 TOTAL
-## 4      OTHER             38       6791 20220315 TOTAL
-## 5 REPUBLICAN           4438       7700 20220315 TOTAL</code></pre>
+## 1 REPUBLICAN         102294     176785 20220315 TOTAL
+## 2   DEMOCRAT           4625       9906 20220315 TOTAL
+## 3   DEMOCRAT           1597       7950 20220315 TOTAL
+## 4   DEMOCRAT           2996       5052 20220315 TOTAL
+## 5      OTHER              0      19658 20220315 TOTAL</code></pre>
 <p>We can gather all votes in 2004 and 2008 per county via the pivot
 function:</p>
 <pre class="r"><code>votestimeframe &lt;- electiondf %&gt;%
   filter(year == 2004 | year == 2008) %&gt;%
-  pivot_wider(names_from = year, values_from = candidatevotes)
-
-votestimeframe %&gt;% head(10)</code></pre>
-<pre><code>## # A tibble: 10 × 12
-##    state   state_po county_name county_fips office    candidate party totalvotes
-##    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;int&gt;
-##  1 ALABAMA AL       AUTAUGA            1001 US PRESI… JOHN KER… DEMO…      20081
-##  2 ALABAMA AL       AUTAUGA            1001 US PRESI… GEORGE W… REPU…      20081
-##  3 ALABAMA AL       AUTAUGA            1001 US PRESI… OTHER     OTHER      20081
-##  4 ALABAMA AL       BALDWIN            1003 US PRESI… JOHN KER… DEMO…      69320
-##  5 ALABAMA AL       BALDWIN            1003 US PRESI… GEORGE W… REPU…      69320
-##  6 ALABAMA AL       BALDWIN            1003 US PRESI… OTHER     OTHER      69320
-##  7 ALABAMA AL       BARBOUR            1005 US PRESI… JOHN KER… DEMO…      10777
-##  8 ALABAMA AL       BARBOUR            1005 US PRESI… GEORGE W… REPU…      10777
-##  9 ALABAMA AL       BARBOUR            1005 US PRESI… OTHER     OTHER      10777
-## 10 ALABAMA AL       BIBB               1007 US PRESI… JOHN KER… DEMO…       7600
-## # ℹ 4 more variables: version &lt;int&gt;, mode &lt;chr&gt;, `2004` &lt;int&gt;, `2008` &lt;int&gt;</code></pre>
+  select(year, state, county_name, party, office, candidatevotes) %&gt;%
+  group_by(year, state, county_name, office) %&gt;%
+  filter(candidatevotes == max(candidatevotes)) %&gt;%
+  ungroup %&gt;%
+  group_by(state, county_name, office) %&gt;%
+  pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = candidatevotes) %&gt;%
+  head(10) %&gt;% print</code></pre>
+<pre><code>## # A tibble: 10 × 6
+## # Groups:   state, county_name, office [10]
+##    state   county_name party      office       `2004` `2008`
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;  &lt;int&gt;
+##  1 ALABAMA AUTAUGA     REPUBLICAN US PRESIDENT  15196  17403
+##  2 ALABAMA BALDWIN     REPUBLICAN US PRESIDENT  52971  61271
+##  3 ALABAMA BARBOUR     REPUBLICAN US PRESIDENT   5899   5866
+##  4 ALABAMA BIBB        REPUBLICAN US PRESIDENT   5472   6262
+##  5 ALABAMA BLOUNT      REPUBLICAN US PRESIDENT  17386  20389
+##  6 ALABAMA BULLOCK     DEMOCRAT   US PRESIDENT   3210   4011
+##  7 ALABAMA BUTLER      REPUBLICAN US PRESIDENT   4979   5485
+##  8 ALABAMA CALHOUN     REPUBLICAN US PRESIDENT  29814  32348
+##  9 ALABAMA CHAMBERS    REPUBLICAN US PRESIDENT   7622   8067
+## 10 ALABAMA CHEROKEE    REPUBLICAN US PRESIDENT   5923   7298</code></pre>
 <p>We can then calculate the swing like such:</p>
 <pre class="r"><code>votestimeframe %&gt;%
-  mutate(swing = .data[[&quot;2008&quot;]] - .data[[&quot;2004&quot;]]) %&gt;%
-  select(county_name, swing) %&gt;%
-  filter(!is.na(swing)) %&gt;%
-  head(10)</code></pre>
-<pre><code>## # A tibble: 6 × 2
-##   county_name       swing
-##   &lt;chr&gt;             &lt;int&gt;
-## 1 UPTON                 8
-## 2 CRAIG                35
-## 3 STATEWIDE WRITEIN     0
-## 4 MAINE UOCAVA          0
-## 5 FEDERAL PRECINCT      0
-## 6 DISTRICT 99           0</code></pre>
+    filter(!is.na(2004) | !is.na(2008)) %&gt;%
+    head(2)</code></pre>
+<pre><code>## # A tibble: 2 × 6
+## # Groups:   state, county_name, office [2]
+##   state   county_name party      office       `2004` `2008`
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;  &lt;int&gt;
+## 1 ALABAMA AUTAUGA     REPUBLICAN US PRESIDENT  15196  17403
+## 2 ALABAMA BALDWIN     REPUBLICAN US PRESIDENT  52971  61271</code></pre>
 </div>
 
 
