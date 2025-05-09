@@ -15,28 +15,50 @@ Herein, we explore the relationship between google search query frequency for to
 
 ## 2. Data Cleaning
 
-### 2.1 Region / city name sample
+See the `scripts/` folder for utilities we wrote to clean our data. Notably, Google trends data for city / region over varying time frames were combined from multiple CSV files into a single table, which looks like this:
 
-#### 2.1.1 Google trends dat
-
-```{r, echo = TRUE}
+```{r}
 library(dplyr)
 library(purrr)
+library(tidyr)
 
-cities_immigration_search_df <- read.delim("./data_cleaned/google_trends/immigration_query_cities.csv")
-summary(cities_immigration_search_df)
+trendsdf <- read.csv("../../data_cleaned/google_trends/summarized.csv")
+trendsdf %>% head(5)
 ```
 
-## 3. Results
+## 3. Electoral Swing from 2004 - 2008 Presidential Elections
 
-### 3.1. 2004 United States presidential election
+Here is an overview of the electiondf dataset:
 
-```{r, echo = TRUE}
-
+```{r}
+electiondf <- read.csv("../../data_cleaned/harvard_election/countypres_2000-2020.csv")
+electiondf %>% sample_n(10)
 ```
 
-### 3.2. 2008 United States presidential election
+For this particular analysis, we are interested in the swing from 2004 to 2008. We can get all data from these date ranges like such:
 
-```{r, echo = TRUE}
+```{r}
+electiondf %>%
+    filter(year == 2004 | year == 2008) %>%
+    sample_n(5)
+```
 
+We can gather all votes in 2004 and 2008 per county via the pivot function:
+
+```{r}
+votestimeframe <- electiondf %>%
+  filter(year == 2004 | year == 2008) %>%
+  pivot_wider(names_from = year, values_from = candidatevotes)
+
+votestimeframe %>% head(10)
+```
+
+We can then calculate the swing like such:
+
+```{r}
+votestimeframe %>%
+  mutate(swing = .data[["2008"]] - .data[["2004"]]) %>%
+  select(county_name, swing) %>%
+  filter(!is.na(swing)) %>%
+  sample_n(10)
 ```
