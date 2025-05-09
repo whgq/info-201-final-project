@@ -56,14 +56,16 @@ votestimeframe <- electiondf %>%
   ungroup %>%
   # Collapse votes in 2004 and 2008 into columns 2004 and 2008
   group_by(state, county_name, office) %>%
-  pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = candidatevotes) %>%
-  head(10) %>% print
+  pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = candidatevotes)
+
+votestimeframe %>% head(10)
 ```
 
 We can then calculate the swing like such:
 
 ```{r}
 votestimeframe %>%
-    filter(!is.na(2004) | !is.na(2008)) %>%
-    head(2)
+    group_by(state, county_name, office) %>%
+    summarise(swing = .data[["2008"]] - .data[["2004"]]) %>%
+    head(10)
 ```
