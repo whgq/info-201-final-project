@@ -383,6 +383,7 @@ which looks like this:</p>
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(purrr)
 library(tidyr)
+library(stringr)
 
 trendsdf &lt;- read.csv(&quot;../../data_cleaned/google_trends/summarized.csv&quot;)
 trendsdf %&gt;% head(5)</code></pre>
@@ -395,59 +396,53 @@ trendsdf %&gt;% head(5)</code></pre>
 </div>
 <div id="electoral-swing-from-2004---2008-presidential-elections" class="section level2">
 <h2>3. Electoral Swing from 2004 - 2008 Presidential Elections</h2>
+<div id="data-overview" class="section level3">
+<h3>3.1 Data Overview</h3>
 <p>Here is an overview of the electiondf dataset:</p>
 <pre class="r"><code>electiondf &lt;- read.csv(&quot;../../data_cleaned/harvard_election/countypres_2000-2020.csv&quot;)
 electiondf %&gt;% sample_n(10)</code></pre>
-<pre><code>##    year     state state_po    county_name county_fips       office
-## 1  2016  MISSOURI       MO         VERNON       29217 US PRESIDENT
-## 2  2000 MINNESOTA       MN    KOOCHICHING       27071 US PRESIDENT
-## 3  2004     TEXAS       TX       LA SALLE       48283 US PRESIDENT
-## 4  2012      OHIO       OH     WASHINGTON       39167 US PRESIDENT
-## 5  2020   WYOMING       WY       SHERIDAN       56033 US PRESIDENT
-## 6  2012  ARKANSAS       AR        PRAIRIE        5117 US PRESIDENT
-## 7  2016  NEBRASKA       NE          BROWN       31017 US PRESIDENT
-## 8  2020 MINNESOTA       MN       TRAVERSE       27155 US PRESIDENT
-## 9  2020  VIRGINIA       VA KING AND QUEEN       51097 US PRESIDENT
-## 10 2008 TENNESSEE       TN          OBION       47131 US PRESIDENT
-##            candidate       party candidatevotes totalvotes  version
-## 1       DONALD TRUMP  REPUBLICAN           6533       8599 20220315
-## 2              OTHER       OTHER            151       6879 20220315
-## 3     GEORGE W. BUSH  REPUBLICAN            989       2230 20220315
-## 4       BARACK OBAMA    DEMOCRAT          11651      29499 20220315
-## 5  JOSEPH R BIDEN JR    DEMOCRAT           4043      16546 20220315
-## 6              OTHER       OTHER            108       3141 20220315
-## 7    HILLARY CLINTON    DEMOCRAT            153       1597 20220315
-## 8       JO JORGENSEN LIBERTARIAN             12       1864 20220315
-## 9       JO JORGENSEN LIBERTARIAN             44       4115 20220315
-## 10             OTHER       OTHER            211      13392 20220315
-##            mode
-## 1         TOTAL
-## 2         TOTAL
-## 3         TOTAL
-## 4         TOTAL
-## 5         TOTAL
-## 6         TOTAL
-## 7         TOTAL
-## 8         TOTAL
-## 9  ELECTION DAY
-## 10        TOTAL</code></pre>
+<pre><code>##    year        state state_po county_name county_fips       office
+## 1  2020     NEW YORK       NY      BROOME       36007 US PRESIDENT
+## 2  2000       KANSAS       KS    MARSHALL       20117 US PRESIDENT
+## 3  2004   CALIFORNIA       CA LOS ANGELES        6037 US PRESIDENT
+## 4  2016     ILLINOIS       IL       BROWN       17009 US PRESIDENT
+## 5  2000 PENNSYLVANIA       PA     CLARION       42031 US PRESIDENT
+## 6  2020     NEW YORK       NY       KINGS       36047 US PRESIDENT
+## 7  2012      VERMONT       VT     WINDSOR       50027 US PRESIDENT
+## 8  2012      MONTANA       MT    TREASURE       30103 US PRESIDENT
+## 9  2008    LOUISIANA       LA     BOSSIER       22015 US PRESIDENT
+## 10 2020    LOUISIANA       LA       ALLEN       22003 US PRESIDENT
+##          candidate      party candidatevotes totalvotes  version  mode
+## 1            OTHER      OTHER           1148      93494 20220315 TOTAL
+## 2   GEORGE W. BUSH REPUBLICAN           3066       5115 20220315 TOTAL
+## 3       JOHN KERRY   DEMOCRAT        1907736    3021647 20220315 TOTAL
+## 4  HILLARY CLINTON   DEMOCRAT            476       2379 20220315 TOTAL
+## 5          AL GORE   DEMOCRAT           5605      15843 20220315 TOTAL
+## 6            OTHER      OTHER           7816     920380 20220315 TOTAL
+## 7     BARACK OBAMA   DEMOCRAT          19494      28699 20220315 TOTAL
+## 8     BARACK OBAMA   DEMOCRAT            114        455 20220315 TOTAL
+## 9     BARACK OBAMA   DEMOCRAT          12701      45826 20220315 TOTAL
+## 10           OTHER      OTHER             55       9810 20220315 TOTAL</code></pre>
+</div>
+<div id="data-cleaning-1" class="section level3">
+<h3>3.2 Data Cleaning</h3>
 <p>For this particular analysis, we are interested in the swing from
 2004 to 2008. We can get all data from these date ranges like such:</p>
 <pre class="r"><code>electiondf %&gt;%
     filter(year == 2004 | year == 2008) %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##   year          state state_po  county_name county_fips       office
-## 1 2004       OKLAHOMA       OK POTTAWATOMIE       40125 US PRESIDENT
-## 2 2008         ALASKA       AK  DISTRICT 27        2027 US PRESIDENT
-## 3 2004      TENNESSEE       TN       MORGAN       47129 US PRESIDENT
-## 4 2008       VIRGINIA       VA        GALAX       51640 US PRESIDENT
-## 5 2008 NORTH CAROLINA       NC         NASH       37127 US PRESIDENT
-##        candidate      party candidatevotes totalvotes  version  mode
-## 1          OTHER      OTHER              0      25853 20220315 TOTAL
-## 2          OTHER      OTHER            209       8498 20220315 TOTAL
-## 3 GEORGE W. BUSH REPUBLICAN           4401       7360 20220315 TOTAL
-## 4    JOHN MCCAIN REPUBLICAN           1317       2402 20220315 TOTAL
-## 5    JOHN MCCAIN REPUBLICAN          23728      47118 20220315 TOTAL</code></pre>
+<pre><code>##   year      state state_po  county_name county_fips       office      candidate
+## 1 2004     OREGON       OR         LAKE       41037 US PRESIDENT GEORGE W. BUSH
+## 2 2008 WASHINGTON       WA       BENTON       53005 US PRESIDENT   BARACK OBAMA
+## 3 2008       UTAH       UT        WAYNE       49055 US PRESIDENT   BARACK OBAMA
+## 4 2004   VIRGINIA       VA          LEE       51105 US PRESIDENT          OTHER
+## 5 2004   MICHIGAN       MI PRESQUE ISLE       26141 US PRESIDENT     JOHN KERRY
+##        party candidatevotes totalvotes  version  mode
+## 1 REPUBLICAN           3039       3905 20220315 TOTAL
+## 2   DEMOCRAT          26288      72911 20220315 TOTAL
+## 3   DEMOCRAT            335       1314 20220315 TOTAL
+## 4      OTHER            101       9770 20220315 TOTAL
+## 5   DEMOCRAT           3432       7516 20220315 TOTAL</code></pre>
 <p>We can gather all votes in 2004 and 2008 per county via the pivot
 function:</p>
 <pre class="r"><code>votestimeframe &lt;- electiondf %&gt;%
@@ -477,6 +472,9 @@ votestimeframe %&gt;% head(10)</code></pre>
 ##  8 ALABAMA CALHOUN     REPUBLICAN US PRESIDENT  29814  32348
 ##  9 ALABAMA CHAMBERS    REPUBLICAN US PRESIDENT   7622   8067
 ## 10 ALABAMA CHEROKEE    REPUBLICAN US PRESIDENT   5923   7298</code></pre>
+</div>
+<div id="swing-calculation" class="section level3">
+<h3>3.3 Swing Calculation</h3>
 <p>We can then calculate the swing like such:</p>
 <pre class="r"><code>votestimeframe %&gt;%
     group_by(state, county_name, office) %&gt;%
@@ -502,6 +500,30 @@ votestimeframe %&gt;% head(10)</code></pre>
 ##  8 ALABAMA CALHOUN     US PRESIDENT  2534
 ##  9 ALABAMA CHAMBERS    US PRESIDENT   445
 ## 10 ALABAMA CHEROKEE    US PRESIDENT  1375</code></pre>
+</div>
+</div>
+<div id="change-in-google-trends-over-a-timeframe" class="section level2">
+<h2>4. Change in Google Trends Over a Timeframe</h2>
+<p>Now, we calculate the change in average query incidence from one
+timeframe to the next. We use a similar pivoting method to get (date
+ranges, queyr_incidence) as columns.</p>
+<pre class="r"><code>trendsdf %&gt;%
+  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %&gt;%
+  (\(df) df %&gt;% mutate(&quot;change_04-12&quot; = df[[&quot;08-12&quot;]] - df[[&quot;04-08&quot;]])) %&gt;%
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 × 8
+##    Region           City  `04-08` `08-12` `12-16` `16-20` `20-24` `change_04-12`
+##    &lt;chr&gt;            &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;          &lt;int&gt;
+##  1 District of Col… &lt;NA&gt;      100     100     100     100     100              0
+##  2 New York         &lt;NA&gt;       79      77      82      61      65             -2
+##  3 Maryland         &lt;NA&gt;       73      69      73      54      57             -4
+##  4 California       &lt;NA&gt;       73      66      73      61      61             -7
+##  5 New Jersey       &lt;NA&gt;       72      80      82      60      65              8
+##  6 Illinois         &lt;NA&gt;       68      59      60      50      55             -9
+##  7 Arizona          &lt;NA&gt;       68      70      56      46      50              2
+##  8 Florida          &lt;NA&gt;       67      72      61      52      71              5
+##  9 Nevada           &lt;NA&gt;       65      75      60      47      55             10
+## 10 Connecticut      &lt;NA&gt;       65      68      68      52      61              3</code></pre>
 </div>
 
 

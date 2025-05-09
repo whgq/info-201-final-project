@@ -77,23 +77,13 @@ votestimeframe %>%
     head(10)
 ```
 
-### 3.4 Generalization to a Function
+## 4. Change in Google Trends Over a Timeframe
 
-We define a function `swing_timeframe` which performs the above steps. We also normalize the swing as a change in percentage basis points:
+Now, we calculate the change in average query incidence from one timeframe to the next. We use a similar pivoting method to get (date ranges, queyr_incidence) as columns.
 
 ```{r}
-swing_timeframe <- function(year1, year2) {
-  read.csv(c("../../data_cleaned/harvard_election/countypres_", year1, "-", year2, ".csv")) %>%
-    filter(year == year1 | year == year2) %>%
-    select(year, state, county_name, party, office, candidatevotes, totalvotes) %>%
-    # Only get rows where the candidates won
-    group_by(year, state, county_name, office) %>%
-    filter(candidatevotes == max(candidatevotes)) %>%
-    ungroup %>%
-    # Collapse votes in 2004 and 2008 into columns 2004 and 2008
-    group_by(state, county_name, office) %>%
-    pivot_wider(id_cols = c(state, county_name, party, office), names_from = year, values_from = c(candidatevotes, totalvotes)) %>%
-    group_by(state, county_name, office) %>%
-    summarise(swing = .data[["2008_candidatevotes"]] / .data[["2008_totalvotes"]] - (.data[["2004_candidatevotes"]] / .data[["2008_totalvotes"]]))
-}
+trendsdf %>%
+  pivot_wider(id_cols = c(Region, City), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
+  (\(df) df %>% mutate("change_04-12" = df[["08-12"]] - df[["04-08"]])) %>%
+  head(10)
 ```
