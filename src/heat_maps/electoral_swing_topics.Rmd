@@ -23,7 +23,8 @@ Herein, we explore the relationship between google search query frequency for to
 library(dplyr)
 library(purrr)
 
-cities_immigration_search_df <- read.delim("./data_cleaned/geoMap(1).csv")
+cities_immigration_search_df <- read.delim("./data_cleaned/google_trends/immigration_query_cities.csv")
+summary(cities_immigration_search_df)
 ```
 
 ## 3. Results

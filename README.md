@@ -15,7 +15,6 @@ This repository is formatted as an Rproject. Setup can be performed manually by 
 ```
 tidyverse
 ggplot2
-gtrendsR
 ```
 
 A Nix file is also included which optionally sets up a development environment automatically including dependencies for the project.
