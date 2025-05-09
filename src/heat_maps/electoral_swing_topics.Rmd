@@ -155,13 +155,13 @@ library(ggplot2)
 library(scales)
 
 classified <- with_lat_long %>%
-    bi_class(x = change_query_incidence, y = swing, style = "quantile", dim = 2) %>%
+    bi_class(x = change_query_incidence, y = swing, style = "equal", dim = 2) %>%
     mutate("long" = lat_long.lon, "lat" = lat_long.lat)
 
 ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
   geom_point(data = classified %>% filter(long > -140), aes(x = long, y = lat, color = bi_class), alpha = 1) +
-  bi_scale_fill(dim = 2) +
+  bi_scale_fill(pal = "GrPink", dim = 2) +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
   ) +
