@@ -25,6 +25,12 @@
           tidyr
           ggmap
           fuzzyjoin
+          biscale
+          sf
+          cowplot
+          maps
+          mapproj
+          scales
         ];
         shellHook = ''
           function knit() {
