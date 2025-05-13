@@ -175,9 +175,9 @@ plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
     color = "Local Correlation Between\nSearch Interest Change for\n\"Immigration\" and Election Results"
   ) +
-  theme(text = element_text(size = 8))
+  theme(text = element_text(size = 8), legend.position = "bottom")
 
-ggsave("election_04_to_2012_heat_map_query_change_election_result.png")
+ggsave("election_04_to_2012_heat_map_query_change_election_result.png", bg = "white")
 
 plot
 ```
@@ -250,8 +250,8 @@ plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2008 - 2020",
     color = "Local Correlation Between\nSearch Interest Change for\n\"Immigration\" and Election Results"
   ) +
-  theme(text = element_text(size = 8))
-ggsave("election_08_to_2020_heat_map_query_change_election_result.png")
+  theme(text = element_text(size = 8), legend.position = "bottom")
+ggsave("election_08_to_2020_heat_map_query_change_election_result.png", bg = "white")
 
 plot
 ```
