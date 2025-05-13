@@ -54,3 +54,10 @@ We have written several scripts to process this data in `scripts/`.
 - `conv_xlsx_csv.R`: converts excel-formatted data from deportationdata.org to compressed CSV format
 - `split_large_csv.R`: splits datasets from deportationdata.org into small chunks of less than 100K rows so that they can be uploaded to GitHub
 - `remove_large_files.R`: removes large datasets from deportationdata.org
+
+## Results
+
+There was a greater correlation between search interest change for the topic "Immigration" and election results for the period 2008 - 2020 than there was for the period 2004 - 2012.
+
+![2004 - 2012](https://github.com/dowlandaiello/info-201-final-project/blob/master/src/heat_maps/election_04_to_2012_heat_map_query_change_election_result.png)
+![2008 - 2020](https://github.com/dowlandaiello/info-201-final-project/blob/master/src/heat_maps/election_08_to_2020_heat_map_query_change_election_result.png)
