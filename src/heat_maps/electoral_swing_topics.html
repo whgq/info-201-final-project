@@ -408,27 +408,27 @@ trendsdf %&gt;% head(5)</code></pre>
 <pre class="r"><code>electiondf &lt;- read.csv(&quot;../../data_cleaned/harvard_election/countypres_2000-2020.csv&quot;)
 electiondf %&gt;% sample_n(10)</code></pre>
 <pre><code>##    year        state state_po county_name county_fips       office
-## 1  2016     MICHIGAN       MI   WASHTENAW       26161 US PRESIDENT
-## 2  2000        TEXAS       TX     WICHITA       48485 US PRESIDENT
-## 3  2016     MISSOURI       MO      BUTLER       29023 US PRESIDENT
-## 4  2012     MISSOURI       MO       RALLS       29173 US PRESIDENT
-## 5  2008 PENNSYLVANIA       PA       PERRY       42099 US PRESIDENT
-## 6  2016         UTAH       UT        UTAH       49049 US PRESIDENT
-## 7  2020   WASHINGTON       WA   JEFFERSON       53031 US PRESIDENT
-## 8  2004         UTAH       UT       GRAND       49019 US PRESIDENT
-## 9  2020     ARKANSAS       AR     MADISON        5087 US PRESIDENT
-## 10 2008    WISCONSIN       WI   JEFFERSON       55055 US PRESIDENT
-##            candidate      party candidatevotes totalvotes  version        mode
-## 1    HILLARY CLINTON   DEMOCRAT         128483     188578 20220315       TOTAL
-## 2        RALPH NADER      GREEN            518      42713 20220315       TOTAL
-## 3    HILLARY CLINTON   DEMOCRAT           3036      17259 20220315       TOTAL
-## 4              OTHER      OTHER             69       5036 20220315       TOTAL
-## 5              OTHER      OTHER            279      19733 20220315       TOTAL
-## 6       DONALD TRUMP REPUBLICAN         102182     201551 20220315       TOTAL
-## 7              OTHER      GREEN            146      24792 20220315       TOTAL
-## 8     GEORGE W. BUSH REPUBLICAN           2130       4165 20220315       TOTAL
-## 9  JOSEPH R BIDEN JR   DEMOCRAT              0       7351 20220315 PROVISIONAL
-## 10       JOHN MCCAIN REPUBLICAN          21096      43166 20220315       TOTAL</code></pre>
+## 1  2000     ILLINOIS       IL     HANCOCK       17067 US PRESIDENT
+## 2  2012     VIRGINIA       VA    NOTTOWAY       51135 US PRESIDENT
+## 3  2000    MINNESOTA       MN      NOBLES       27105 US PRESIDENT
+## 4  2016  MISSISSIPPI       MS     WINSTON       28159 US PRESIDENT
+## 5  2016       KANSAS       KS      WILSON       20205 US PRESIDENT
+## 6  2012     MISSOURI       MO      NEWTON       29145 US PRESIDENT
+## 7  2020     MISSOURI       MO        KNOX       29103 US PRESIDENT
+## 8  2020 NORTH DAKOTA       ND      TOWNER       38095 US PRESIDENT
+## 9  2008 SOUTH DAKOTA       SD     GREGORY       46053 US PRESIDENT
+## 10 2008        IDAHO       ID  WASHINGTON       16087 US PRESIDENT
+##         candidate       party candidatevotes totalvotes  version  mode
+## 1           OTHER       OTHER            140       9691 20220315 TOTAL
+## 2     MITT ROMNEY  REPUBLICAN           3409       6846 20220315 TOTAL
+## 3  GEORGE W. BUSH  REPUBLICAN           4766       8872 20220315 TOTAL
+## 4    DONALD TRUMP  REPUBLICAN           4910       8881 20220315 TOTAL
+## 5    DONALD TRUMP  REPUBLICAN           2788       3591 20220315 TOTAL
+## 6           OTHER       OTHER            477      25083 20220315 TOTAL
+## 7           OTHER       OTHER              2       1854 20220315 TOTAL
+## 8    JO JORGENSEN LIBERTARIAN             25       1174 20220315 TOTAL
+## 9     JOHN MCCAIN  REPUBLICAN           1423       2218 20220315 TOTAL
+## 10   BARACK OBAMA    DEMOCRAT           1241       4506 20220315 TOTAL</code></pre>
 </div>
 <div id="data-cleaning-1" class="section level3">
 <h3>3.2 Data Cleaning</h3>
@@ -437,18 +437,18 @@ electiondf %&gt;% sample_n(10)</code></pre>
 <pre class="r"><code>electiondf %&gt;%
     filter(year == 2004 | year == 2008) %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##   year         state state_po county_name county_fips       office
-## 1 2008         TEXAS       TX    MAVERICK       48323 US PRESIDENT
-## 2 2008       INDIANA       IN      HOWARD       18067 US PRESIDENT
-## 3 2008 WEST VIRGINIA       WV     RALEIGH       54081 US PRESIDENT
-## 4 2004      MISSOURI       MO   BOLLINGER       29017 US PRESIDENT
-## 5 2008       ALABAMA       AL     JACKSON        1071 US PRESIDENT
-##        candidate      party candidatevotes totalvotes  version  mode
-## 1          OTHER      OTHER             69      10939 20220315 TOTAL
-## 2          OTHER      OTHER            505      38624 20220315 TOTAL
-## 3    JOHN MCCAIN REPUBLICAN          17548      28259 20220315 TOTAL
-## 4 GEORGE W. BUSH REPUBLICAN           4102       5895 20220315 TOTAL
-## 5   BARACK OBAMA   DEMOCRAT           6374      20874 20220315 TOTAL</code></pre>
+<pre><code>##   year          state state_po county_name county_fips       office
+## 1 2008         ALASKA       AK DISTRICT 28        2028 US PRESIDENT
+## 2 2004 SOUTH CAROLINA       SC    RICHLAND       45079 US PRESIDENT
+## 3 2008           OHIO       OH   JEFFERSON       39081 US PRESIDENT
+## 4 2004 NORTH CAROLINA       NC       MACON       37113 US PRESIDENT
+## 5 2004    MISSISSIPPI       MS      COPIAH       28029 US PRESIDENT
+##      candidate    party candidatevotes totalvotes  version  mode
+## 1 BARACK OBAMA DEMOCRAT           3642       9792 20220315 TOTAL
+## 2   JOHN KERRY DEMOCRAT          76283     133801 20220315 TOTAL
+## 3 BARACK OBAMA DEMOCRAT          17635      35939 20220315 TOTAL
+## 4   JOHN KERRY DEMOCRAT           5489      15024 20220315 TOTAL
+## 5   JOHN KERRY DEMOCRAT           4902      11272 20220315 TOTAL</code></pre>
 <p>We can gather all votes in 2004 and 2008 per county via the pivot
 function:</p>
 <pre class="r"><code>votestimeframe &lt;- electiondf %&gt;%
@@ -637,7 +637,9 @@ with_lat_long &lt;- read.csv(&quot;../../data_cleaned/swing_interest_vs_electora
     arrange(lat, long)
 with_corr &lt;- with_lat_long %&gt;%
     filter(!is.na(change_query_incidence) &amp; !is.na(swing)) %&gt;%
-    (\(df) df %&gt;% mutate(local_slope = (1:nrow(df)) %&gt;% map(\(row_num) get_local_slope(df, row_num))))
+    (\(df) df %&gt;% mutate(local_slope = (1:nrow(df)) %&gt;% map(\(row_num) get_local_slope(df, row_num)))) %&gt;%
+    filter(local_slope != Inf &amp; local_slope != -Inf)
+
 with_corr %&gt;% select(change_query_incidence, swing, local_slope, lat, long) %&gt;% head(10)</code></pre>
 <pre><code>##    change_query_incidence        swing   local_slope      lat       long
 ## 1                       5  0.173671100    0.04705234 21.30988 -157.85814
@@ -743,7 +745,9 @@ with_lat_long.2 &lt;- read.csv(&quot;../../data_cleaned/swing_interest_vs_electo
     arrange(lat, long)
 with_corr.2 &lt;- with_lat_long.2 %&gt;%
     filter(!is.na(change_query_incidence) &amp; !is.na(swing)) %&gt;%
-    (\(df) df %&gt;% mutate(local_slope = (1:(nrow(df)) |&gt; purrr::map(\(row_num) get_local_slope(df, row_num)))))
+    (\(df) df %&gt;% mutate(local_slope = (1:(nrow(df)) |&gt; purrr::map(\(row_num) get_local_slope(df, row_num))))) %&gt;%
+    filter(local_slope != Inf &amp; local_slope != -Inf)
+
 with_corr.2 %&gt;% select(change_query_incidence, swing, local_slope, lat, long) %&gt;% head(10)</code></pre>
 <pre><code>##    change_query_incidence      swing  local_slope      lat       long
 ## 1                       1 0.13753727 -0.001375674 21.30988 -157.85814

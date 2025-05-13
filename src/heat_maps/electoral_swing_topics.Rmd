@@ -155,7 +155,9 @@ with_lat_long <- read.csv("../../data_cleaned/swing_interest_vs_electoral_04_12_
     arrange(lat, long)
 with_corr <- with_lat_long %>%
     filter(!is.na(change_query_incidence) & !is.na(swing)) %>%
-    (\(df) df %>% mutate(local_slope = (1:nrow(df)) %>% map(\(row_num) get_local_slope(df, row_num))))
+    (\(df) df %>% mutate(local_slope = (1:nrow(df)) %>% map(\(row_num) get_local_slope(df, row_num)))) %>%
+    filter(local_slope != Inf & local_slope != -Inf)
+
 with_corr %>% select(change_query_incidence, swing, local_slope, lat, long) %>% head(10)
 ```
 
@@ -239,7 +241,9 @@ with_lat_long.2 <- read.csv("../../data_cleaned/swing_interest_vs_electoral_08_2
     arrange(lat, long)
 with_corr.2 <- with_lat_long.2 %>%
     filter(!is.na(change_query_incidence) & !is.na(swing)) %>%
-    (\(df) df %>% mutate(local_slope = (1:(nrow(df)) |> purrr::map(\(row_num) get_local_slope(df, row_num)))))
+    (\(df) df %>% mutate(local_slope = (1:(nrow(df)) |> purrr::map(\(row_num) get_local_slope(df, row_num))))) %>%
+    filter(local_slope != Inf & local_slope != -Inf)
+
 with_corr.2 %>% select(change_query_incidence, swing, local_slope, lat, long) %>% head(10)
 
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
