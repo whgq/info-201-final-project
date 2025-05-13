@@ -165,11 +165,12 @@ Now, we generate the heatmap.
 ```{r}
 library(maps)
 library(ggplot2)
+library(scales)
 
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
-  geom_point(data = with_corr %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope)), alpha = 1) +
-  scale_color_continuous(low = "blue", high = "red") +
+  geom_point(data = with_corr %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope), alpha = 1)) +
+  scale_colour_gradient(low = "blue", high = "red") +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
     color = "Local Correlation Between\nSearch Interest Change for\n\"Immigration\" and Election Results"
@@ -221,6 +222,7 @@ We cache this data for convenience.
 library(maps)
 library(ggplot2)
 library(purrr)
+library(scales)
 
 get_local_slope <- function(df, row_number, n = 5) {
   # Assumes df is sorted by lat, long
@@ -242,8 +244,8 @@ with_corr.2 %>% select(change_query_incidence, swing, local_slope, lat, long) %>
 
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
-  geom_point(data = with_corr.2 %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope)), alpha = 1) +
-  scale_color_continuous(low = "blue", high = "red") +
+  geom_point(data = with_corr.2 %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope), alpha = 1)) +
+  scale_color_gradient(low = "blue", high = "red") +
   theme_minimal() +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2008 - 2020",
