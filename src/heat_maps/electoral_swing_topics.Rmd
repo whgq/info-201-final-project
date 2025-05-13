@@ -52,7 +52,6 @@ We can gather all votes in 2004 and 2008 per county via the pivot function:
 
 ```{r}
 votestimeframe <- electiondf %>%
-  # Only interested in vote counts for 2004 or 2008
   select(year, state, county_name, party, office, candidatevotes, totalvotes) %>%
   # Only get rows where the candidates won
   group_by(year, state, county_name, office) %>%
@@ -164,18 +163,94 @@ Looks good.
 Now, we generate the heatmap.
 
 ```{r}
-library(biscale)
 library(maps)
 library(ggplot2)
-library(scales)
 
-ggplot(data = map_data("state") %>% filter(long > -140)) +
+plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
   geom_point(data = with_corr %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope)), alpha = 1) +
   scale_color_continuous(low = "blue", high = "red") +
-  theme_minimal() +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
-    color = "Local Correlation Between Search Interest Change for \"Immigration\" and Election Results"
-  )
+    color = "Local Correlation Between\nSearch Interest Change for\n\"Immigration\" and Election Results"
+  ) +
+  theme(text = element_text(size = 8))
+
+ggsave("election_04_to_2012_heat_map_query_change_election_result.png")
+
+plot
+```
+
+
+### 5.3 Comparison to 2020 - 2024 change
+
+Here, we generate the same heatmap, but for the 2020 - 2024 election.
+
+
+```{r}
+library(fuzzyjoin)
+
+interest_swing_08_12_16_20 <- change_time_period("08-12", "16-20") %>% mutate(county = toupper(DMA)) %>% select(county, change_query_incidence)
+swing_county <- votestimeframe %>%
+    group_by(state, county_name, office) %>%
+    summarise(swing = (.data[["candidatevotes_2020"]] / .data[["totalvotes_2016"]]) - (.data[["candidatevotes_2008"]] / .data[["totalvotes_2008"]])) %>%
+    mutate(county = county_name) %>%
+    select(county, swing)
+
+regex_inner_join(interest_swing_08_12_16_20, swing_county, by = "county") %>% head(10)
+```
+
+Now, we geocode the data.
+
+```{r}
+#library(ggmap)
+
+#register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE
+#)
+#with_lat_long <- regex_inner_join(interest_swing_08_12_16_20, swing_county, by = "county") %>%
+#    select(county = county.y, swing, change_query_incidence, state) %>%
+#    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
+
+#with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_08_20_lat_long.csv")
+#with_lat_long %>% head(10)
+```
+
+We cache this data for convenience.
+
+```{r}
+library(maps)
+library(ggplot2)
+library(purrr)
+
+get_local_slope <- function(df, row_number, n = 5) {
+  # Assumes df is sorted by lat, long
+  below <- df[max(c(1, row_number - (n %/% 2))):row_number, ]
+  above <- df[row_number:min(c((row_number + n / 2), nrow(df))), ]
+  all = rbind(below, above)
+
+  model <- lm(swing ~ change_query_incidence, data = all)
+  coef(model)[["change_query_incidence"]]
+}
+
+with_lat_long.2 <- read.csv("../../data_cleaned/swing_interest_vs_electoral_08_20_lat_long.csv") %>%
+    mutate(lat = lat_long.lat, long = lat_long.lon) %>%
+    arrange(lat, long)
+with_corr.2 <- with_lat_long.2 %>%
+    filter(!is.na(change_query_incidence) & !is.na(swing)) %>%
+    (\(df) df %>% mutate(local_slope = (1:(nrow(df)) |> purrr::map(\(row_num) get_local_slope(df, row_num)))))
+with_corr.2 %>% select(change_query_incidence, swing, local_slope, lat, long) %>% head(10)
+
+plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
+  geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
+  geom_point(data = with_corr.2 %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope)), alpha = 1) +
+  scale_color_continuous(low = "blue", high = "red") +
+  theme_minimal() +
+  labs(
+    title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2008 - 2020",
+    color = "Local Correlation Between\nSearch Interest Change for\n\"Immigration\" and Election Results"
+  ) +
+  theme(text = element_text(size = 8))
+ggsave("election_08_to_2020_heat_map_query_change_election_result.png")
+
+plot
 ```
