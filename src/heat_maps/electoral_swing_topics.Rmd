@@ -127,7 +127,7 @@ Looks good.
 
 ### 5.2 The Heatmap
 
-To generate a heatmap, we get latitutde and longitudes for each county, then plot the values. We save this dataframe for convenience. To speed up knitting, we use our cached .csv file.
+To generate a heatmap, we get latitutde and longitudes for each county, then plot the slope of the linear regression at the 10 geographically nearest neighbors at a given pair of query_incidence and swing.
 
 ```{r}
 library(ggmap)
@@ -141,12 +141,27 @@ library(ggmap)
 #with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_04_12_lat_long.csv")
 #with_lat_long %>% head(10)
 
-with_lat_long <- read.csv("../../data_cleaned/swing_interest_vs_electoral_04_12_lat_long.csv")
-with_lat_long %>% filter(!is.na(change_query_incidence)) %>% head(10)
+get_local_slope <- function(df, row_number, n = 5) {
+  # Assumes df is sorted by lat, long
+  below <- df[max(c(1, row_number - (n %/% 2))):row_number, ]
+  above <- df[row_number:min(c((row_number + n / 2), nrow(df))), ]
+  all = rbind(below, above)
+
+  model <- lm(swing ~ change_query_incidence, data = all)
+  coef(model)[["change_query_incidence"]]
+}
+
+with_lat_long <- read.csv("../../data_cleaned/swing_interest_vs_electoral_04_12_lat_long.csv") %>%
+    mutate(lat = lat_long.lat, long = lat_long.lon) %>%
+    arrange(lat, long)
+with_corr <- with_lat_long %>%
+    filter(!is.na(change_query_incidence) & !is.na(swing)) %>%
+    (\(df) df %>% mutate(local_slope = (1:nrow(df)) %>% map(\(row_num) get_local_slope(df, row_num))))
+with_corr %>% select(change_query_incidence, swing, local_slope, lat, long) %>% head(10)
 ```
 
 Looks good.
-Now, we generate a bivariate heatmap. We followed this guide to generate the map: [Bivarite Mapping with ggplot2](https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html).
+Now, we generate the heatmap.
 
 ```{r}
 library(biscale)
@@ -154,16 +169,13 @@ library(maps)
 library(ggplot2)
 library(scales)
 
-classified <- with_lat_long %>%
-    bi_class(x = change_query_incidence, y = swing, style = "equal", dim = 2) %>%
-    mutate("long" = lat_long.lon, "lat" = lat_long.lat)
-
 ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
-  geom_point(data = classified %>% filter(long > -140), aes(x = long, y = lat, color = bi_class), alpha = 1) +
-  bi_scale_fill(pal = "GrPink", dim = 2) +
+  geom_point(data = with_corr %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(local_slope)), alpha = 1) +
+  scale_color_continuous(low = "blue", high = "red") +
+  theme_minimal() +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
-  ) +
-  bi_theme(legend.position = "none", title = element_text(size = 8))
+    color = "Local Correlation Between Search Interest Change for \"Immigration\" and Election Results"
+  )
 ```

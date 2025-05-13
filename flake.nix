@@ -31,6 +31,9 @@
           maps
           mapproj
           scales
+          FNN
+          pracma
+          numDeriv
         ];
         shellHook = ''
           function knit() {
