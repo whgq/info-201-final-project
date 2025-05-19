@@ -34,7 +34,7 @@
           purrr
           tidyr
         ];
-        knit = name: pkgs.stdenv.mkDerivation {
+        knit = path: pkgs.stdenv.mkDerivation {
           name = "knit";
           src = ./.;
           buildInputs = deps ++ (with pkgs; [
@@ -42,19 +42,18 @@
           ]);
           # This produces ${name}.html
           buildPhase = ''
-            ${pkgs.R}/bin/R -e "rmarkdown::render('${name}.Rmd', output_format = 'html_document')"
+            ${pkgs.R}/bin/R -e "rmarkdown::render('${path}.Rmd', output_format = 'html_document')"
           '';
           installPhase = ''
             mkdir $out
-            mv ${name}.html $out/
+            mv ${path}.html $out/
           '';
         };
         serve = name: pkgs.writeShellScriptBin "serve" ''
           ${pkgs.http-server}/bin/http-server ${knit name}/
         '';
         serve-live = pkgs.writeShellScriptBin "serve-live" ''
-          name="$(basename "$1" .Rmd)"
-          ${pkgs.watchexec}/bin/watchexec -w "$1" --restart -- nix run .#"$name"
+          ${pkgs.watchexec}/bin/watchexec -w "$1" --restart -- nix run .#"$1"
         '';
     in
     {
@@ -62,12 +61,17 @@
         nativeBuildInputs = deps ++ [ pkgs.rPackages.languageserver ];
       };
       apps = (with builtins;
-        let rmds = (filter (fname: match ".*\\.Rmd$" fname != null) ((attrNames (readDir ./src/heat_maps)) ++ (attrNames (readDir ./src/data_exploration)))); in
-          listToAttrs (map (fname: let ftrunk = replaceStrings [".Rmd"] [""] fname; in {
-            name = ftrunk;
+        let rmds = (filter
+          (fname: match ".*\\.Rmd$" fname != null)
+          (
+            (map (fname: "./src/heat_maps/${fname}") (attrNames (readDir ./src/heat_maps))) ++
+            (map (fname: "./src/data_exploration/${fname}") (attrNames (readDir ./src/data_exploration)))
+          )); in
+          listToAttrs (map (fname: {
+            name = fname;
             value = {
               type = "app";
-              program = "${serve ftrunk}/bin/serve";
+              program = "${serve fname}/bin/serve";
             };
       }) rmds)) // {
         serve-live = {
