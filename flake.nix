@@ -62,7 +62,7 @@
         nativeBuildInputs = deps ++ [ pkgs.rPackages.languageserver ];
       };
       apps = (with builtins;
-        let rmds = (filter (fname: match ".*\\.Rmd$" fname != null) (attrNames (readDir ./.))); in
+        let rmds = (filter (fname: match ".*\\.Rmd$" fname != null) ((attrNames (readDir ./src/heat_maps)) ++ (attrNames (readDir ./src/data_exploration)))); in
           listToAttrs (map (fname: let ftrunk = replaceStrings [".Rmd"] [""] fname; in {
             name = ftrunk;
             value = {
