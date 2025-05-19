@@ -7,43 +7,73 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
-    let pkgs = nixpkgs.legacyPackages.${system}; in
-    {
-      devShells.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; with rPackages; [
+    let pkgs = nixpkgs.legacyPackages.${system};
+        deps = with pkgs; with rPackages; [
           R
           dplyr
           ggplot2
           readxl
           readr
           stringr
-          pkgs.pandoc
-          rPackages.pandoc
-          firefox
-          languageserver
           purrr
           tidyr
           ggmap
           fuzzyjoin
-          biscale
-          sf
-          cowplot
           maps
           mapproj
           scales
           FNN
           pracma
           numDeriv
+          R
+          rmarkdown
+          dplyr
+          ggplot2
+          readr
+          stringr
+          purrr
+          tidyr
         ];
-        shellHook = ''
-          function knit() {
-            ${pkgs.R}/bin/R -e "rmarkdown::render('$1')"
-            in_path=''${1}
-            html_path="''${in_path%.*}.html"
-            full_path="$(pwd)/$html_path"
-            ${pkgs.firefox}/bin/firefox "file://$full_path"
-          }
+        knit = name: pkgs.stdenv.mkDerivation {
+          name = "knit";
+          src = ./.;
+          buildInputs = deps ++ (with pkgs; [
+            pandoc
+          ]);
+          # This produces ${name}.html
+          buildPhase = ''
+            ${pkgs.R}/bin/R -e "rmarkdown::render('${name}.Rmd', output_format = 'html_document')"
+          '';
+          installPhase = ''
+            mkdir $out
+            mv ${name}.html $out/
+          '';
+        };
+        serve = name: pkgs.writeShellScriptBin "serve" ''
+          ${pkgs.http-server}/bin/http-server ${knit name}/
         '';
+        serve-live = pkgs.writeShellScriptBin "serve-live" ''
+          name="$(basename "$1" .Rmd)"
+          ${pkgs.watchexec}/bin/watchexec -w "$1" --restart -- nix run .#"$name"
+        '';
+    in
+    {
+      devShells.default = pkgs.mkShell {
+        nativeBuildInputs = deps ++ [ pkgs.rPackages.languageserver ];
+      };
+      apps = (with builtins;
+        let rmds = (filter (fname: match ".*\\.Rmd$" fname != null) (attrNames (readDir ./.))); in
+          listToAttrs (map (fname: let ftrunk = replaceStrings [".Rmd"] [""] fname; in {
+            name = ftrunk;
+            value = {
+              type = "app";
+              program = "${serve ftrunk}/bin/serve";
+            };
+      }) rmds)) // {
+        serve-live = {
+          type = "app";
+          program = "${serve-live}/bin/serve-live";
+        };
       };
     }
   );
