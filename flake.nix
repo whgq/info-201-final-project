@@ -44,20 +44,21 @@
             buildInputs = deps ++ (with pkgs; [ pandoc ]);
             # This produces ${name}.html
             buildPhase = ''
-              ${pkgs.R}/bin/R -e "rmarkdown::render('${path}', output_format = 'html_document')"
+              ${pkgs.R}/bin/R -e "rmarkdown::render('./src/heat_maps/${path}.Rmd', output_format = 'html_document')"
             '';
             installPhase = ''
               mkdir $out
-              mv ${path}.html $out/
+              mv ./src/heat_maps/${path}.html $out/
             '';
           };
-        serve = name:
+        serve = path:
           pkgs.writeShellScriptBin "serve" ''
-            ${pkgs.http-server}/bin/http-server ${knit name}/
+            ${pkgs.http-server}/bin/http-server ${knit path}/
           '';
         serve-live = pkgs.writeShellScriptBin "serve-live" ''
-          ${pkgs.watchexec}/bin/watchexec -w "$1" --restart -- nix run .#"$(basename $1)"
-        '';
+            fname=$(basename "$1")
+            ${pkgs.watchexec}/bin/watchexec -w "$1" --restart -- nix run .#''${fname%.*}
+          '';
       in {
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = deps ++ [ pkgs.rPackages.languageserver ];
@@ -70,10 +71,10 @@
                 ++ (map (fname: "./src/data_exploration/${fname}")
                   (attrNames (readDir ./src/data_exploration)))));
           in listToAttrs (map (fname: let ftrunk = builtins.replaceStrings [".Rmd"] [""] (baseNameOf fname); in {
-            name = baseNameOf fname;
+            name = ftrunk;
             value = {
               type = "app";
-              program = "${serve (baseNameOf fname)}/bin/serve";
+              program = "${serve ftrunk}/bin/serve";
             };
           }) rmds)) // {
             serve-live = {
