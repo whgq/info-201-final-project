@@ -57,12 +57,11 @@ votestimeframe <- electiondf %>%
   filter(office == "US PRESIDENT") %>%
   # Collapse votes in year n, n1 into columns n, n1
   group_by(year, state, county_name, office, party) %>%
-  summarise(year, state, county_name, margin = (candidatevotes / totalvotes) * 100) %>%
+  summarise(year, state, county_name, candidatevotes) %>%
   ungroup() %>%
-  filter(party == "REPUBLICAN") %>%
-  distinct(state, county_name, year, .keep_all = TRUE) %>%
-  select(state, county_name, year, margin) %>%
-  pivot_wider(id_cols = c(state, county_name), names_from = year, values_from = c(margin))
+  distinct(party, state, county_name, year, .keep_all = TRUE) %>%
+  select(party, state, county_name, year, candidatevotes) %>%
+  pivot_wider(id_cols = c(state, county_name), names_from = c(party, year), values_from = c(candidatevotes))
 
 votestimeframe %>% head(10)
 ```
@@ -74,7 +73,7 @@ We can then calculate the swing like such:
 ```{r}
 votestimeframe %>%
     group_by(state, county_name) %>%
-    summarise(swing = .data[["2008"]] - .data[["2004"]]) %>%
+    summarise(swing = .data[["REPUBLICAN_2008"]] - .data[["REPUBLICAN_2004"]]) %>%
     head(10)
 ```
 
@@ -118,7 +117,7 @@ library(fuzzyjoin)
 interest_swing_08_12 <- change_time_period("08-12", "04-08") %>% mutate(county = toupper(DMA)) %>% select(county, change_query_incidence)
 swing_county <- votestimeframe %>%
     group_by(state, county_name) %>%
-    summarise(swing = .data[["2012"]] - .data[["2004"]]) %>%
+    summarise(swing = abs(.data[["REPUBLICAN_2012"]] / (.data[["REPUBLICAN_2012"]] + .data[["DEMOCRAT_2012"]]) - .data[["REPUBLICAN_2004"]] / (.data[["REPUBLICAN_2004"]] + .data[["DEMOCRAT_2004"]]))) %>%
     mutate(county = county_name) %>%
     select(county, swing)
 
@@ -163,13 +162,13 @@ library(scales)
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
   geom_point(data = with_corr %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(swing), size = as.numeric(change_query_incidence))) +
-  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0, limits=c(-0.05, 0.075)) +
+  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0, limits=c(-0.5, 0.5)) +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
-    color = "Swing in Election Results (Red = More Republican)",
+    color = "Swing in Election Results (Red = Became More Republican)",
     size = "Change in Search Interest for \"Immigration\"",
   ) +
-  scale_size_binned(range = c(0.5, 3)) +
+  scale_size_binned(n.breaks = 5, range = c(0.25, 2.5), limits = c(-50, 100)) +
   theme(text = element_text(size = 8), legend.position = "bottom")
 
 ggsave("election_04_to_2012_heat_map_query_change_election_result.png", bg = "white")
@@ -189,7 +188,7 @@ library(fuzzyjoin)
 interest_swing_08_12_16_20 <- change_time_period("08-12", "16-20") %>% mutate(county = toupper(DMA)) %>% select(county, change_query_incidence)
 swing_county <- votestimeframe %>%
     group_by(state, county_name) %>%
-    summarise(swing = .data[["2016"]] - .data[["2008"]]) %>%
+    summarise(swing = abs(.data[["REPUBLICAN_2016"]] / (.data[["REPUBLICAN_2016"]] + .data[["DEMOCRAT_2016"]]) - .data[["REPUBLICAN_2008"]] / (.data[["REPUBLICAN_2008"]] + .data[["DEMOCRAT_2008"]]))) %>%
     mutate(county = county_name) %>%
     select(county, swing)
 
@@ -230,13 +229,13 @@ with_corr.2 %>% select(change_query_incidence, swing, lat, long) %>% head(10)
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
   geom_point(data = with_corr.2 %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(swing), size = as.numeric(change_query_incidence))) +
-  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0, limits=c(-0.05, 0.075)) +
+  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0, limits=c(-0.5, 0.5)) +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2008 - 2016",
-    color = "Swing in Election Results (Red = More Republican)",
+    color = "Swing in Election Results (Red = Became More Republican)",
     size = "Change in Search Interest for \"Immigration\"",
   ) +
-  scale_size_binned(range = c(0.5, 3)) +
+  scale_size_binned(n.breaks = 5,range = c(0.25, 2.5), limits = c(-50, 100)) +
   theme(text = element_text(size = 8), legend.position = "bottom")
 
 
