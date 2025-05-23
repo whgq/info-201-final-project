@@ -85,7 +85,7 @@ Now, we calculate the change in average query incidence from one timeframe to th
 
 ```{r}
 trendsdf %>%
-  pivot_wider(id_cols = c(Region, City, DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
+  pivot_wider(id_cols = c(DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
   (\(df) df %>% mutate("change_04-12" = df[["08-12"]] - df[["04-08"]])) %>%
   head(10)
 ```
@@ -97,11 +97,12 @@ Now, we make a reusable function which calculates the change over a given time p
 ```{r}
 change_time_period <- function(date1, date2) {
   trendsdf %>%
-  pivot_wider(id_cols = c(Region, City, DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
-  (\(df) df %>% mutate("change_query_incidence" = df[[date1]] - df[[date2]]))
+    pivot_wider(id_cols = c(DMA), names_from = daterange, values_from = query_incidence, values_fn = max) %>%
+    mutate("change_query_incidence" = .data[[date1]] - .data[[date2]])
 }
 
 change_time_period("08-12", "04-08") %>% head(10)
+change_time_period("16-17", "19-20") %>% head(10)
 ```
 
 ## 5. Heatmap: Query Incidence Swing vs Electoral Swing (2004 election to 2012 election)
@@ -117,7 +118,7 @@ library(fuzzyjoin)
 interest_swing_08_12 <- change_time_period("08-12", "04-08") %>% mutate(county = toupper(DMA)) %>% select(county, change_query_incidence)
 swing_county <- votestimeframe %>%
     group_by(state, county_name) %>%
-    summarise(swing = abs(.data[["REPUBLICAN_2012"]] / (.data[["REPUBLICAN_2012"]] + .data[["DEMOCRAT_2012"]]) - .data[["REPUBLICAN_2004"]] / (.data[["REPUBLICAN_2004"]] + .data[["DEMOCRAT_2004"]]))) %>%
+    summarise(swing = .data[["REPUBLICAN_2012"]] / (.data[["REPUBLICAN_2012"]] + .data[["DEMOCRAT_2012"]]) - .data[["REPUBLICAN_2004"]] / (.data[["REPUBLICAN_2004"]] + .data[["DEMOCRAT_2004"]])) %>%
     mutate(county = county_name) %>%
     select(county, swing)
 
@@ -136,8 +137,8 @@ library(ggmap)
 #register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE)
 
 #with_lat_long <- regex_inner_join(interest_swing_08_12, swing_county, by = "county") %>%
-#    select(county = county.y, swing, change_query_incidence, state) %>%
-#    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
+    #select(county = county.y, swing, change_query_incidence, state) %>%
+    #(\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
 
 #with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_04_12_lat_long.csv")
 #with_lat_long %>% head(10)
@@ -162,7 +163,7 @@ library(scales)
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
   geom_point(data = with_corr %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(swing), alpha = as.numeric(change_query_incidence), size = as.numeric(change_query_incidence))) +
-  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0, limits=c(-0.5, 0.5)) +
+  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0) +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2004 - 2012",
     color = "Swing in Election Results (Red = Became More Republican)",
@@ -200,13 +201,12 @@ regex_inner_join(interest_swing_08_12_16_20, swing_county, by = "county") %>% he
 Now, we geocode the data.
 
 ```{r}
-#library(ggmap)
+library(ggmap)
 
-#register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE
-#)
+#register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE)
 #with_lat_long <- regex_inner_join(interest_swing_08_12_16_20, swing_county, by = "county") %>%
-#    select(county = county.y, swing, change_query_incidence, state) %>%
-#    (\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
+    #select(county = county.y, swing, change_query_incidence, state) %>%
+    #(\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
 
 #with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_08_20_lat_long.csv")
 #with_lat_long %>% head(10)
@@ -231,7 +231,7 @@ with_corr.2 %>% select(change_query_incidence, swing, lat, long) %>% head(10)
 plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
   geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
   geom_point(data = with_corr.2 %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(swing), alpha = as.numeric(change_query_incidence), size = as.numeric(change_query_incidence))) +
-  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0, limits=c(-0.5, 0.5)) +
+  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0) +
   labs(
     title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2008 - 2016",
     color = "Swing in Election Results (Red = Became More Republican)",
@@ -244,6 +244,74 @@ plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
 
 
 ggsave("election_08_to_2020_heat_map_query_change_election_result.png", bg = "white")
+
+plot
+```
+
+### 5.4 Comparison to 2016 - 2020 Change
+
+Here, we generate the same heatmap, but for elections from 2016 - 2020.
+
+
+```{r}
+library(fuzzyjoin)
+
+interest_swing_16_20 <- change_time_period("16-17", "19-20") %>% mutate(county = toupper(DMA)) %>% select(county, change_query_incidence)
+swing_county <- votestimeframe %>%
+    group_by(state, county_name) %>%
+    summarise(swing = .data[["REPUBLICAN_2020"]] / (.data[["REPUBLICAN_2020"]] + .data[["DEMOCRAT_2020"]]) - .data[["REPUBLICAN_2016"]] / (.data[["REPUBLICAN_2016"]] + .data[["DEMOCRAT_2016"]])) %>%
+    mutate(county = county_name) %>%
+    select(county, swing)
+
+regex_inner_join(interest_swing_16_20, swing_county, by = "county") %>% filter(!is.na(change_query_incidence)) %>% head(10)
+```
+
+Now, we geocode the data.
+
+```{r}
+library(ggmap)
+
+#register_google(key = Sys.getenv("GOOGLE_API_KEY"), write = FALSE)
+#with_lat_long <- regex_inner_join(interest_swing_16_20, swing_county, by = "county") %>%
+    #select(county = county.y, swing, change_query_incidence, state) %>%
+    #(\(df) df %>% mutate(lat_long = geocode(output = "latlon", location = paste(df$county, ", ", df$state), method = "census")))
+
+#with_lat_long %>% write.csv("../../data_cleaned/swing_interest_vs_electoral_16-20_lat_long.csv")
+#with_lat_long %>% head(10)
+```
+
+We cache this data for convenience.
+
+```{r, fig.height = 12, fig.width = 16.8}
+library(maps)
+library(ggplot2)
+library(purrr)
+library(scales)
+
+with_lat_long.2 <- read.csv("../../data_cleaned/swing_interest_vs_electoral_16-20_lat_long.csv") %>%
+    mutate(lat = lat_long.lat, long = lat_long.lon) %>%
+    arrange(lat, long)
+with_corr.2 <- with_lat_long.2 %>%
+    filter(!is.na(change_query_incidence) & !is.na(swing))
+
+with_corr.2 %>% select(change_query_incidence, swing, lat, long) %>% head(10)
+
+plot <- ggplot(data = map_data("state") %>% filter(long > -140)) +
+  geom_polygon(aes(x = long, y = lat, group = group), color = "white") +
+  geom_point(data = with_corr.2 %>% filter(long > -140), aes(x = long, y = lat, color = as.numeric(swing), alpha = as.numeric(change_query_incidence), size = as.numeric(change_query_incidence))) +
+  scale_colour_gradient2(low = "blue", high = "red", mid = "gray", midpoint = 0) +
+  labs(
+    title = "Change in Search Interest for \"Immigration\" vs Electoral Swing from 2016 - 2020",
+    color = "Swing in Election Results (Red = Became More Republican)",
+    size = "Change in Search Interest for \"Immigration\"",
+    ) +
+  guides(alpha = "none") +
+  scale_alpha(range = c(0.05, 1), limits = c(-30, 20)) +
+  scale_size_binned(n.breaks = 5, range = c(0.25, 5), limits = c(-50, 100)) +
+  theme(text = element_text(size = 13), legend.text = element_text(size = 8), legend.position = "bottom")
+
+
+ggsave("election_16_to_2020_heat_map_query_change_election_result.png", bg = "white")
 
 plot
 ```

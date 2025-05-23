@@ -36,6 +36,7 @@
             stringr
             purrr
             tidyr
+            lubridate
           ];
         knit = path:
           pkgs.stdenv.mkDerivation {
@@ -61,7 +62,7 @@
           '';
       in {
         devShells.default = pkgs.mkShell {
-          nativeBuildInputs = deps ++ [ pkgs.rPackages.languageserver ];
+          nativeBuildInputs = deps ++ [ pkgs.rPackages.languageserver pkgs.pandoc ];
         };
         apps = (with builtins;
           let
