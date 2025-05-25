@@ -1,0 +1,315 @@
+---
+title: "electoral_deportation_results"
+author: "Winston Qi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup ,include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1 Overview
+How are presidential election results correlated with immigration policy (measured via deporations and encounters at the border)? - Winston
+
+DO: 
+- Change in votes vs deportations 
+- Change in votes vs encounters
+- Change in border encounters vs deportations
+- apprehensions data set (encounters) vs removals (deportations)
+- Create variable border to determine border vs. nonborder states (make variable through mutate)
+- sample from aggregate data
+- Port of departure? (from deportation datasets)
+
+```{r}
+library(tidyverse)
+dp_df1 <- read_delim("../../data_cleaned/removals/2023-ICFO_42034_Removals_FY13-12_LESA-STU_FINAL- Redacted_raw.xlsx.csv.gz_1.csv.gz")
+#View(deport_ds1)
+dp_df2 <- read_delim("../../data_cleaned/removals/2023-ICFO_42034_Removals_FY13-12_LESA-STU_FINAL- Redacted_raw.xlsx.csv.gz_2.csv.gz")
+#View(deport_ds2)
+dp_df3 <- read_delim("../../data_cleaned/removals/2023-ICFO_42034_Removals_FY13-12_LESA-STU_FINAL- Redacted_raw.xlsx.csv.gz_3.csv.gz")
+
+app_df1 <- read_delim("../../data_cleaned/apprehensions_origins/Family Units apprehended along the SWB FY2000 Redacted_raw.xlsx.csv.gz_1.csv.gz")
+
+election_results <- read_delim("../../data_cleaned/harvard_election/countypres_2000-2020.csv")
+#View(election_results)
+```
+```{r}
+ice_rem <- read_delim("../../data_cleaned/removals/ICE_Removals_FY2012-FY2014-REDACTED_raw.xlsx.csv.gz_1.csv.gz")
+```
+
+## 2 Election results 2000-2020 
+
+```{r}
+election_results %>% 
+  select(year, party, candidatevotes) %>% 
+  summarize(year, party, candidatevotes) %>% 
+  sample_n(10) 
+  # 
+  # how many states voted for each party?
+  # ggplot(aes(year, candidatevotes, fill = party)) +
+  # geom_line()
+
+# mutate(tot_demvotes = sum(), tot_repvotes = sum(), tot_othervotes = sum())
+#
+
+election_results %>% 
+  select(year, party, candidatevotes) %>% 
+  summarize(year, party, candidatevotes = sum(candidatevotes)) %>% 
+  #  summarize(year, party %in% c("REPUBLICAN", "DEMOCRAT", "OTHER"), candidatevotes = sum(candidatevotes)) %>% 
+  #  summarize(party$"OTHER" == sum(party != "DEMOCRAT" || party != "REPUBLICAN")) %>% 
+  ggplot(aes(x = year, y = candidatevotes, fill = party)) +
+  geom_col()
+
+# election_results %>% 
+#   select(year, party) %>% 
+#   ggplot(aes(x = year, )) +
+#   geom_bar()
+
+```
+
+```{r}
+votestimeframe <- election_results %>% 
+  select(year, state, county_name, party, office, candidatevotes, totalvotes) %>%
+  # select only these cat. variables
+  filter(office == "US PRESIDENT") %>% 
+  group_by(year, state, county_name, party, office) %>% 
+  summarise(year, state, county_name, candidatevotes) %>%
+  ungroup() %>%
+  distinct(party, state, county_name, year, .keep_all = TRUE) %>%
+  select(party, state, county_name, year, candidatevotes) %>%
+  pivot_wider(id_cols = c(state, county_name), names_from = c(party, year), values_from = c(candidatevotes))
+  
+votestimeframe %>% 
+  head(10)
+  #sample_n(10)
+```
+
+
+Separate data set including border variable (?):
+
+```{r}
+# include votestimeframe dataframe so when running code on rmarkdown console
+# it is called for the clean run and won't give an error 
+# nvm doesn't work
+
+# filter works finally
+bordervotes <- votestimeframe %>% 
+  filter(state %in% c("CALIFORNIA", "ARIZONA", "NEW MEXICO", "TEXAS")) %>% 
+  sample_n(10)
+bordervotes
+  
+
+# works yessss
+border_status <- votestimeframe %>% 
+  mutate(border = state %in%
+           c("CALIFORNIA", "ARIZONA",
+             "NEW MEXICO", "TEXAS"))
+border_status %>% 
+    sample_n(10)
+
+
+
+# works-ish (all states are non-border ATM), unique(border_status$border) only returns non-border"
+# border_status <- votestimeframe %>% 
+#   mutate(border = ifelse(state == state %in%
+#                            c("CALIFORNIA", "ARIZONA",
+#                              "NEW MEXICO", "TEXAS"),
+#                          "border", "non-border")) %>% 
+#   sample_n(10)
+# border_status
+
+  # str_detect(c("CALIFORNIA", "ARIZONA", "NEW MEXICO", "TEXAS")) %>% 
+  # head(5)
+
+# borderstates = c("CALIFORNIA", "ARIZONA", "NEW MEXICO", "TEXAS")
+# str_detect(votestimeframe$state, borderstates)
+
+#   mutate(border_state = ifelse(state == c("CALIFORNIA", "ARIZONA", "NEW MEXICO", "TEXAS"), "border", "non-border")) %>%
+#   sample_n(10)
+
+# California, Arizona, New Mexico, Texas
+# class(votestimeframe$state)
+```
+
+
+Same data manipulation with deportations and border encounters:
+
+FIND # OF DEPORTATIONS, APPREHENSIONS, & ENCOUNTERS BY YEAR
+CORRESPOND IT WITH ELECTION RESULTS
+```{r}
+# dp_df1 %>% 
+#   filter(na.rm = TRUE) %>% 
+#   dim()
+# sample_n()   ?
+
+
+# getting somewhere but not sure how ATM
+border_dp <- dp_df1 %>% 
+  select(contains(c("CA", "AZ", "TX"))) %>% 
+  #mutate(border = ...3 %in% contains(c("CA", "AZ", "TX"))) %>% 
+  # sample_n(10)
+  head(10)
+border_dp
+  #summarize()
+
+
+# break up into dates, specifically want years
+test_df <- read_delim("USBP Apprehensions FY2012_FORRELEASE_raw.csv")
+ice_rem_raw <- read_delim("ICE_Removals_FY2012-FY2014-REDACTED_raw.csv")
+# View(ice_rem_raw)
+# ok so the deportation data was kinda messed up
+# View(test_df)
+totaldep_by_year <- test_df %>% 
+  select(...8) %>% 
+  mutate(year = ...8 %in% c())
+
+
+# works
+# shows # of deportations in current given years
+totalice_by_year <- ice_rem_raw %>% 
+  select(...2) %>%  # , ...3
+  #as.Date() %>% 
+  #mutate(date = as.Date(...2, "%m/%d/%y")) %>% 
+  mutate(date = as_date(...2, format = "%m/%d/%Y")) %>% 
+  # finally got a working date variable
+  mutate(year = as.numeric(format(date, format = "%Y")),
+         month = as.numeric(format(date, format = "%m")),
+         day = as.numeric(format(date, format = "%d")))
+  #mutate(deports = nrow()) %>% 
+  # ok now working year, month, & day variables too
+totalice_by_year
+
+
+# works
+icedeports_by_yr <- totalice_by_year %>% 
+  select(year) %>% 
+  na.omit() %>% 
+  count(year) 
+  # finally got the correct function
+# %>% 
+#   mutate(n = as.double(icedeports_by_yr$n))
+  # this works but technically dont need bc change the variable type to double in pivot_longer
+
+  # thought this would work   
+  # mutate(deportations = count(year))
+  
+icedeports_by_yr
+
+# icedeports_by_yr %>% 
+#   mutate(n = as.double(icedeports_by_yr$n))
+# ok conversion to double worked?
+# yeah just need to store it in a variable
+
+#as.double(icedeports_by_yr$n)
+
+#icedeports_by_yr
+
+# why doesnt this work
+# Figured it out: use count()
+# unique(totalice_by_year$year) 
+#summarize(n = nrow())
+# unique(nrow(icedeports_by_yr))
+
+
+
+# get # of distinct years, then count how many deportations in each year
+# nrow(totalice_by_year$year == 2010)
+# 
+# ice_rem_raw %>% 
+#   pivot_wider() %>% 
+#   head(10)
+# unique(ice_rem_raw$`ERO-LESA Statistical Tracking Unit`)
+  # can also sort by border status
+
+
+# app_df1 %>% 
+  
+  #pivot longer? do it by year
+# check na.rm
+
+```
+
+Create plots with variables
+
+barplot?
+
+line/scatterplot of election results?
+
+properly format deportation dates, check dim aka how many occur between every election, if more occur during certain years perhaps a pattern
+
+
+
+line graph:
+x axis = time, y = count, fill/color = votes (dem/rep), deportations, encounters etc.
+graph difference in # of dem/rep votes?
+
+bar graph (election results):
+x axis (categories) = year, y = # of votes
+
+## 3 Deportations vs Election Results
+
+```{r}
+dem_votes <- election_results %>% 
+  select(year, party, candidatevotes) %>% 
+  filter(party %in% "DEMOCRAT") %>% 
+  group_by(year, party) %>% 
+  # think this worked? but # of total votes seems a bit 
+  # actually nvm that seems accurate
+  summarize(tot_votes = sum(candidatevotes))
+  #currently have total aggregate votes for democrats i think, now need to separate by year
+dem_votes
+
+rep_votes <- election_results %>% 
+  select(year, party, candidatevotes) %>% 
+  filter(party %in% "REPUBLICAN") %>% 
+  group_by(year, party) %>% 
+  summarize(tot_votes = sum(candidatevotes))
+rep_votes
+
+total_votes_by_yr <- rbind(dem_votes, rep_votes)
+# data.frame(dem_votes, rep_votes) kinda works
+# rbind is a bit better
+total_votes_by_yr
+
+# maybe pivot to wide or long form of data? so dem votes and rep votes r 2 columns
+wide_votes <- total_votes_by_yr %>% 
+  pivot_wider(id_cols = year, names_from = party, values_from = tot_votes)
+
+wide_votes
+# wow that worked
+
+dep_vs_votes <- rbind(wide_votes, icedeports_by_yr) %>% 
+  arrange(year)
+dep_vs_votes
+
+long_df <- dep_vs_votes %>% 
+    pivot_longer(cols = c("DEMOCRAT", "REPUBLICAN", "n"),
+                 names_to = "Number of:", names_transform = list(n = as.double),
+                 values_to = "number") %>% 
+  na.omit()
+
+long_df
+
+
+# put dem, rep, & n variables into one variable specifying variable type? e.g. dem_votes, rep_votes, deportations
+
+
+# total_votes_by_yr <- election_results %>% 
+#   select(year, party, candidatevotes) %>% 
+#   filter(party %in% c("DEMOCRAT", "REPUBLICAN")) %>% 
+#   mutate(tot_dem = sum())
+#   count(candidatevotes)
+# find out total # of votes for each party for each year
+# check votestimeframe
+# sum()
+
+str_replace(icedeports_by_yr[2,]) = "deportations"
+icedeports_by_yr
+  
+ggplot(long_df, aes(x = year, y = number, col = `Number of:`)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Deportations and votes, by year")
+```
+
