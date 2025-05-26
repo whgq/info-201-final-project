@@ -156,6 +156,14 @@ border_dp
 
 # break up into dates, specifically want years
 test_df <- read_delim("USBP Apprehensions FY2012_FORRELEASE_raw.csv")
+
+
+
+
+
+
+
+
 ice_rem_raw <- read_delim("ICE_Removals_FY2012-FY2014-REDACTED_raw.csv")
 # View(ice_rem_raw)
 # ok so the deportation data was kinda messed up
@@ -164,10 +172,42 @@ totaldep_by_year <- test_df %>%
   select(...8) %>% 
   mutate(year = ...8 %in% c())
 
+ice_rem_raw2 <- read_delim("2023-ICFO_42034_Removals_FY13-12_LESA-STU_FINAL- Redacted_raw.csv")
+View(ice_rem_raw2)
+
+ice_rem_raw2015 <- read_delim("ICE_Removals_FY2015-FY2023_YTD-REDACTED_raw.csv")
+View(ice_rem_raw2015)
+
+ice_rem_raw16_14 <- read_delim("2023-ICFO_42034_Removals_FY16-14_LESA-STU_FINAL_Redacted_raw.csv")
+View(ice_rem_raw16_14)
+
+ice_rem_raw19_17 <- read_delim("2023-ICFO_42034_Removals_FY19-17_LESA-STU_FINAL_Redacted_raw.csv")
+View(ice_rem_raw19_17)
+
+ice_rem_raw6 <- read_delim("")
+
+
+# date_sep <- function(data, date_col) {
+#   mutate(data, date = as_date(date_col, format = "%m/%d/%Y")) %>%
+#   mutate(year = as.numeric(format(date, format = "%Y")),
+#          month = as.numeric(format(date, format = "%m")),
+#          day = as.numeric(format(date, format = "%d")))
+# }
+# 
+# 
+# 
+# date_sep(ice_rem_raw, ice_rem_raw$...2)
+# 
+# totalice_yr11_12_test <- ice_rem_raw %>% 
+#   select(...2) %>% 
+#   date_sep(,...2) %>% 
+#   select(year, month, day, date)
+# 
+# totalice_yr11_12_test
 
 # works
 # shows # of deportations in current given years
-totalice_by_year <- ice_rem_raw %>% 
+totalice_yr11_12 <- ice_rem_raw %>% 
   select(...2) %>%  # , ...3
   #as.Date() %>% 
   #mutate(date = as.Date(...2, "%m/%d/%y")) %>% 
@@ -175,18 +215,80 @@ totalice_by_year <- ice_rem_raw %>%
   # finally got a working date variable
   mutate(year = as.numeric(format(date, format = "%Y")),
          month = as.numeric(format(date, format = "%m")),
-         day = as.numeric(format(date, format = "%d")))
+         day = as.numeric(format(date, format = "%d"))) %>% 
+  select(year, month, day, date)
   #mutate(deports = nrow()) %>% 
   # ok now working year, month, & day variables too
-totalice_by_year
 
+totalice_yr11_12
+# function
+
+
+
+
+totalice_yr13 <- ice_rem_raw2 %>% 
+  select(`ERO-LESA Statistical Tracking Unit`) %>% 
+  mutate(date = as_date(`ERO-LESA Statistical Tracking Unit`, format = "%m/%d/%Y")) %>% 
+  mutate(year = as.numeric(format(date, format = "%Y")),
+         month = as.numeric(format(date, format = "%m")),
+         day = as.numeric(format(date, format = "%d"))) %>% 
+  select(year, month, day, date)
+
+totalice_yr13
+
+
+totalice_yr14_15 <- ice_rem_raw2015 %>% 
+  select(...3) %>% 
+  mutate(date = as_date(...3, format = "%m/%d/%Y")) %>% 
+  mutate(year = as.numeric(format(date, format = "%Y")),
+         month = as.numeric(format(date, format = "%m")),
+         day = as.numeric(format(date, format = "%d"))) %>% 
+  select(year, month, day, date)
+ 
+totalice_yr16_14 <- ice_rem_raw16_14 %>% 
+  select(`ERO-LESA Statistical Tracking Unit`) %>% 
+  mutate(date = as_date(`ERO-LESA Statistical Tracking Unit`, format = "%m/%d/%Y")) %>% 
+  mutate(year = as.numeric(format(date, format = "%Y")),
+         month = as.numeric(format(date, format = "%m")),
+         day = as.numeric(format(date, format = "%d"))) %>% 
+  select(year, month, day, date)
+
+totalice_yr16_14
+
+totalice_yr19_17 <- ice_rem_raw19_17 %>% 
+  select(`ERO-LESA Statistical Tracking Unit`) %>% 
+  mutate(date = as_date(`ERO-LESA Statistical Tracking Unit`, format = "%m/%d/%Y")) %>% 
+  mutate(year = as.numeric(format(date, format = "%Y")),
+         month = as.numeric(format(date, format = "%m")),
+         day = as.numeric(format(date, format = "%d"))) %>% 
+  select(year, month, day, date)
+
+totalice_yr19_17
+
+
+totalice_yr11_12
+totalice_yr13
+totalice_yr14_15
+totalice_yr16_14
+totalice_yr19_17
+
+
+totalice_by_year <- rbind(totalice_yr11_12, totalice_yr13, totalice_yr14_15, totalice_yr16_14, totalice_yr19_17) %>% 
+  select(date, year, month, day)
+  # NEED TO SELECT B4 MERGING DATASETS
+
+totalice_by_year
+sample_n(totalice_by_year, 20)
+
+# turn all into departed date? or simply discard extra columns
 
 # works
 icedeports_by_yr <- totalice_by_year %>% 
   select(year) %>% 
   na.omit() %>% 
-  count(year) 
-  # finally got the correct function
+  count(year)
+
+# finally got the correct function
 # %>% 
 #   mutate(n = as.double(icedeports_by_yr$n))
   # this works but technically dont need bc change the variable type to double in pivot_longer
@@ -194,6 +296,7 @@ icedeports_by_yr <- totalice_by_year %>%
   # thought this would work   
   # mutate(deportations = count(year))
   
+colnames(icedeports_by_yr)[colnames(icedeports_by_yr) == "n"] <- "Deportations"
 icedeports_by_yr
 
 # icedeports_by_yr %>% 
@@ -284,7 +387,7 @@ dep_vs_votes <- rbind(wide_votes, icedeports_by_yr) %>%
 dep_vs_votes
 
 long_df <- dep_vs_votes %>% 
-    pivot_longer(cols = c("DEMOCRAT", "REPUBLICAN", "n"),
+    pivot_longer(cols = c("DEMOCRAT", "REPUBLICAN", "Deportations"),
                  names_to = "Number of:", names_transform = list(n = as.double),
                  values_to = "number") %>% 
   na.omit()
@@ -304,12 +407,20 @@ long_df
 # check votestimeframe
 # sum()
 
-str_replace(icedeports_by_yr[2,]) = "deportations"
-icedeports_by_yr
+# str_replace(icedeports_by_yr[2,]) = "deportations"
+# icedeports_by_yr
   
 ggplot(long_df, aes(x = year, y = number, col = `Number of:`)) +
   geom_point() +
   geom_line() +
   labs(title = "Deportations and votes, by year")
+# add difference btwn dem and rep votes as a variable
+
+long_df %>% 
+  filter(`Number of:` == "Deportations") %>% 
+  ggplot(aes(x = year, y = number)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Deportations by year")
 ```
 
