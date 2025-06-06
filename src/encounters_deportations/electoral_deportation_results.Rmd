@@ -24,6 +24,7 @@ DONE - Change in votes vs deportations
 ```{r}
 # install.packages("tidyverse")
 library(tidyverse)
+library(scales)
 ```
 
 ```{r, echo = FALSE}
@@ -56,7 +57,6 @@ app_2003 <- read_delim("apprehensions_data/Family Units apprehended along the SW
 app_2004 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2004 Redacted_raw.csv")
 app_2005 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2005 Redacted_raw.csv")
 app_2006 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2006 Redacted_raw.csv")
-
 app_2007 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2007 Redacted_raw.csv")
 app_2008 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2008 Redacted_raw.csv")
 app_2009 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2009 Redacted_raw.csv")
@@ -73,6 +73,60 @@ app_2019 <- read_delim("apprehensions_data/Family Units apprehended along the SW
 app_2020 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2020 Redacted_raw.csv")
 app_2021 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2021 Redacted_raw.csv")
 app_2022 <- read_delim("apprehensions_data/Family Units apprehended along the SWB FY2022 Redacted_raw.csv")
+```
+
+# app @ border
+```{r}
+# borapp_2007 <- read_delim("apprehensions_data/USBP Apprehensions FY2008_FORRELEASE_raw.csv")
+# # k dont care about this rn, need to figure out election swings(?), apprehension states of origin, etc.
+# 
+# borapp_2007 <- borapp_2007 %>% 
+#   select(...10) %>% 
+#   date_time_sep(...10)
+# borapp_2007
+# 
+# borapp_2007 <- borapp_2007 %>% 
+#   select(...10) %>% 
+#   filter(str_detect(...10, "200")) %>% 
+#   mutate(date = as_date(...10)
+#          # ,
+#          # hour = hour(...10),
+#          # minute = minute(...10),
+#          # second = second(...10)
+#          ) %>% 
+#   mutate(
+#     format_date = format(date, "%m/%d/%Y")
+#     # ,
+#     # format_hour = paste(hour, minute, second, sep = ":")
+#     )
+# # works
+# borapp_2007
+# 
+# borapp_2007 %>% 
+#   select(...10) %>% 
+#   na.omit() %>% 
+#   count()
+# 
+# borapp_2007
+
+# date_time_sep <- function(data, date_col) {
+#   mutate(data, date = as_date({{date_col}}),
+#          hour = hour({{date_col}}),
+#          minute = minute({{date_col}}),
+#          second = second({{date_col}})) %>% 
+#     mutate(format_date = format(date, "%m/%d/%Y"),
+#     format_hour = paste(hour, minute, second, sep = ":"))
+  
+  
+  
+  
+  # mutate(data, date = as_date({{date_col}}, format = "%m/%d/%Y")) %>%
+  # mutate(year = as.numeric(format(date, format = "%Y")),
+  #        month = as.numeric(format(date, format = "%m")),
+  #        day = as.numeric(format(date, format = "%d"))) %>% 
+  #   select(year, month, day, date) %>% 
+  #   na.omit()
+# }
 ```
 
 
@@ -109,15 +163,14 @@ unique(totalapp_by_year)
 apps_by_yr <- totalapp_by_year %>% 
   select(year) %>% 
   na.omit() %>% 
-  count(year)
+  count(year) 
 
 colnames(apps_by_yr)[colnames(apps_by_yr) == "n"] <- "Apprehensions at the Border"
 apps_by_yr <- apps_by_yr %>% 
-  transform(year = as.double(year))
+  transform(year = as.integer(year)) 
 # works
 # as.numeric(apps_by_yr$year)
 # works, but need to put into dataframe 
-
 
 apps_by_yr
 ```
@@ -128,23 +181,52 @@ apps_by_yr
 ```{r}
 election_results <- read_delim("../../data_cleaned/harvard_election/countypres_2000-2020.csv")
 
-election_results 
+ele_clean <- election_results
 
-# election_results %>% 
-#   select(year, party, candidatevotes) %>% 
-#   summarize(year, party, candidatevotes = sum(candidatevotes)) %>% 
+
+# literally all wrong below
+
+
+  # FIX THIS WITH 2 MAIN CANDIDATES SO VOTES ARE ACCURATE 
+# ele_clean %>% 
+#   filter(party %in% c("DEMOCRAT", "REPUBLICAN")) %>% 
+#   select(year, party, candidatevotes) %>%
+#   summarize(year, party, candidatevotes = sum(candidatevotes)) %>%
 #   ggplot(aes(x = year, y = candidatevotes, fill = factor(party))) +
 #   geom_col(stat = "identity", position = "dodge")
 
-# original
-election_results %>% 
-  select(year, party, candidatevotes) %>% 
-  summarize(year, party, candidatevotes) %>% 
-  ggplot(aes(x = year, y = candidatevotes)) +
-  # literally it was just getting rid of = sum(candidatevotes) from candidatevotes
-  geom_col(aes(fill = party), stat = "identity", position = "dodge") +
-  labs(title = "Election Results from Total Party Candidate Votes", 
-       y = "Number of Candidate Votes")
+
+
+# # original
+# election_results %>% 
+#   select(year, party, candidatevotes) %>% 
+#   summarize(year, party, candidatevotes) %>% 
+#   mutate(candidatevotes = as.integer(candidatevotes)) %>% 
+#   ggplot(aes(x = year, y = candidatevotes)) +
+#   # literally it was just getting rid of = sum(candidatevotes) from candidatevotes
+#   geom_col(aes(fill = party), stat = "identity", position = "dodge") +
+#   labs(title = "Election Results from Total Party Candidate Votes", 
+#        y = "Number of Candidate Votes") 
+# 
+# election_results %>% 
+#   select(year, party, candidatevotes) %>% 
+#   summarize(year, party, candidatevotes) %>% 
+#   mutate(candidatevotes = as.integer(candidatevotes)) %>% 
+#   filter(party %in% c("DEMOCRAT", "REPUBLICAN")) %>% 
+#   mutate(candidatevotes %in% "DEMOCRAT" = sum(candidatevotes %in% "DEMOCRAT")) %>% 
+#   mutate(candidatevotes %in% "REPUBLICAN" = sum(candidatevotes %in% "REPUBLICAN")) %>% 
+#   ggplot(aes(x = year, y = candidatevotes)) +
+#   # literally it was just getting rid of = sum(candidatevotes) from candidatevotes
+#   geom_col(aes(fill = party), stat = "identity", position = "dodge") +
+#   labs(title = "Election Results from Total Party Candidate Votes", 
+#        y = "Number of Candidate Votes")  +
+#    scale_y_continuous(name="Number of Candidate Votes", labels = comma)
+#   # ok so this works but the numbers r weird
+# 
+# 
+# election_results %>% 
+#   mutate(candidatevotes = sum(candidatevotes %in% "DEMOCRAT")) %>% 
+#   mutate(candidatevotes %in% "REPUBLICAN" = sum(candidatevotes %in% "REPUBLICAN"))
 
 # change linear x axis to categorical years?
 
@@ -245,14 +327,6 @@ icedeports_by_yr
 
 ## 3 Deportations vs Election Results
 
-        # In wrong chunk
-```{r}
-# vote_diff_by_yr <- wide_votes %>% 
-#   mutate("Vote Difference (Republican minus Democrat)" = REPUBLICAN - DEMOCRAT)
-# vote_diff_by_yr
-# # works but should probably clarify which group is negative/being subtracted
-
-```
 Quick check online shows that these election results are fairly accurate/consistent with actual numbers
 
 ```{r}
@@ -271,7 +345,9 @@ rep_votes <- election_results %>%
 rep_votes
 
 
-border_states <- c("MAINE", "NEW HAMPSHIRE", "VERMONT", "NEW YORK", "PENNSYLVANIA", "OHIO", "MICHIGAN", "MINNESOTA", "NORTH DAKOTA", "MONTANA", "IDAHO", "WASHINGTON", "ALASKA")
+border_states <- c("MAINE", "NEW HAMPSHIRE", "VERMONT", "NEW YORK", "PENNSYLVANIA", "OHIO", "MICHIGAN", "MINNESOTA", "NORTH DAKOTA", "MONTANA", "IDAHO", "WASHINGTON", "ALASKA", "CALIFORNIA", "NEW MEXICO", "ARIZONA", "TEXAS")
+
+# border_states <- c("MAINE", "NEW HAMPSHIRE", "VERMONT", "NEW YORK", "PENNSYLVANIA", "OHIO", "MICHIGAN", "MINNESOTA", "NORTH DAKOTA", "MONTANA", "IDAHO", "WASHINGTON", "ALASKA")
 
 bor_status <- election_results %>% 
   mutate(border_state = state %in% border_states) 
@@ -295,6 +371,21 @@ rep_bor_votes
 total_votes_by_yr <- rbind(dem_votes, rep_votes) 
 total_votes_by_yr
 
+
+total_votes_by_yr %>% 
+  mutate(year = as.character(year)) %>% 
+  ggplot(aes(x = year, y = tot_votes)) +
+  geom_col(aes(fill = party), stat = "identity", position = "dodge") +
+  labs(title = "Election Results from Total Party Candidate Votes", 
+       y = "Number of Candidate Votes")  +
+    # scale_x_continuous(name="year", labels = comma) +
+   scale_y_continuous(name="Number of Candidate Votes", labels = comma) +
+  scale_fill_manual(values = c("#03bfc4", "#f7766d"), 
+                    breaks = c("DEMOCRAT", "REPUBLICAN"))
+
+# OK YEAH SO I DID SCREW IT UP
+
+
 wide_votes <- total_votes_by_yr %>% 
   pivot_wider(id_cols = year, names_from = party, values_from = tot_votes)
 wide_votes
@@ -309,18 +400,22 @@ colnames(wide_bor_votes)[colnames(wide_bor_votes) == "DEMOCRAT_FALSE"] <- "Non-B
 colnames(wide_bor_votes)[colnames(wide_bor_votes) == "DEMOCRAT_TRUE"] <- "Border: Democrat"
 colnames(wide_bor_votes)[colnames(wide_bor_votes) == "REPUBLICAN_FALSE"] <- "Non-Border: Republican"
 colnames(wide_bor_votes)[colnames(wide_bor_votes) == "REPUBLICAN_TRUE"] <- "Border: Republican"
+wide_bor_votes <- wide_bor_votes %>% 
+  mutate("Border Vote Difference" = `Border: Republican` -`Border: Democrat`) %>% 
+  mutate("Non-Border Vote Difference" = `Non-Border: Republican` - `Non-Border: Democrat`) 
 wide_bor_votes
-  
 
 
 long_df_bor <- wide_bor_votes %>% 
-  pivot_longer(cols = c("Non-Border: Democrat", "Border: Democrat", "Non-Border: Republican", "Border: Republican"),
-                 names_to = "Number of State Votes:", names_transform = list(n = as.double),
+  pivot_longer(cols = c("Non-Border: Democrat", "Border: Democrat",
+                        "Non-Border: Republican", "Border: Republican",
+                        "Border Vote Difference", "Non-Border Vote Difference"),
+                 names_to = "Number of State Votes:", names_transform = list(n = as.integer),
                  values_to = "number") %>% 
   # TODO: need to change var names to Dem: bor/Dem: non-bor or smth like that
   na.omit()
-long_df_bor
 
+long_df_bor
 
 
 vote_diff_by_yr <- wide_votes %>% 
@@ -335,7 +430,7 @@ dep_vs_votes <- rbind(wide_votes, icedeports_by_yr, vote_diff_by_yr) %>%
   arrange(year)
 dep_vs_votes
 
-app_vs_dep <- merge(apps_by_yr, icedeports_by_yr) %>% 
+app_vs_dep <- merge(apps_by_yr, icedeports_by_yr, all = T) %>% 
   # ok merge worked but theres a cutoff of certain years
   arrange(year)
 # currently have a variable type issue
@@ -353,7 +448,7 @@ app_vs_dep
 long_df_app <- app_vs_votes %>% 
     pivot_longer(cols = c("DEMOCRAT", "REPUBLICAN", "Apprehensions at the Border",
                           "Vote Difference (Republican minus Democrat)"),
-                 names_to = "Number of:", names_transform = list(n = as.double),
+                 names_to = "Number of:", names_transform = list(n = as.integer),
                  values_to = "number") %>% 
   na.omit()
 long_df_app
@@ -361,17 +456,30 @@ long_df_app
 long_df_dep <- dep_vs_votes %>% 
     pivot_longer(cols = c("DEMOCRAT", "REPUBLICAN", "Deportations",
                           "Vote Difference (Republican minus Democrat)"),
-                 names_to = "Number of:", names_transform = list(n = as.double),
+                 names_to = "Number of:", names_transform = list(n = as.integer),
                  values_to = "number") %>% 
   na.omit()
 long_df_dep
 
 long_df_dep_app <- app_vs_dep %>% 
     pivot_longer(cols = c("Apprehensions at the Border", "Deportations"),
-                 names_to = "Number of:", names_transform = list(n = as.double),
+                 names_to = "Number of:", names_transform = list(n = as.integer),
                  values_to = "number") %>% 
   na.omit()
 long_df_dep_app
+
+app_dep_diff <- merge(app_vs_dep, vote_diff_by_yr, all = T)
+app_dep_diff
+vote_diff_by_yr
+
+long_df_dep_app_diff <- app_dep_diff %>% 
+    pivot_longer(cols = c("Apprehensions at the Border", "Deportations", "Vote Difference (Republican minus Democrat)"),
+                 names_to = "Number of:", names_transform = list(n = as.integer),
+                 values_to = "number") %>% 
+  na.omit()
+long_df_dep_app_diff <- long_df_dep_app_diff %>% 
+  select(year, `Number of:`, number)
+long_df_dep_app_diff
 ```
 
 ```{r}
@@ -382,7 +490,8 @@ long_df_dep %>%
   ggplot(aes(x = year, y = number, col = `Number of:`)) +
   geom_point() +
   geom_line() +
-  labs(title = "Deportations and Votes, by Year")
+  labs(title = "Deportations and Votes, by Year") + 
+  scale_y_continuous(name="Number of", labels = comma)
 
 # Apprehensions vs Votes
 long_df_app %>%
@@ -390,6 +499,16 @@ long_df_app %>%
   geom_point() +
   geom_line() +
   labs(title = "Apprehensions and Votes, by Year")
+
+# Apprehensions vs Deportations vs Voting Difference
+long_df_dep_app_diff %>% 
+  mutate(year = as.integer(year))%>% 
+  ggplot(aes(x = year, y = number, col = `Number of:`)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Apprehensions at the Border, Deportations, and Voting Difference by Year")
+
+
 # 
 # # Deportations Only
 # long_df_dep %>% 
@@ -408,39 +527,74 @@ apps_by_yr %>%
   geom_line() +
   labs(title = "Apprehensions at the Border by Year")
 
+
+
+labels_vot_diff <- c(3000000, 0, -3000000, -6000000, -9000000)
 # Vote Difference Only
 vote_diff_by_yr %>% 
   ggplot(aes(x = year, y = `Vote Difference (Republican minus Democrat)`,
              color = `Vote Difference (Republican minus Democrat)`)) +
   geom_point(size = 2) +
   geom_line() + 
-  geom_hline(yintercept = 1.5, color = "black") +
+  geom_hline(yintercept = 0, color = "black") +
+  scale_y_continuous(name="Number of Votes", labels = comma) +
   labs(title = "Voting Difference (Rep. - Dem.), by Year") +
-  scale_color_gradient(
+  # scale_color_manual(labels = labels_vot_diff,  )+
+  scale_color_gradient(labels = comma,
     low = "blue",
     high = "red")
+
 # not working bc need    col = [insert variable] in ggplot(aes())
 
 # Border vs Non-Border States Votes
 long_df_bor %>% 
+  filter(`Number of State Votes:` %in% c("Non-Border: Democrat", "Border: Democrat",
+                        "Non-Border: Republican", "Border: Republican")) %>% 
   ggplot(aes(x = year, y = number, col = `Number of State Votes:`)) +
-  # , fill = border_state
   geom_point() +
   geom_line() +
-  labs(title = "Border vs Non-Border State Votes, by Year")
+  scale_y_continuous(name="Number of Votes", labels = comma) +
+  labs(title = "Border vs Non-Border State Votes, by Year", 
+       y = "Number of Votes")
+
+
+long_df_bor %>% 
+  filter(`Number of State Votes:` %in% c("Border Vote Difference", "Non-Border Vote Difference")) %>% 
+  ggplot(aes(x = year, y = number, col = `Number of State Votes:`)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "black") +
+  scale_y_continuous(name="Number of Votes", labels = comma) +
+  labs(title = "Border vs Non-Border State Voting Difference (Rep - Dem), by Year", 
+       y = "Number of Votes")
+
 
 # TODO: Bor vs Non-Bor voting trends?
 # e.g. By Main Candidates 
+# no thats bad
+# do by difference in rep vs dem votes for border vs nonborder and nonborder vs border diff
+# 
 
 
 # Apprehensions vs Deportations
 long_df_dep_app %>% 
+  mutate(year = as.integer(year))%>% 
   ggplot(aes(x = year, y = number, col = `Number of:`)) +
   geom_point() +
   geom_line() +
   labs(title = "Apprehensions at the Border and Deportations, by Year")
 
-# slight conflict in name, variables named app but called Apprehensions 
+# Apprehensions vs Deportations vs Voting Difference
+
+
+
+long_df_dep_app_diff %>% 
+  mutate(year = as.integer(year))%>% 
+  ggplot(aes(x = year, y = number, col = `Number of:`)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Apprehensions at the Border, Deportations, and Voting Difference by Year")
+
 
 
 # add color separations by 4 year periods btwn elections?
